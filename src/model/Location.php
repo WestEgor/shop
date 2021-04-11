@@ -1,5 +1,8 @@
 <?php
 
+namespace model;
+
+
 class Location
 {
     private string $country;

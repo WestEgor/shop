@@ -1,5 +1,8 @@
 <?php
 
+namespace model;
+
+
 class Office
 {
     private int $id;

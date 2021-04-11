@@ -1,4 +1,7 @@
 <?php
+
+namespace model;
+
 class OrderDetails{
     private int $id;
     private int $quantityOrdered;

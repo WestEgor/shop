@@ -1,4 +1,8 @@
 <?php
+
+namespace model;
+
+
 class Employee{
     private int $id;
     private Person $person;

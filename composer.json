@@ -1,0 +1,17 @@
+{
+  "name": "yehor/shop",
+  "description": "autoloader",
+  "type": "project",
+  "license": "MIT",
+  "minimum-stability": "stable",
+  "require": {
+    "ext-pdo": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "config\\": "src/config",
+      "model\\": "src/model/",
+      "repository\\": "src/repository"
+    }
+  }
+}

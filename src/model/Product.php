@@ -1,28 +1,14 @@
 <?php
-class Product{
+
+namespace model;
+
+class Product
+{
     private int $id;
-    private String $productName;
+    private string $productName;
     private int $quantity;
     private float $price;
     private float $msrp;
-    private int $productLineId;
-
-    /**
-     * Product constructor.
-     * @param String $productName
-     * @param int $quantity
-     * @param float $price
-     * @param float $msrp
-     * @param int $productLineId
-     */
-    public function __construct(string $productName, int $quantity, float $price, float $msrp, int $productLineId)
-    {
-        $this->productName = $productName;
-        $this->quantity = $quantity;
-        $this->price = $price;
-        $this->msrp = $msrp;
-        $this->productLineId = $productLineId;
-    }
 
     /**
      * @return int
@@ -102,22 +88,6 @@ class Product{
     public function setMsrp(float $msrp): void
     {
         $this->msrp = $msrp;
-    }
-
-    /**
-     * @return int
-     */
-    public function getProductLineId(): int
-    {
-        return $this->productLineId;
-    }
-
-    /**
-     * @param int $productLineId
-     */
-    public function setProductLineId(int $productLineId): void
-    {
-        $this->productLineId = $productLineId;
     }
 
 
