@@ -5,7 +5,8 @@
   "license": "MIT",
   "minimum-stability": "stable",
   "require": {
-    "ext-pdo": "*"
+    "ext-pdo": "*",
+    "ext-http": "*"
   },
   "autoload": {
     "psr-4": {

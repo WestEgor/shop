@@ -5,7 +5,7 @@ namespace model;
 class Product
 {
     private int $id;
-    private string $productName;
+    private string $name;
     private int $quantity;
     private float $price;
     private float $msrp;
@@ -29,17 +29,17 @@ class Product
     /**
      * @return String
      */
-    public function getProductName(): string
+    public function getName(): string
     {
-        return $this->productName;
+        return $this->name;
     }
 
     /**
-     * @param String $productName
+     * @param String $name
      */
-    public function setProductName(string $productName): void
+    public function setName(string $name): void
     {
-        $this->productName = $productName;
+        $this->name = $name;
     }
 
     /**
@@ -91,6 +91,16 @@ class Product
     }
 
 
+    public function setAll(object $keys)
+    {
+        foreach ($keys as $key => $value) {
+            if ($key === 'id') $this->id = $value;
+            if ($key === 'name') $this->name = $value;
+            if ($key === 'quantity') $this->quantity = $value;
+            if ($key === 'price') $this->price = $value;
+            if ($key === 'msrp') $this->msrp = $value;
+        }
+    }
 
 
 }

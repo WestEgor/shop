@@ -39,7 +39,7 @@ use repository\products\ProductTableInformation;
         ?>
         <tr>
             <th scope="row"><?php echo $product->getId(); ?></th>
-            <td><?php echo $product->getProductName(); ?></td>
+            <td><?php echo $product->getName(); ?></td>
             <td><?php echo $product->getQuantity(); ?></td>
             <td><?php echo $product->getPrice(); ?></td>
             <td><?php echo $product->getMsrp(); ?></td>
@@ -47,6 +47,50 @@ use repository\products\ProductTableInformation;
     <?php endforeach; ?>
     </tbody>
 </table>
+<div>
+    <form method="get" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+        <label>
+            Search by ID:
+            <input type="text" name="search_by_id_products"/>
+            <button type="submit" name="submit">Submit</button>
+        </label>
+    </form>
+</div>
+<?php
+if (isset($_GET['submit'])):
+    $id = $_GET['search_by_id_products'];
+    if (filter_var($id, FILTER_VALIDATE_INT)):
+
+        $product = new ProductEntity($pdo);
+        $products = $product->read($id);
+
+        ?>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <?php foreach ($col as $column): ?>
+            <th scope="col"><?php echo $column ?></th>
+        <?php endforeach; ?>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <th scope="row"><?php echo $products->getId(); ?></th>
+        <td><?php echo $products->getName(); ?></td>
+        <td><?php echo $products->getQuantity(); ?></td>
+        <td><?php echo $products->getPrice(); ?></td>
+        <td><?php echo $products->getMsrp(); ?></td>
+    </tr>
+    </tbody>
+</table>
+<?php else: ?>
+<div class="alert alert-danger" role="alert">
+    <?php echo 'ID MUST BE AN INTEGER (NUMBER WITHOUT COMMA)'; ?>
+</div>
+<?php
+endif;
+endif;
+?>
 </body>
 
 </html>
