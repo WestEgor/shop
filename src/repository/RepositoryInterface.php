@@ -8,9 +8,9 @@ interface RepositoryInterface
 
     public function read(int $key): object;
 
-    public function create(object $obj): void;
+    public function create(object $obj): bool;
 
-    public function update(object $obj): void;
+    public function update(object $obj): bool;
 
     public function delete(int $key): void;
 }

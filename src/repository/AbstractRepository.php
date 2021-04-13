@@ -4,7 +4,6 @@ namespace repository;
 
 
 use InvalidArgumentException;
-use TypeError;
 
 abstract class AbstractRepository implements RepositoryInterface
 {
@@ -19,14 +18,26 @@ abstract class AbstractRepository implements RepositoryInterface
 
     public abstract function readByKeyQuery(): string;
 
-    public abstract function getReadAllStatement($stmt): array;
+    public abstract function createQuery(): string;
 
-    public abstract function getReadByKeyStatement($stmt, $key): object;
+    public abstract function updateQuery(): string;
+
+    public abstract function deleteQuery(): string;
+
+
+    public abstract function createStatement($stmt, $obj): bool;
+
+    public abstract function readAllStatement($stmt): array;
+
+    public abstract function readByKeyStatement($stmt, $key): object;
+
+    public abstract function updateStatement($stmt, $obj): bool;
+
 
     public function readAll(): array
     {
         $stmt = $this->pdo->query($this->readAllQuery());
-        return $this->getReadAllStatement($stmt);
+        return $this->readAllStatement($stmt);
     }
 
     public function read(int $key): object
@@ -35,26 +46,30 @@ abstract class AbstractRepository implements RepositoryInterface
             $stmt = $this->pdo->prepare($this->readByKeyQuery());
             $stmt->bindValue(':id', $key);
             $stmt->execute();
-            $ss = $this->getReadByKeyStatement($stmt, $key);
+            $obj = $this->readByKeyStatement($stmt, $key);
         } catch (InvalidArgumentException $e) {
             echo $e->getMessage();
         }
-        return $ss;
+        return $obj;
     }
 
 
-    public function create(object $obj): void
+    public function create(object $obj): bool
     {
-
+        $stmt = $this->pdo->prepare($this->createQuery());
+        return $this->createStatement($stmt, $obj);
     }
 
-    public function update(object $obj): void
+    public function update(object $obj): bool
     {
-
+        $stmt = $this->pdo->prepare($this->updateQuery());
+        return $this->updateStatement($stmt, $obj);
     }
 
     public function delete(int $key): void
     {
-
+        $stmt = $this->pdo->prepare($this->deleteQuery());
+        $stmt->bindValue(':id', $key);
+        $stmt->execute();
     }
 }

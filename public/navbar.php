@@ -5,8 +5,16 @@ use config\Connector as Connection;
 use repository\TableInformation as Information;
 
 ?>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="/../public/index.php">YMI</a>
+<html lang="en">
+<head>
+    <title>Nav</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" >
+    <a class="navbar-brand" href="/../public/index.php" style="margin-left: 5px">YMI</a>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
             <li class="nav-item active">
@@ -32,3 +40,5 @@ use repository\TableInformation as Information;
         } ?>
     </div>
 </nav>
+</body>
+</html>
