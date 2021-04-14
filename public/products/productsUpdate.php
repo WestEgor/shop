@@ -5,20 +5,19 @@ require '../navbar.php';
 use config\Connector as Connection;
 use model\Product;
 use repository\products\ProductEntity;
+use repository\products\ProductsMethods;
 
 $id = intval($_REQUEST['id']);
 $pdo = Connection::get()->getConnect();
 $productEntity = new ProductEntity($pdo);
-$product = new Product();
 $product = $productEntity->read($id);
 
 if (isset($_POST['update_submit'])) {
-    $product->setId($id);
-    $product->setName($_POST['product_name']);
-    $product->setQuantity($_POST['product_quantity']);
-    $product->setPrice($_POST['product_price']);
-    $product->setMsrp($_POST['product_msrp']);
-    $productEntity->update($product);
+    $name = $_POST['product_name'];
+    $quantity = $_POST['product_quantity'];
+    $price = $_POST['product_price'];
+    $msrp = $_POST['product_msrp'];
+    ProductsMethods::updateProduct($pdo, $id, $name, $quantity, $price, $msrp);
     echo '<META HTTP-EQUIV="refresh" content="0;URL=products.php">';
 }
 ?>

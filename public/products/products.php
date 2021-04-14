@@ -3,7 +3,6 @@ require __DIR__ . '/../../vendor/autoload.php';
 
 use config\Connector as Connection;
 use repository\products\ProductEntity;
-use repository\products\ProductTableInformation;
 
 ?>
 
@@ -64,6 +63,7 @@ if (isset($_GET['submit'])):
     <?php
     endif;
 endif;
+
 ?>
 
 

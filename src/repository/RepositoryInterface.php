@@ -4,13 +4,13 @@ namespace repository;
 
 interface RepositoryInterface
 {
-    public function readAll(): array;
+    public function readAll(): array|false;
 
-    public function read(int $key): object;
+    public function read(int $key): object|false;
 
-    public function create(object $obj): bool;
+    public function create(object $object): bool;
 
-    public function update(object $obj): bool;
+    public function update(object $object): bool;
 
-    public function delete(int $key): void;
+    public function delete(int $key): bool;
 }

@@ -2,9 +2,8 @@
 
 namespace repository\products;
 
-
-use InvalidArgumentException;
 use model\Product;
+use PDOStatement;
 use repository\AbstractRepository;
 use PDO;
 
@@ -40,9 +39,10 @@ class ProductEntity extends AbstractRepository
     }
 
 
-    public function readAllStatement($stmt): array
+    public function readAllStatement(PDOStatement $statement): array|false
     {
-        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $products = [];
+        while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
             $product = new Product();
             $product->setId($row['id']);
             $product->setName($row['name']);
@@ -54,34 +54,31 @@ class ProductEntity extends AbstractRepository
         return $products;
     }
 
-    public function readByKeyStatement($stmt, $key): object
+    public function readByKeyStatement(PDOStatement $statement, int $key): object|false
     {
         $product = new Product();
-        if ($obj = $stmt->fetchObject()) {
-            $product->setAll($obj);
-            return $product;
-        } else {
-            throw new InvalidArgumentException('CANNOT FIND OBJECT WITH SELECTED ID' . "\n");
-        }
+        $obj = $statement->fetchObject();
+        $product->setAll($obj);
+        return $product;
     }
 
-    public function createStatement($stmt, $obj): bool
+    public function createStatement(PDOStatement $statement, $object): bool
     {
-        $stmt->bindValue(':name', $obj->getName());
-        $stmt->bindValue(':quantity', $obj->getQuantity());
-        $stmt->bindValue(':price', $obj->getPrice());
-        $stmt->bindValue(':msrp', $obj->getMsrp());
-        return $stmt->execute();
+        $statement->bindValue(':name', $object->getName());
+        $statement->bindValue(':quantity', $object->getQuantity());
+        $statement->bindValue(':price', $object->getPrice());
+        $statement->bindValue(':msrp', $object->getMsrp());
+        return $statement->execute();
     }
 
 
-    public function updateStatement($stmt, $obj): bool
+    public function updateStatement(PDOStatement $statement, $obj): bool
     {
-        $stmt->bindValue(':name', $obj->getName());
-        $stmt->bindValue(':quantity', $obj->getQuantity());
-        $stmt->bindValue(':price', $obj->getPrice());
-        $stmt->bindValue(':msrp', $obj->getMsrp());
-        $stmt->bindValue(':id', $obj->getId());
-        return $stmt->execute();
+        $statement->bindValue(':name', $obj->getName());
+        $statement->bindValue(':quantity', $obj->getQuantity());
+        $statement->bindValue(':price', $obj->getPrice());
+        $statement->bindValue(':msrp', $obj->getMsrp());
+        $statement->bindValue(':id', $obj->getId());
+        return $statement->execute();
     }
 }

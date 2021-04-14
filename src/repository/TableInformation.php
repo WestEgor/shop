@@ -2,7 +2,6 @@
 
 namespace repository;
 
-use Exception;
 use PDO;
 
 class TableInformation

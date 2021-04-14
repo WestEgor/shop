@@ -2,10 +2,9 @@
 require __DIR__ . '/../../vendor/autoload.php';
 
 use config\Connector as Connection;
-use repository\products\ProductEntity;
+use repository\products\ProductsMethods;
 
 $id = $_REQUEST['id'];
 $pdo = Connection::get()->getConnect();
-$deleteProd = new ProductEntity($pdo);
-$deleteProd->delete($id);
+ProductsMethods::deleteProduct($pdo, $id);
 header('Location: products.php');
