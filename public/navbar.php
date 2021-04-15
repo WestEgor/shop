@@ -2,11 +2,11 @@
 require __DIR__ . '/../vendor/autoload.php';
 
 use config\Connector as Connection;
-use repository\TableInformation as Information;
+use repository\TablesInformation as Information;
 
 ?>
 
-    <head>
+<head>
     <title>Nav</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
           rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
@@ -25,16 +25,19 @@ use repository\TableInformation as Information;
         try {
             $pdo = Connection::get()->getConnect();
             $tableNames = new Information($pdo);
-            $names = $tableNames->getTableName();
-            foreach ($names as $name):
-                ?>
-                <ul class="navbar-nav">
-                    <a class="nav-link" href="/public/<?php echo $name . '/' . $name . '.php' ?>" id="navbar-s"
-                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <?php echo $name ?>
-                    </a>
-                </ul>
-            <?php endforeach;
+            if ($names = $tableNames->getTableName()):
+                foreach ($names as $name):
+                    ?>
+                    <ul class="navbar-nav">
+                        <a class="nav-link" href="/public/<?php echo $name . '/' . $name . '.php' ?>" id="navbar-s"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <?php echo $name ?>
+                        </a>
+                    </ul>
+                <?php endforeach;
+            else:
+                echo 'No table in scheme';
+            endif;
         } catch (PDOException $e) {
             echo $e->getMessage();
         } ?>

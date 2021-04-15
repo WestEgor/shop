@@ -1,26 +1,56 @@
 <?php
+if (!session_id()) {
+    session_start();
+}
 require __DIR__ . '/../../vendor/autoload.php';
 require '../navbar.php';
 
 use config\Connector as Connection;
-use model\Product;
-use repository\products\ProductEntity;
-use repository\products\ProductsMethods;
+use repository\products\ProductsEntity;
+use repository\products\ProductsEntitiesMethods;
+use util\Validator;
 
 $id = intval($_REQUEST['id']);
 $pdo = Connection::get()->getConnect();
-$productEntity = new ProductEntity($pdo);
-$product = $productEntity->read($id);
+$productEntity = new ProductsEntity($pdo);
+$product = ProductsEntitiesMethods::readProductByKey($pdo, $id);
 
-if (isset($_POST['update_submit'])) {
-    $name = $_POST['product_name'];
-    $quantity = $_POST['product_quantity'];
-    $price = $_POST['product_price'];
-    $msrp = $_POST['product_msrp'];
-    ProductsMethods::updateProduct($pdo, $id, $name, $quantity, $price, $msrp);
-    echo '<META HTTP-EQUIV="refresh" content="0;URL=products.php">';
-}
+if (isset($_POST['update_submit'])) :
+    $errorMessage = '';
+    $_SESSION['product_name'] = $_POST['product_name'];
+    $name = $_SESSION['product_name'];
+    if (!Validator::validateString($name)) {
+        $errorMessage .= 'Name of product cannot be empty' . '</br>';
+    }
+    $_SESSION['product_quantity'] = $_POST['product_quantity'];
+    $quantity = $_SESSION['product_quantity'];
+    if (!Validator::validateInt($quantity)) {
+        $errorMessage .= 'Quantity cannot be empty or cannot be string/float' . '</br>';
+    }
+    $_SESSION['product_price'] = $_POST['product_price'];
+    $price = $_SESSION['product_price'];
+    if (!Validator::validateFloat($price)) {
+        $errorMessage .= 'Price cannot be empty or cannot be string' . '</br>';
+    }
+    $_SESSION['product_msrp'] = $_POST['product_msrp'];
+    $msrp = $_SESSION['product_msrp'];
+    if (!Validator::validateFloat($msrp)) {
+        $errorMessage .= 'MSRP cannot be empty or cannot be string' . '</br>';
+    }
+    $productEntity = new ProductsEntity($pdo);
+    if ($errorMessage === '') :
+        ProductsEntitiesMethods::updateProduct($pdo, $id, $name, $quantity, $price, $msrp);
+        echo '<META HTTP-EQUIV="refresh" content="0;URL=products.php">';
+        ?>
+    <?php else: ?>
+        <div class="alert alert-danger" role="alert">
+            <?php echo $errorMessage; ?>
+        </div>
+    <?php
+    endif;
+endif;
 ?>
+
     <body>
     <form action="productsUpdate.php?id=<?php echo $product->getId(); ?>" method="POST">
         <div class="row g-3 align-items-center" style="margin-left: 5px">
@@ -39,7 +69,7 @@ if (isset($_POST['update_submit'])) {
                 <input type="text" id="pprice" name="product_price" class="form-control"
                        value="<?php echo $product->getPrice(); ?>">
             </div>
-            <div class="col-auto" style="margin-bottom:10px; margin-top: 15px"> `
+            <div class="col-auto" style="margin-bottom:10px; margin-top: 15px">
                 <label for="pmsrp" class="form-label" style="margin-top: 15px">MSRP:</label>
                 <input type="text" id="pmsrp" name="product_msrp" class="form-control"
                        value="<?php echo $product->getMsrp(); ?>">

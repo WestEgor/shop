@@ -1,17 +1,51 @@
 <?php
 
 namespace model;
-
+/**
+ * Class Product
+ * instance will be used to manipulate of entity of table´products´
+ *
+ * @package model
+ */
 class Product
 {
+    /**
+     * id of table 'products'
+     *
+     * @var int
+     */
     private int $id;
+
+    /**
+     * name of table 'products'
+     *
+     * @var string
+     */
     private string $name;
+
+    /**
+     * quantity of table 'products'
+     *
+     * @var int
+     */
     private int $quantity;
+
+    /**
+     * price of table 'products'
+     *
+     * @var float
+     */
     private float $price;
+
+    /**
+     * msrp of table 'products'
+     *
+     * @var float
+     */
     private float $msrp;
 
     /**
-     * @return int
+     * @return int product id
      */
     public function getId(): int
     {
@@ -19,7 +53,7 @@ class Product
     }
 
     /**
-     * @param int $id
+     * @param int $id id of product
      */
     public function setId(int $id): void
     {
@@ -27,7 +61,7 @@ class Product
     }
 
     /**
-     * @return String
+     * @return String product name
      */
     public function getName(): string
     {
@@ -35,7 +69,7 @@ class Product
     }
 
     /**
-     * @param String $name
+     * @param String $name name of product
      */
     public function setName(string $name): void
     {
@@ -43,7 +77,7 @@ class Product
     }
 
     /**
-     * @return int
+     * @return int product quantity
      */
     public function getQuantity(): int
     {
@@ -51,7 +85,7 @@ class Product
     }
 
     /**
-     * @param int $quantity
+     * @param int $quantity quantity of product
      */
     public function setQuantity(int $quantity): void
     {
@@ -59,7 +93,7 @@ class Product
     }
 
     /**
-     * @return float
+     * @return float price
      */
     public function getPrice(): float
     {
@@ -67,7 +101,7 @@ class Product
     }
 
     /**
-     * @param float $price
+     * @param float $price price of product
      */
     public function setPrice(float $price): void
     {
@@ -75,7 +109,7 @@ class Product
     }
 
     /**
-     * @return float
+     * @return float product msrp
      */
     public function getMsrp(): float
     {
@@ -83,16 +117,23 @@ class Product
     }
 
     /**
-     * @param float $msrp
+     * @param float $msrp msrp of product
      */
     public function setMsrp(float $msrp): void
     {
         $this->msrp = $msrp;
     }
 
-
-    public function setAll(object $keys)
+    /**
+     * @param object $keys PDO::fetchObject returns stdClass
+     * Methods used for parse from stdClass to Product
+     * @return bool
+     * return TRUE if object exists
+     * return FALSE if object is null (false)
+     */
+    public function setAll(object $keys): bool
     {
+        if (!$keys) return false;
         foreach ($keys as $key => $value) {
             if ($key === 'id') $this->id = $value;
             if ($key === 'name') $this->name = $value;
@@ -100,7 +141,7 @@ class Product
             if ($key === 'price') $this->price = $value;
             if ($key === 'msrp') $this->msrp = $value;
         }
+        return true;
     }
-
 
 }

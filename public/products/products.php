@@ -1,8 +1,11 @@
 <?php
 require __DIR__ . '/../../vendor/autoload.php';
+if (!session_id()) {
+    session_start();
+}
 
 use config\Connector as Connection;
-use repository\products\ProductEntity;
+use repository\products\ProductsEntitiesMethods;
 
 ?>
 
@@ -31,39 +34,41 @@ if (isset($_GET['submit'])):
     $id = $_GET['search_by_id_products'];
     if (filter_var($id, FILTER_VALIDATE_INT)):
         $pdo = Connection::get()->getConnect();
-        $product = new ProductEntity($pdo);
-        $products = $product->read($id);
-
-        ?>
-        <table class="table table-striped" style="margin-left: 3px">
-            <thead>
-            <tr>
-                <?php foreach ($col as $column):
+        if ($product = ProductsEntitiesMethods::readProductByKey($pdo, $id)):?>
+            <table class="table table-striped" style="margin-left: 3px">
+                <thead>
+                <tr>
+                    <?php foreach ($col as $column):
+                        ?>
+                        <th scope="col"><?php echo $column ?>
+                        </th>
+                    <?php endforeach;
                     ?>
-                    <th scope="col"><?php echo $column ?>
-                    </th>
-                <?php endforeach;
-                ?>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <th scope="row"><?php echo $products->getId(); ?></th>
-                <td><?php echo $products->getName(); ?></td>
-                <td><?php echo $products->getQuantity(); ?></td>
-                <td><?php echo $products->getPrice(); ?></td>
-                <td><?php echo $products->getMsrp(); ?></td>
-            </tr>
-            </tbody>
-        </table>
-    <?php else: ?>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row"><?php echo $product->getId(); ?></th>
+                    <td><?php echo $product->getName(); ?></td>
+                    <td><?php echo $product->getQuantity(); ?></td>
+                    <td><?php echo $product->getPrice(); ?></td>
+                    <td><?php echo $product->getMsrp(); ?></td>
+                </tr>
+                </tbody>
+            </table>
+        <?php else: ?>
+            <div class="alert alert-danger" role="alert">
+                <?php echo 'Product with chosen ID doesn\'t exist'; ?>
+            </div>
+        <?php
+        endif;
+    else:?>
         <div class="alert alert-danger" role="alert">
-            <?php echo 'ID MUST BE AN INTEGER (NUMBER WITHOUT COMMA)'; ?>
+            <?php echo 'ID have to be integer value(without comma)'; ?>
         </div>
     <?php
     endif;
 endif;
-
 ?>
 
 

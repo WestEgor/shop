@@ -5,14 +5,14 @@
   "license": "MIT",
   "minimum-stability": "stable",
   "require": {
-    "ext-pdo": "*",
-    "ext-http": "*"
+    "ext-pdo": "*"
   },
   "autoload": {
     "psr-4": {
       "config\\": "src/config",
       "model\\": "src/model/",
-      "repository\\": "src/repository"
+      "repository\\": "src/repository",
+      "util\\": "src/util"
     }
   }
 }

@@ -6,9 +6,9 @@ require __DIR__ . '/../../vendor/autoload.php';
 require '../navbar.php';
 
 use config\Connector as Connection;
-use repository\products\ProductEntity;
-use repository\products\ProductsMethods;
-use repository\Validator;
+use repository\products\ProductsEntity;
+use repository\products\ProductsEntitiesMethods;
+use util\Validator;
 
 $pdo = Connection::get()->getConnect();
 
@@ -34,9 +34,9 @@ if (isset($_POST['create_submit'])) :
     if (!Validator::validateFloat($msrp)) {
         $errorMessage .= 'MSRP cannot be empty or cannot be string' . '</br>';
     }
-    $productEntity = new ProductEntity($pdo);
+    $productEntity = new ProductsEntity($pdo);
     if ($errorMessage === '') :
-        ProductsMethods::createProduct($pdo, $name, $quantity, $price, $msrp);
+        ProductsEntitiesMethods::createProduct($pdo, $name, $quantity, $price, $msrp);
         echo '<META HTTP-EQUIV="refresh" content="0;URL=products.php">';
         ?>
     <?php else: ?>
@@ -66,7 +66,7 @@ endif;
             <input type="text" id="pprice" name="product_price" class="form-control"
                    value="<?php $_SESSION['product_price'] ?>">
         </div>
-        <div class="col-auto" style="margin-bottom:10px; margin-top: 15px">`
+        <div class="col-auto" style="margin-bottom:10px; margin-top: 15px">
             <label for="pmsrp" class="form-label" style="margin-top: 15px">MSRP:</label>
             <input type="text" id="pmsrp" name="product_msrp" class="form-control"
                    value="<?php $_SESSION['product_msrp'] ?>">

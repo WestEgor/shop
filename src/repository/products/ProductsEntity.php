@@ -7,25 +7,45 @@ use PDOStatement;
 use repository\AbstractRepository;
 use PDO;
 
-class ProductEntity extends AbstractRepository
+/**
+ * Class @ProductsEntity
+ * Extends @AbstractRepository
+ * Class for work with entity 'products'
+ *
+ * @package repository\products
+ */
+
+class ProductsEntity extends AbstractRepository
 {
 
+    /**
+     * @return string
+     */
     public function createQuery(): string
     {
         return 'INSERT INTO products(name,quantity,price,msrp) 
                 VALUES(:name,:quantity,:price,:msrp)';
     }
 
+    /**
+     * @return string
+     */
     public function readAllQuery(): string
     {
         return 'SELECT * FROM products';
     }
 
+    /**
+     * @return string
+     */
     public function readByKeyQuery(): string
     {
         return 'SELECT * FROM products WHERE id = :id';
     }
 
+    /**
+     * @return string
+     */
     public function updateQuery(): string
     {
         return 'UPDATE products 
@@ -33,12 +53,19 @@ class ProductEntity extends AbstractRepository
                 WHERE id = :id';
     }
 
+    /**
+     * @return string
+     */
     public function deleteQuery(): string
     {
         return 'DELETE FROM products WHERE id = :id';
     }
 
 
+    /**
+     * @param PDOStatement $statement
+     * @return array|false
+     */
     public function readAllStatement(PDOStatement $statement): array|false
     {
         $products = [];
@@ -54,15 +81,26 @@ class ProductEntity extends AbstractRepository
         return $products;
     }
 
+    /**
+     * @param PDOStatement $statement
+     * @param int $key
+     * @return Product|false
+     */
     public function readByKeyStatement(PDOStatement $statement, int $key): object|false
     {
         $product = new Product();
         $obj = $statement->fetchObject();
+        if (!$obj) return false;
         $product->setAll($obj);
         return $product;
     }
 
-    public function createStatement(PDOStatement $statement, $object): bool
+    /**
+     * @param PDOStatement $statement
+     * @param object $object
+     * @return bool
+     */
+    public function createStatement(PDOStatement $statement,object $object): bool
     {
         $statement->bindValue(':name', $object->getName());
         $statement->bindValue(':quantity', $object->getQuantity());
@@ -72,13 +110,18 @@ class ProductEntity extends AbstractRepository
     }
 
 
-    public function updateStatement(PDOStatement $statement, $obj): bool
+    /**
+     * @param PDOStatement $statement
+     * @param object $object
+     * @return bool
+     */
+    public function updateStatement(PDOStatement $statement,object $object): bool
     {
-        $statement->bindValue(':name', $obj->getName());
-        $statement->bindValue(':quantity', $obj->getQuantity());
-        $statement->bindValue(':price', $obj->getPrice());
-        $statement->bindValue(':msrp', $obj->getMsrp());
-        $statement->bindValue(':id', $obj->getId());
+        $statement->bindValue(':name', $object->getName());
+        $statement->bindValue(':quantity', $object->getQuantity());
+        $statement->bindValue(':price', $object->getPrice());
+        $statement->bindValue(':msrp', $object->getMsrp());
+        $statement->bindValue(':id', $object->getId());
         return $statement->execute();
     }
 }
