@@ -40,6 +40,10 @@ if (isset($_POST['update_submit'])) :
     $productEntity = new ProductsEntity($pdo);
     if ($errorMessage === '') :
         ProductsEntitiesMethods::updateProduct($pdo, $id, $name, $quantity, $price, $msrp);
+        foreach ($_SESSION as $key) {
+            unset($_SESSION[$key]);
+        }
+        session_destroy();
         echo '<META HTTP-EQUIV="refresh" content="0;URL=products.php">';
         ?>
     <?php else: ?>
