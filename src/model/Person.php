@@ -6,16 +6,29 @@ class Person
 {
     private string $name;
     private string $lastname;
+    private int $age;
+
+
+    public function __construct()
+    {
+        $this->name = '';
+        $this->lastname = '';
+        $this->age = -1;
+    }
 
     /**
      * Person constructor.
      * @param string $name
      * @param string $lastname
+     * @param int $age
      */
-    public function __construct(string $name, string $lastname)
+    public static function  parameterizedConstructor(string $name, string $lastname, int $age)
     {
-        $this->name = $name;
-        $this->lastname = $lastname;
+        $person = new self();
+        $person->name = $name;
+        $person->lastname = $lastname;
+        $person->age = $age;
+        return $person;
     }
 
     /**
@@ -48,6 +61,22 @@ class Person
     public function setLastname(string $lastname): void
     {
         $this->lastname = $lastname;
+    }
+
+    /**
+     * @return int
+     */
+    public function getAge(): int
+    {
+        return $this->age;
+    }
+
+    /**
+     * @param int $age
+     */
+    public function setAge(int $age): void
+    {
+        $this->age = $age;
     }
 
 

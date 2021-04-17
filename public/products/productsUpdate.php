@@ -14,7 +14,6 @@ $id = intval($_REQUEST['id']);
 $pdo = Connection::get()->getConnect();
 $productEntity = new ProductsEntity($pdo);
 $product = ProductsEntitiesMethods::readProductByKey($pdo, $id);
-
 if (isset($_POST['update_submit'])) :
     $errorMessage = '';
     $_SESSION['product_name'] = $_POST['product_name'];
@@ -37,7 +36,7 @@ if (isset($_POST['update_submit'])) :
     if (!Validator::validateFloat($msrp)) {
         $errorMessage .= 'MSRP cannot be empty or cannot be string' . '</br>';
     }
-    $productEntity = new ProductsEntity($pdo);
+
     if ($errorMessage === '') :
         ProductsEntitiesMethods::updateProduct($pdo, $id, $name, $quantity, $price, $msrp);
         foreach ($_SESSION as $key) {
@@ -84,4 +83,3 @@ endif;
         </button>
     </form>
     </body>
-<?php

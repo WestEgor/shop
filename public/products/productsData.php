@@ -2,14 +2,14 @@
 
 use config\Connector as Connection;
 use repository\products\ProductsEntitiesMethods;
-use repository\products\ProductsTablesInformation;
+use repository\products\ProductsColumnsInformation;
 
 ?>
 <table class="table table-striped" style="margin-left: 3px">
     <thead>
     <tr>
         <?php $pdo = Connection::get()->getConnect();
-        $columns = new ProductsTablesInformation($pdo);
+        $columns = new ProductsColumnsInformation($pdo);
         $col = $columns->getColumnName();
         foreach ($col as $column):
             ?>

@@ -6,26 +6,26 @@ class Customer
 {
     private int $id;
     private Person $person;
-    private int $age;
     private Location $location;
     private Contacts $contacts;
-    private int $employeeId;
 
     /**
      * Customer constructor.
      * @param Person $person
-     * @param int $age
      * @param Location $location
      * @param Contacts $contacts
-     * @param int $employeeId
      */
-    public function __construct(Person $person, int $age, Location $location, Contacts $contacts, int $employeeId)
+    public function __construct()
     {
-        $this->person = $person;
-        $this->age = $age;
-        $this->location = $location;
-        $this->contacts = $contacts;
-        $this->employeeId = $employeeId;
+    }
+
+    public static function parameterizedConstructor(Person $person, Location $location, Contacts $contacts)
+    {
+        $customer = new self();
+        $customer->person = $person;
+        $customer->location = $location;
+        $customer->contacts = $contacts;
+        return $customer;
     }
 
 
@@ -61,23 +61,6 @@ class Customer
         $this->person = $person;
     }
 
-
-    /**
-     * @return int
-     */
-    public function getAge(): int
-    {
-        return $this->age;
-    }
-
-    /**
-     * @param int $age
-     */
-    public function setAge(int $age): void
-    {
-        $this->age = $age;
-    }
-
     /**
      * @return Location
      */
@@ -110,22 +93,73 @@ class Customer
         $this->contacts = $contacts;
     }
 
-
-    /**
-     * @return int
-     */
-    public function getEmployeeId(): int
+    public function getPersonName(): string
     {
-        return $this->employeeId;
+        return $this->getPerson()->getName();
     }
 
-    /**
-     * @param int $employeeId
-     */
-    public function setEmployeeId(int $employeeId): void
+    public function getPersonLastName(): string
     {
-        $this->employeeId = $employeeId;
+        return $this->getPerson()->getLastname();
     }
 
+    public function getPersonAge(): string
+    {
+        return $this->getPerson()->getAge();
+    }
+
+    public function getLocationCountry(): string
+    {
+        return $this->getLocation()->getCountry();
+    }
+
+    public function getLocationCity(): string
+    {
+        return $this->getLocation()->getCity();
+    }
+
+    public function getLocationAddress(): string
+    {
+        return $this->getLocation()->getAddress();
+    }
+
+    public function getLocationZipCode(): string
+    {
+        return $this->getLocation()->getZipCode();
+    }
+
+    public function getContactsEmail(): string
+    {
+        return $this->getContacts()->getEmail();
+    }
+
+    public function getContactsPhoneNumber(): string
+    {
+        return $this->getContacts()->getPhoneNumber();
+    }
+
+    public function setAll(object $keys): bool
+    {
+        if (!$keys) return false;
+        $person = new Person();
+        $location = new Location();
+        $contacts = new Contacts();
+        foreach ($keys as $key => $value) {
+            if ($key === 'id') $this->id = $value;
+            if ($key === 'name') $person->setName($value);
+            if ($key === 'last_name') $person->setLastname($value);
+            if ($key === 'age') $person->setAge($value);
+            if ($key === 'country') $location->setCountry($value);
+            if ($key === 'city') $location->setCity($value);
+            if ($key === 'address') $location->setAddress($value);
+            if ($key === 'zip_code') $location->setZipCode($value);
+            if ($key === 'email') $contacts->setEmail($value);
+            if ($key === 'phone_number') $contacts->setPhoneNumber($value);
+        }
+        $this->setPerson($person);
+        $this->setLocation($location);
+        $this->setContacts($contacts);
+        return true;
+    }
 
 }

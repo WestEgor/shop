@@ -46,4 +46,10 @@ class Validator
         return trim($str) !== '';
     }
 
+    public static function validateEmail(string &$email): bool
+    {
+        $email = filter_var($email, FILTER_SANITIZE_EMAIL);
+        return filter_var($email, FILTER_VALIDATE_EMAIL);
+    }
+
 }

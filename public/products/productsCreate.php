@@ -5,12 +5,13 @@ if (!session_id()) {
 require __DIR__ . '/../../vendor/autoload.php';
 require '../navbar.php';
 
-use config\Connector as Connection;
-use repository\products\ProductsEntity;
 use repository\products\ProductsEntitiesMethods;
 use util\Validator;
 
-$pdo = Connection::get()->getConnect();
+$name = '';
+$quantity = '';
+$price = '';
+$msrp  = '';
 
 if (isset($_POST['create_submit'])) :
     $errorMessage = '';
@@ -34,9 +35,9 @@ if (isset($_POST['create_submit'])) :
     if (!Validator::validateFloat($msrp)) {
         $errorMessage .= 'MSRP cannot be empty or cannot be string' . '</br>';
     }
-    $productEntity = new ProductsEntity($pdo);
+
     if ($errorMessage === '') :
-        ProductsEntitiesMethods::createProduct($pdo, $name, $quantity, $price, $msrp);
+        ProductsEntitiesMethods::createProduct($name, $quantity, $price, $msrp);
         foreach ($_SESSION as $key) {
             unset($_SESSION[$key]);
         }
@@ -58,22 +59,22 @@ endif;
         <div class="col-auto" style="margin-bottom:10px; margin-top: 15px">
             <label for="pname" class="form-label" style="margin-top: 15px">Name of product:</label>
             <input type="text" id="pname" name="product_name" class="form-control"
-                   value="<?php $_SESSION['product_name'] ?>">
+                   value="<?php if($name) echo $name?>">
         </div>
         <div class="col-auto" style="margin-bottom:10px; margin-top: 15px">
             <label for="pquantity" class="form-label" style="margin-top: 15px">Quantity:</label>
             <input type="text" id="pquantity" name="product_quantity" class="form-control"
-                   value="<?php $_SESSION['product_quantity'] ?>">
+                   value="<?php if($quantity) echo $quantity ?>">
         </div>
         <div class="col-auto" style="margin-bottom:10px; margin-top: 15px">
             <label for="pprice" class="form-label" style="margin-top: 15px">Price:</label>
             <input type="text" id="pprice" name="product_price" class="form-control"
-                   value="<?php $_SESSION['product_price'] ?>">
+                   value="<?php if($price) echo $price  ?>">
         </div>
         <div class="col-auto" style="margin-bottom:10px; margin-top: 15px">
             <label for="pmsrp" class="form-label" style="margin-top: 15px">MSRP:</label>
             <input type="text" id="pmsrp" name="product_msrp" class="form-control"
-                   value="<?php $_SESSION['product_msrp'] ?>">
+                   value="<?php if($msrp) echo $msrp  ?>">
         </div>
     </div>
     <button type="submit" name="create_submit" class="btn btn-success"

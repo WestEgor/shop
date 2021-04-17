@@ -2,6 +2,8 @@
 
 namespace model;
 
+use DateTime;
+
 class Payment
 {
     private int $id;

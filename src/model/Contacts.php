@@ -12,10 +12,12 @@ class Contacts
      * @param string $email
      * @param string $phoneNumber
      */
-    public function __construct(string $email, string $phoneNumber)
+    public static function parameterizedConstructor(string $email, string $phoneNumber)
     {
-        $this->email = $email;
-        $this->phoneNumber = $phoneNumber;
+        $contacts = new self();
+        $contacts->email = $email;
+        $contacts->phoneNumber = $phoneNumber;
+        return $contacts;
     }
 
 

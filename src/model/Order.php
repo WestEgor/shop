@@ -2,6 +2,7 @@
 
 namespace model;
 
+use DateTime;
 
 class Order
 {

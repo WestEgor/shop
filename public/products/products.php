@@ -1,6 +1,8 @@
 <?php
+if (!session_id()) {
+    session_start();
+}
 require __DIR__ . '/../../vendor/autoload.php';
-
 
 use config\Connector as Connection;
 use repository\products\ProductsEntitiesMethods;
@@ -67,6 +69,7 @@ if (isset($_GET['submit'])):
     <?php
     endif;
 endif;
+session_destroy();
 ?>
 
 

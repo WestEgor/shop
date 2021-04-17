@@ -5,6 +5,5 @@ use config\Connector as Connection;
 use repository\products\ProductsEntitiesMethods;
 
 $id = $_REQUEST['id'];
-$pdo = Connection::get()->getConnect();
-ProductsEntitiesMethods::deleteProduct($pdo, $id);
+ProductsEntitiesMethods::deleteProduct($id);
 header('Location: products.php');

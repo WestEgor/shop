@@ -14,7 +14,6 @@ use PDO;
  *
  * @package repository\products
  */
-
 class ProductsEntity extends AbstractRepository
 {
 
@@ -70,12 +69,12 @@ class ProductsEntity extends AbstractRepository
     {
         $products = [];
         while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
-            $product = new Product();
-            $product->setId($row['id']);
-            $product->setName($row['name']);
-            $product->setQuantity($row['quantity']);
-            $product->setPrice($row['price']);
-            $product->setMsrp($row['msrp']);
+            $id = $row['id'];
+            $name = $row['name'];
+            $quantity = $row['quantity'];
+            $price = $row['price'];
+            $msrp = $row['msrp'];
+            $product = Product::parameterizedConstructor($id, $name, $quantity, $price, $msrp);
             $products[] = $product;
         }
         return $products;
@@ -100,7 +99,7 @@ class ProductsEntity extends AbstractRepository
      * @param object $object
      * @return bool
      */
-    public function createStatement(PDOStatement $statement,object $object): bool
+    public function createStatement(PDOStatement $statement, object $object): bool
     {
         $statement->bindValue(':name', $object->getName());
         $statement->bindValue(':quantity', $object->getQuantity());
@@ -115,7 +114,7 @@ class ProductsEntity extends AbstractRepository
      * @param object $object
      * @return bool
      */
-    public function updateStatement(PDOStatement $statement,object $object): bool
+    public function updateStatement(PDOStatement $statement, object $object): bool
     {
         $statement->bindValue(':name', $object->getName());
         $statement->bindValue(':quantity', $object->getQuantity());

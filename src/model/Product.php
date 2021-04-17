@@ -11,38 +11,74 @@ class Product
 {
     /**
      * id of table 'products'
-     *
      * @var int
      */
     private int $id;
 
     /**
      * name of table 'products'
-     *
      * @var string
      */
     private string $name;
 
     /**
      * quantity of table 'products'
-     *
      * @var int
      */
     private int $quantity;
 
     /**
      * price of table 'products'
-     *
      * @var float
      */
     private float $price;
 
     /**
      * msrp of table 'products'
-     *
      * @var float
      */
     private float $msrp;
+
+    /**
+     * Product constructor.
+     * @param string $name
+     * @param int $quantity
+     * @param float $price
+     * @param float $msrp
+     */
+    public function __construct()
+    {
+        $this->id = -1;
+        $this->name = '';
+        $this->quantity = -1;
+        $this->price = -1.0;
+        $this->msrp = -1.0;
+    }
+
+
+    /**
+     * Method to .
+     *
+     * @param int $id
+     * @param string $name
+     * @param int $quantity
+     * @param float $price
+     * @param float $msrp
+     * @return Product
+     */
+
+    public static function parameterizedConstructor(int $id, string $name, int $quantity,
+                                                    float $price, float $msrp): Product
+    {
+        $product = new self();
+        $product->id = $id;
+        $product->name = $name;
+        $product->quantity = $quantity;
+        $product->price = $price;
+        $product->msrp = $msrp;
+        return $product;
+    }
+
 
     /**
      * @return int product id

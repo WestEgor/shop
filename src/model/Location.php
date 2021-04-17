@@ -17,14 +17,15 @@ class Location
      * @param string $address
      * @param string $zipCode
      */
-    public function __construct(string $country, string $city, string $address, string $zipCode)
+    public static function parameterizedConstructor(string $country, string $city, string $address, string $zipCode)
     {
-        $this->country = $country;
-        $this->city = $city;
-        $this->address = $address;
-        $this->zipCode = $zipCode;
+        $location = new self();
+        $location->country = $country;
+        $location->city = $city;
+        $location->address = $address;
+        $location->zipCode = $zipCode;
+        return $location;
     }
-
 
     /**
      * @return string
