@@ -17,11 +17,21 @@ class Payment
      * @param DateTime $paymentDate
      * @param int $customerId
      */
-    public function __construct(float $amount, DateTime $paymentDate, int $customerId)
+    public function __construct()
     {
-        $this->amount = $amount;
-        $this->paymentDate = $paymentDate;
-        $this->customerId = $customerId;
+        $this->amount = -1;
+        $this->paymentDate = new DateTime('now');
+        $this->customerId = -1;
+    }
+
+
+    public static function parameterizedConstructor($customerId, $amount, DateTime $paymentDate)
+    {
+        $payment = new self();
+        $payment->customerId = $customerId;
+        $payment->amount = $amount;
+        $payment->paymentDate = $paymentDate;
+        return $payment;
     }
 
     /**
@@ -88,7 +98,15 @@ class Payment
         $this->customerId = $customerId;
     }
 
-
-
-
+    public function setAll(object $keys): bool
+    {
+        if (!$keys) return false;
+        foreach ($keys as $key => $value) {
+            if ($key === 'customers_id') $this->customerId = $value;
+            if ($key === 'id') $this->id = $value;
+            if ($key === 'amount') $this->amount = $value;
+            if ($key === 'payment_date') $this->paymentDate = DateTime::createFromFormat('Y-m-d', $value);
+        }
+        return true;
+    }
 }

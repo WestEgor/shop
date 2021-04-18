@@ -19,7 +19,7 @@ class Validator
      * return TRUE iff $intNumber is integer
      * return FALSE if $intNumber doesnt integer
      */
-    #[Pure] static public function validateInt($intNumber): bool
+    public static function validateInt($intNumber): bool
     {
         return (filter_var($intNumber, FILTER_VALIDATE_INT));
     }
@@ -30,7 +30,7 @@ class Validator
      * return TRUE iff $floatVal is float
      * return FALSE if $floatVal doesnt float
      */
-    #[Pure] static public function validateFloat($floatVal): bool
+    public static function validateFloat($floatVal): bool
     {
         return (filter_var($floatVal, FILTER_VALIDATE_FLOAT));
     }
@@ -41,7 +41,7 @@ class Validator
      * return TRUE iff $str is not empty string
      * return FALSE if $str is empty string
      */
-    #[Pure] static public function validateString($str): bool
+    public static function validateString($str): bool
     {
         return trim($str) !== '';
     }

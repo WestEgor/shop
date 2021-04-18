@@ -12,7 +12,6 @@ use util\Validator;
 
 $id = intval($_REQUEST['id']);
 $pdo = Connection::get()->getConnect();
-$productEntity = new ProductsEntity($pdo);
 $product = ProductsEntitiesMethods::readProductByKey($pdo, $id);
 if (isset($_POST['update_submit'])) :
     $errorMessage = '';
