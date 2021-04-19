@@ -11,26 +11,25 @@ class Order
     private DateTime $requiredDate;
     private string $status;
     private string $comments;
-    private string $costumerId;
+    private int $customerId;
 
-    /**
-     * Order constructor.
-     * @param DateTime $orderDate
-     * @param DateTime $requiredDate
-     * @param string $status
-     * @param string $comments
-     * @param string $costumerId
-     */
-    public function __construct(DateTime $orderDate, DateTime $requiredDate,
-                                string $status, string $comments, string $costumerId)
+
+    public function __construct()
     {
-        $this->orderDate = $orderDate;
-        $this->requiredDate = $requiredDate;
-        $this->status = $status;
-        $this->comments = $comments;
-        $this->costumerId = $costumerId;
+
     }
 
+    public static function parameterizedConstructor(DateTime $orderDate, DateTime $requiredDate,
+                                                    string $status, string $comments, int $customerId)
+    {
+        $order = new self();
+        $order->orderDate = $orderDate;
+        $order->requiredDate = $requiredDate;
+        $order->status = $status;
+        $order->comments = $comments;
+        $order->customerId = $customerId;
+        return $order;
+    }
 
     /**
      * @return mixed
@@ -113,19 +112,34 @@ class Order
     }
 
     /**
-     * @return string
+     * @return int
      */
-    public function getCostumerId(): string
+    public function getCustomerId(): int
     {
-        return $this->costumerId;
+        return $this->customerId;
     }
 
     /**
-     * @param string $costumerId
+     * @param int $customerId
      */
-    public function setCostumerId(string $costumerId): void
+    public function setCustomerId(int $customerId): void
     {
-        $this->costumerId = $costumerId;
+        $this->customerId = $customerId;
+    }
+
+
+    public function setAll(object $keys)
+    {
+        if (!$keys) return false;
+        foreach ($keys as $key => $value) {
+            if ($key === 'id') $this->id = $value;
+            if ($key === 'order_date') $this->orderDate = DateTime::createFromFormat('Y-m-d', $value);
+            if ($key === 'required_date') $this->requiredDate = DateTime::createFromFormat('Y-m-d', $value);
+            if ($key === 'status') $this->status = $value;
+            if ($key === 'comments') $this->comments = $value;
+            if ($key === 'customers_id') $this->customerId = $value;
+        }
+        return true;
     }
 
 
