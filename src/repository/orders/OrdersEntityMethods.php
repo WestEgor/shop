@@ -7,7 +7,7 @@ use DateTime;
 use model\Order;
 use PDO;
 
-class OrdersEntitiesMethods
+class OrdersEntityMethods
 {
 
     public static function createOrder(DateTime $orderDate, DateTime $requiredDate,

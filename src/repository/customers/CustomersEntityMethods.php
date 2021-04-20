@@ -3,13 +3,14 @@
 namespace repository\customers;
 
 use config\Connector as Connection;
-use model\Contacts;
+use model\help_change_name\Contacts;
+use model\help_change_name\Location;
+use model\help_change_name\Person;
 use model\Customer;
-use model\Location;
-use model\Person;
+
 use PDO;
 
-class CustomersEntitiesMethods
+class CustomersEntityMethods
 {
 
     public static function readAllCustomers(PDO $pdo)

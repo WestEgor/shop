@@ -1,18 +1,18 @@
 <?php
 
 
-namespace repository\customers;
+namespace repository\order_details;
 
 
 use repository\AbstractColumnsTablesInformation;
 
-class CustomersTablesInformation extends AbstractColumnsTablesInformation
+class OrderDetailsTablesInformation extends AbstractColumnsTablesInformation
 {
 
     public function getColumnsQuery(): string
     {
         return "SELECT * FROM information_schema.columns
                          WHERE table_schema = 'public'
-                         AND table_name   = 'customers'";
+                         AND table_name   = 'order_details'";
     }
 }

@@ -1,9 +1,9 @@
 <?php
 
-use repository\orders\OrdersEntitiesMethods;
+use repository\orders\OrdersEntityMethods;
 
 require __DIR__ . '/../../vendor/autoload.php';
 
 $id = $_REQUEST['id'];
-OrdersEntitiesMethods::deleteOrder($id);
+OrdersEntityMethods::deleteOrder($id);
 header('Location: orders.php');

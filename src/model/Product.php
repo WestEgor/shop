@@ -7,7 +7,7 @@ namespace model;
  *
  * @package model
  */
-class Product
+class Product implements ModelInterface
 {
     /**
      * id of table 'products'
@@ -160,13 +160,7 @@ class Product
         $this->msrp = $msrp;
     }
 
-    /**
-     * @param object $keys PDO::fetchObject returns stdClass
-     * Methods used for parse from stdClass to Product
-     * @return bool
-     * return TRUE if object exists
-     * return FALSE if object is null (false)
-     */
+
     public function setAll(object $keys): bool
     {
         if (!$keys) return false;

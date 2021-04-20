@@ -1,10 +1,10 @@
 <?php
 
-use repository\customers\CustomersEntitiesMethods;
+use repository\customers\CustomersEntityMethods;
 
 require __DIR__ . '/../../vendor/autoload.php';
 
 
 $id = $_REQUEST['id'];
-CustomersEntitiesMethods::deleteCustomer($id);
+CustomersEntityMethods::deleteCustomer($id);
 header('Location: customers.php');

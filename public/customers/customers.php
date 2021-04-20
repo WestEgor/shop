@@ -5,7 +5,7 @@ if (!session_id()) {
 require __DIR__ . '/../../vendor/autoload.php';
 
 use config\Connector as Connection;
-use repository\customers\CustomersEntitiesMethods;
+use repository\customers\CustomersEntityMethods;
 
 ?>
 
@@ -34,7 +34,7 @@ if (isset($_GET['submit'])):
     $id = $_GET['search_by_id_customers'];
     if (filter_var($id, FILTER_VALIDATE_INT)):
         $pdo = Connection::get()->getConnect();
-        if ($customer = CustomersEntitiesMethods::readCustomersByKey($pdo, $id)):?>
+        if ($customer = CustomersEntityMethods::readCustomersByKey($pdo, $id)):?>
             <table class="table table-striped" style="margin-left: 3px">
                 <thead>
                 <tr>

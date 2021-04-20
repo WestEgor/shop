@@ -2,7 +2,7 @@
 
 use config\Connector as Connection;
 use repository\orders\OrdersColumnsInformation;
-use repository\orders\OrdersEntitiesMethods;
+use repository\orders\OrdersEntityMethods;
 
 
 ?>
@@ -24,7 +24,7 @@ use repository\orders\OrdersEntitiesMethods;
     </thead>
     <tbody>
     <?php
-    if (!$orders = OrdersEntitiesMethods::readAllOrders($pdo)):  ?>
+    if (!$orders = OrdersEntityMethods::readAllOrders($pdo)):  ?>
         <tr>
             <th scope="row">No data</th>
             <td>-</td>

@@ -5,7 +5,7 @@ if (!session_id()) {
 require __DIR__ . '/../../vendor/autoload.php';
 require '../navbar.php';
 
-use repository\payments\PaymentsEntitiesMethods;
+use repository\payments\PaymentsEntityMethods;
 use util\Parser;
 use util\Validator;
 
@@ -31,7 +31,7 @@ if (isset($_POST['create_submit'])) :
         $errorMessage .= 'Cannot parse' . '</br>';
     }
     if ($errorMessage === '') :
-        PaymentsEntitiesMethods::createPayment($customersId, $amount, $paymentDate);
+        PaymentsEntityMethods::createPayment($customersId, $amount, $paymentDate);
         foreach ($_SESSION as $key) {
             unset($_SESSION[$key]);
         }

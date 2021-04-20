@@ -2,26 +2,27 @@
 
 namespace model;
 
-class OrderDetails{
+class OrderDetails implements ModelInterface
+{
     private int $id;
-    private int $quantityOrdered;
-    private float $price;
     private int $productId;
     private int $orderId;
+    private int $quantityOrdered;
+    private float $price;
 
-    /**
-     * OrderDetails constructor.
-     * @param int $quantityOrdered
-     * @param float $price
-     * @param int $productId
-     * @param int $orderId
-     */
-    public function __construct(int $quantityOrdered, float $price, int $productId, int $orderId)
+    public function __construct()
     {
-        $this->quantityOrdered = $quantityOrdered;
-        $this->price = $price;
-        $this->productId = $productId;
-        $this->orderId = $orderId;
+
+    }
+
+    public static function parameterizedConstructor(int $productId, int $orderId, int $quantityOrdered, float $price)
+    {
+        $orderDetails = new self();
+        $orderDetails->productId = $productId;
+        $orderDetails->orderId = $orderId;
+        $orderDetails->quantityOrdered = $quantityOrdered;
+        $orderDetails->price = $price;
+        return $orderDetails;
     }
 
     /**
@@ -104,7 +105,18 @@ class OrderDetails{
         $this->orderId = $orderId;
     }
 
-
+    public function setAll(object $keys)
+    {
+        if (!$keys) return false;
+        foreach ($keys as $key => $value) {
+            if ($key === 'id') $this->id = $value;
+            if ($key === 'products_id') $this->productId = $value;
+            if ($key === 'orders_id') $this->orderId = $value;
+            if ($key === 'quantity_ordered') $this->quantityOrdered = $value;
+            if ($key === 'price') $this->price = $value;
+        }
+        return true;
+    }
 
 
 }

@@ -8,7 +8,7 @@ require '../navbar.php';
 use model\Contacts;
 use model\Location;
 use model\Person;
-use repository\customers\CustomersEntitiesMethods;
+use repository\customers\CustomersEntityMethods;
 use util\Validator;
 
 $name = '';
@@ -74,7 +74,7 @@ if (isset($_POST['create_submit'])) :
         $person = Person::parameterizedConstructor($name, $lastName, $age);
         $location = Location::parameterizedConstructor($country, $city, $address, $zipCode);
         $contacts = Contacts::parameterizedConstructor($email, $phoneNumber);
-        CustomersEntitiesMethods::createCustomer($person, $location, $contacts);
+        CustomersEntityMethods::createCustomer($person, $location, $contacts);
         foreach ($_SESSION as $key) {
             unset($_SESSION[$key]);
         }

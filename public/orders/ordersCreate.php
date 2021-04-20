@@ -5,8 +5,8 @@ if (!session_id()) {
 require __DIR__ . '/../../vendor/autoload.php';
 require '../navbar.php';
 
-use repository\orders\OrdersEntitiesMethods;
-use repository\payments\PaymentsEntitiesMethods;
+use repository\orders\OrdersEntityMethods;
+use repository\payments\PaymentsEntityMethods;
 use util\Parser;
 use util\Validator;
 
@@ -52,7 +52,7 @@ if (isset($_POST['create_submit'])) :
 
 
     if ($errorMessage === '') :
-        OrdersEntitiesMethods::createOrder($orderDate, $requiredDate, $status, $comments, $customersId);
+        OrdersEntityMethods::createOrder($orderDate, $requiredDate, $status, $comments, $customersId);
         foreach ($_SESSION as $key) {
             unset($_SESSION[$key]);
         }

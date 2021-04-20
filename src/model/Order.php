@@ -4,7 +4,7 @@ namespace model;
 
 use DateTime;
 
-class Order
+class Order implements ModelInterface
 {
     private int $id;
     private DateTime $orderDate;

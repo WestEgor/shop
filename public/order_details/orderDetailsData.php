@@ -1,15 +1,15 @@
 <?php
 
 use config\Connector as Connection;
-use repository\products\ProductsEntityMethods;
-use repository\products\ProductsColumnsInformation;
+use repository\order_details\OrderDetailsEntityMethods;
+use repository\order_details\OrderDetailsTablesInformation;
 
 ?>
 <table class="table table-striped" style="margin-left: 3px">
     <thead>
     <tr>
         <?php $pdo = Connection::get()->getConnect();
-        $columns = new ProductsColumnsInformation($pdo);
+        $columns = new OrderDetailsTablesInformation($pdo);
         $col = $columns->getColumnName();
         foreach ($col as $column):
             ?>
@@ -22,7 +22,7 @@ use repository\products\ProductsColumnsInformation;
     </thead>
     <tbody>
     <?php
-    if (!$products = ProductsEntityMethods::readAllProducts($pdo)): ?>
+    if (!$orderDetailsArray = OrderDetailsEntityMethods::readAllOrderDetails($pdo)): ?>
         <tr>
             <th scope="row">No data</th>
             <td>-</td>
@@ -33,19 +33,19 @@ use repository\products\ProductsColumnsInformation;
             <td>-</td>
         </tr>
     <?php else:
-        foreach ($products as $product):
+        foreach ($orderDetailsArray as $orderDetails):
             ?>
             <tr>
-                <th scope="row"><?php echo $product->getId(); ?></th>
-                <td><?php echo $product->getName(); ?></td>
-                <td><?php echo $product->getQuantity(); ?></td>
-                <td><?php echo $product->getPrice(); ?></td>
-                <td><?php echo $product->getMsrp(); ?></td>
+                <th scope="row"><?php echo $orderDetails->getId(); ?></th>
+                <td><?php echo $orderDetails->getProductId(); ?></td>
+                <td><?php echo $orderDetails->getOrderId(); ?></td>
+                <td><?php echo $orderDetails->getQuantityOrdered(); ?></td>
+                <td><?php echo $orderDetails->getPrice(); ?></td>
                 <td><a id="submit_update" class="btn btn-primary"
-                       href="productsUpdate.php?id=<?php echo $product->getId(); ?>">Update</a>
+                       href="orderDetailsUpdate.php?id=<?php echo $orderDetails->getId(); ?>">Update</a>
                 </td>
                 <td><a id="submit_delete" class="btn btn-primary"
-                       href="productsDelete.php?id=<?php echo $product->getId(); ?>">Delete</a></td>
+                       href="orderDetailsDelete.php?id=<?php echo $orderDetails->getId(); ?>">Delete</a></td>
             </tr>
         <?php endforeach; endif; ?>
     </tbody>

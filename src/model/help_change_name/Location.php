@@ -1,6 +1,6 @@
 <?php
 
-namespace model;
+namespace model\help_change_name;
 
 
 class Location

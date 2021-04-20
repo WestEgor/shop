@@ -1,9 +1,8 @@
 <?php
 require __DIR__ . '/../../vendor/autoload.php';
 
-use config\Connector as Connection;
-use repository\products\ProductsEntitiesMethods;
+use repository\products\ProductsEntityMethods;
 
 $id = $_REQUEST['id'];
-ProductsEntitiesMethods::deleteProduct($id);
+ProductsEntityMethods::deleteProduct($id);
 header('Location: products.php');

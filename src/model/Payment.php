@@ -4,7 +4,7 @@ namespace model;
 
 use DateTime;
 
-class Payment
+class Payment implements ModelInterface
 {
     private int $id;
     private float $amount;

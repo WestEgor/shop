@@ -1,7 +1,7 @@
 <?php
 
 use config\Connector as Connection;
-use repository\customers\CustomersEntitiesMethods;
+use repository\customers\CustomersEntityMethods;
 use repository\customers\CustomersTablesInformation;
 
 ?>
@@ -21,7 +21,7 @@ use repository\customers\CustomersTablesInformation;
     </thead>
     <tbody>
     <?php
-    if (!$customers = CustomersEntitiesMethods::readAllCustomers($pdo)): ?>
+    if (!$customers = CustomersEntityMethods::readAllCustomers($pdo)): ?>
         <tr>
             <th scope="row">No data</th>
             <td>-</td>

@@ -7,12 +7,12 @@ require '../navbar.php';
 
 use config\Connector as Connection;
 use repository\products\ProductsEntity;
-use repository\products\ProductsEntitiesMethods;
+use repository\products\ProductsEntityMethods;
 use util\Validator;
 
 $id = intval($_REQUEST['id']);
 $pdo = Connection::get()->getConnect();
-$product = ProductsEntitiesMethods::readProductByKey($pdo, $id);
+$product = ProductsEntityMethods::readProductByKey($pdo, $id);
 if (isset($_POST['update_submit'])) :
     $errorMessage = '';
     $_SESSION['product_name'] = $_POST['product_name'];
@@ -37,7 +37,7 @@ if (isset($_POST['update_submit'])) :
     }
 
     if ($errorMessage === '') :
-        ProductsEntitiesMethods::updateProduct($pdo, $id, $name, $quantity, $price, $msrp);
+        ProductsEntityMethods::updateProduct($pdo, $id, $name, $quantity, $price, $msrp);
         foreach ($_SESSION as $key) {
             unset($_SESSION[$key]);
         }

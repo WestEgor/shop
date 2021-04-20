@@ -8,7 +8,7 @@ use DateTime;
 use model\Payment;
 use PDO;
 
-class PaymentsEntitiesMethods
+class PaymentsEntityMethods
 {
 
     public static function createPayment(int $customersId, float $amount, DateTime $paymentDate): bool

@@ -2,7 +2,7 @@
 
 use config\Connector as Connection;
 use repository\payments\PaymentsColumnsInformation;
-use repository\payments\PaymentsEntitiesMethods;
+use repository\payments\PaymentsEntityMethods;
 
 ?>
 <table class="table table-striped" style="margin-left: 3px">
@@ -23,7 +23,7 @@ use repository\payments\PaymentsEntitiesMethods;
     </thead>
     <tbody>
     <?php
-    if (!$payments = PaymentsEntitiesMethods::readAllPayments($pdo)): ?>
+    if (!$payments = PaymentsEntityMethods::readAllPayments($pdo)): ?>
         <tr>
             <th scope="row">No data</th>
             <td>-</td>

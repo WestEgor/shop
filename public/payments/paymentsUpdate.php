@@ -6,14 +6,14 @@ require __DIR__ . '/../../vendor/autoload.php';
 require '../navbar.php';
 
 use config\Connector as Connection;
-use repository\payments\PaymentsEntitiesMethods;
+use repository\payments\PaymentsEntityMethods;
 use util\Parser;
 use util\Validator;
 
 $id = intval($_REQUEST['id']);
 
 $pdo = Connection::get()->getConnect();
-$payment = PaymentsEntitiesMethods::readPaymentByKey($pdo, $id);
+$payment = PaymentsEntityMethods::readPaymentByKey($pdo, $id);
 
 if (isset($_POST['update_submit'])) :
     $errorMessage = '';
@@ -33,7 +33,7 @@ if (isset($_POST['update_submit'])) :
         $errorMessage .= 'Cannot parse' . '</br>';
     }
     if ($errorMessage === '') :
-        PaymentsEntitiesMethods::updatePayment($pdo, $id, $customersId, $amount, $paymentDate);
+        PaymentsEntityMethods::updatePayment($pdo, $id, $customersId, $amount, $paymentDate);
         foreach ($_SESSION as $key) {
             unset($_SESSION[$key]);
         }

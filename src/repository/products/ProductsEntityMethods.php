@@ -7,12 +7,12 @@ use model\Product;
 use PDO;
 
 /**
- * Class @ProductsEntitiesMethods
+ * Class @ProductsEntityMethods
  * Class which have static methods to manipulate @ProductsEntities methods
  *
  * @package repository\products
  */
-class ProductsEntitiesMethods
+class ProductsEntityMethods
 {
 
     /**

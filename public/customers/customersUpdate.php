@@ -9,7 +9,7 @@ use config\Connector as Connection;
 use model\Contacts;
 use model\Location;
 use model\Person;
-use repository\customers\CustomersEntitiesMethods;
+use repository\customers\CustomersEntityMethods;
 use repository\customers\CustomersEntity;
 use util\Validator;
 
@@ -17,7 +17,7 @@ use util\Validator;
 $id = intval($_REQUEST['id']);
 $pdo = Connection::get()->getConnect();
 $productEntity = new CustomersEntity($pdo);
-$customer = CustomersEntitiesMethods::readCustomersByKey($pdo, $id);
+$customer = CustomersEntityMethods::readCustomersByKey($pdo, $id);
 
 if (isset($_POST['update_submit'])) :
     $errorMessage = '';
@@ -70,7 +70,7 @@ if (isset($_POST['update_submit'])) :
         $person = Person::parameterizedConstructor($name, $lastName, $age);
         $location = Location::parameterizedConstructor($country, $city, $address, $zipCode);
         $contacts = Contacts::parameterizedConstructor($email, $phoneNumber);
-        CustomersEntitiesMethods::updateCustomer($pdo, $id, $person, $location, $contacts);
+        CustomersEntityMethods::updateCustomer($pdo, $id, $person, $location, $contacts);
         foreach ($_SESSION as $key) {
             unset($_SESSION[$key]);
         }

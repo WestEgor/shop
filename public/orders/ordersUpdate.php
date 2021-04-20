@@ -6,7 +6,7 @@ require __DIR__ . '/../../vendor/autoload.php';
 require '../navbar.php';
 
 use config\Connector as Connection;
-use repository\orders\OrdersEntitiesMethods;
+use repository\orders\OrdersEntityMethods;
 use util\Parser;
 use util\Validator;
 
@@ -14,7 +14,7 @@ use util\Validator;
 $id = intval($_REQUEST['id']);
 
 $pdo = Connection::get()->getConnect();
-$order = OrdersEntitiesMethods::readOrderByKey($pdo, $id);
+$order = OrdersEntityMethods::readOrderByKey($pdo, $id);
 
 if (isset($_POST['create_submit'])) :
     $errorMessage = '';
@@ -51,7 +51,7 @@ if (isset($_POST['create_submit'])) :
 
 
     if ($errorMessage === '') :
-        OrdersEntitiesMethods::createOrder($orderDate, $requiredDate, $status, $comments, $customersId);
+        OrdersEntityMethods::createOrder($orderDate, $requiredDate, $status, $comments, $customersId);
         foreach ($_SESSION as $key) {
             unset($_SESSION[$key]);
         }

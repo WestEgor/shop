@@ -5,7 +5,7 @@ if (!session_id()) {
 require __DIR__ . '/../../vendor/autoload.php';
 require '../navbar.php';
 
-use repository\products\ProductsEntitiesMethods;
+use repository\products\ProductsEntityMethods;
 use util\Validator;
 
 $name = '';
@@ -37,7 +37,7 @@ if (isset($_POST['create_submit'])) :
     }
 
     if ($errorMessage === '') :
-        ProductsEntitiesMethods::createProduct($name, $quantity, $price, $msrp);
+        ProductsEntityMethods::createProduct($name, $quantity, $price, $msrp);
         foreach ($_SESSION as $key) {
             unset($_SESSION[$key]);
         }

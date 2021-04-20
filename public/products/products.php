@@ -5,7 +5,7 @@ if (!session_id()) {
 require __DIR__ . '/../../vendor/autoload.php';
 
 use config\Connector as Connection;
-use repository\products\ProductsEntitiesMethods;
+use repository\products\ProductsEntityMethods;
 
 ?>
 
@@ -34,7 +34,7 @@ if (isset($_GET['submit'])):
     $id = $_GET['search_by_id_products'];
     if (filter_var($id, FILTER_VALIDATE_INT)):
         $pdo = Connection::get()->getConnect();
-        if ($product = ProductsEntitiesMethods::readProductByKey($pdo, $id)):?>
+        if ($product = ProductsEntityMethods::readProductByKey($pdo, $id)):?>
             <table class="table table-striped" style="margin-left: 3px">
                 <thead>
                 <tr>

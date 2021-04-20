@@ -2,7 +2,11 @@
 
 namespace model;
 
-class Customer
+use model\help_change_name\Contacts;
+use model\help_change_name\Location;
+use model\help_change_name\Person;
+
+class Customer implements ModelInterface
 {
     private int $id;
     private Person $person;

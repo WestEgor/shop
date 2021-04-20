@@ -3,11 +3,10 @@
 
 namespace repository\customers;
 
-
-use model\Contacts;
 use model\Customer;
-use model\Location;
-use model\Person;
+use model\help_change_name\Contacts;
+use model\help_change_name\Location;
+use model\help_change_name\Person;
 use PDO;
 use PDOStatement;
 use repository\AbstractRepository;
