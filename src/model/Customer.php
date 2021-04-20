@@ -2,9 +2,9 @@
 
 namespace model;
 
-use model\help_change_name\Contacts;
-use model\help_change_name\Location;
-use model\help_change_name\Person;
+use model\support_classes\Contacts;
+use model\support_classes\Location;
+use model\support_classes\Person;
 
 class Customer implements ModelInterface
 {

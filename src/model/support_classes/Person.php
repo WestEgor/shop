@@ -1,6 +1,6 @@
 <?php
 
-namespace model\help_change_name;
+namespace model\support_classes;
 
 class Person
 {
