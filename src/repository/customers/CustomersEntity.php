@@ -11,25 +11,47 @@ use PDO;
 use PDOStatement;
 use repository\AbstractRepository;
 
+/**
+ * Class CustomersEntity
+ * Extends AbstractRepository
+ * Class for work with entity 'customers'
+ * @package repository\customers
+ */
 class CustomersEntity extends AbstractRepository
 {
 
-    public function readAllQuery(): string
-    {
-        return 'Select * FROM customers';
-    }
-
-    public function readByKeyQuery(): string
-    {
-        return 'Select * FROM customers WHERE id = :id';
-    }
-
+    /**
+     * Implementation of abstract method
+     * @return string query of insert in 'customers'
+     */
     public function createQuery(): string
     {
         return 'INSERT INTO customers(name,last_name,age,country,city,address,zip_code,email,phone_number) 
                 VALUES(:name,:last_name,:age,:country,:city,:address,:zip_code,:email,:phone_number)';
     }
 
+    /**
+     * Implementation of abstract method
+     * @return string query of select all in 'customers'
+     */
+    public function readAllQuery(): string
+    {
+        return 'Select * FROM customers';
+    }
+
+    /**
+     * Implementation of abstract method
+     * @return string query of select all in 'customers' with id
+     */
+    public function readByKeyQuery(): string
+    {
+        return 'Select * FROM customers WHERE id = :id';
+    }
+
+    /**
+     * Implementation of abstract method
+     * @return string query of update in 'customers'
+     */
     public function updateQuery(): string
     {
         return 'UPDATE customers 
@@ -39,11 +61,21 @@ class CustomersEntity extends AbstractRepository
                 WHERE id = :id';
     }
 
+    /**
+     * Implementation of abstract method
+     * @return string query of delete in 'customers' with
+     */
     public function deleteQuery(): string
     {
         return 'DELETE FROM customers WHERE id = :id';
     }
 
+    /**
+     * Implementation of abstract method
+     * @param PDOStatement $statement
+     * @param object $object
+     * @return bool
+     */
     public function createStatement(PDOStatement $statement, object $object): bool
     {
         $statement->bindValue(':name', $object->getPersonName());
@@ -58,6 +90,11 @@ class CustomersEntity extends AbstractRepository
         return $statement->execute();
     }
 
+    /**
+     * Implementation of abstract method
+     * @param PDOStatement $statement
+     * @return array|false
+     */
     public function readAllStatement(PDOStatement $statement): array|false
     {
         $customers = [];
@@ -82,6 +119,12 @@ class CustomersEntity extends AbstractRepository
         return $customers;
     }
 
+    /**
+     * Implementation of abstract method
+     * @param PDOStatement $statement
+     * @param int $key
+     * @return object|false
+     */
     public function readByKeyStatement(PDOStatement $statement, int $key): object|false
     {
         $customer = new Customer();
@@ -91,6 +134,12 @@ class CustomersEntity extends AbstractRepository
         return $customer;
     }
 
+    /**
+     * Implementation of abstract method
+     * @param PDOStatement $statement
+     * @param object $object
+     * @return bool
+     */
     public function updateStatement(PDOStatement $statement, object $object): bool
     {
         $statement->bindValue(':name', $object->getPersonName());

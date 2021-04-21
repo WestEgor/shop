@@ -16,23 +16,38 @@ use repository\AbstractRepository;
 
 class PaymentsEntity extends AbstractRepository
 {
-
+    /**
+     * Implementation of abstract method
+     * @return string query of select all in 'payments'
+     */
     public function readAllQuery(): string
     {
         return 'SELECT * FROM payments';
     }
 
+    /**
+     * Implementation of abstract method
+     * @return string query of select all in 'payments' with id
+     */
     public function readByKeyQuery(): string
     {
         return 'SELECT * FROM payments WHERE id= :id';
     }
 
+    /**
+     * Implementation of abstract method
+     * @return string query of insert in 'payments'
+     */
     public function createQuery(): string
     {
         return 'INSERT INTO payments(customers_id, amount,payment_date) 
                 VALUES(:customers_id, :amount, :payment_date)';
     }
 
+    /**
+     * Implementation of abstract method
+     * @return string query of update in 'payments'
+     */
     public function updateQuery(): string
     {
         return 'UPDATE payments 
@@ -40,11 +55,21 @@ class PaymentsEntity extends AbstractRepository
                 WHERE id = :id';
     }
 
+    /**
+     * Implementation of abstract method
+     * @return string query of delete in 'payments' with
+     */
     public function deleteQuery(): string
     {
         return 'DELETE FROM payments WHERE id = :id';
     }
 
+    /**
+     * Implementation of abstract method
+     * @param PDOStatement $statement
+     * @param object $object
+     * @return bool
+     */
     public function createStatement(PDOStatement $statement, object $object): bool
     {
         $statement->bindValue(':customers_id', $object->getCustomerId());
@@ -53,6 +78,11 @@ class PaymentsEntity extends AbstractRepository
         return $statement->execute();
     }
 
+    /**
+     * Implementation of abstract method
+     * @param PDOStatement $statement
+     * @return array|false
+     */
     public function readAllStatement(PDOStatement $statement): array|false
     {
         $payments = [];
@@ -68,6 +98,12 @@ class PaymentsEntity extends AbstractRepository
         return $payments;
     }
 
+    /**
+     * Implementation of abstract method
+     * @param PDOStatement $statement
+     * @param int $key
+     * @return object|false
+     */
     public function readByKeyStatement(PDOStatement $statement, int $key): object|false
     {
         $payment = new Payment();
@@ -77,6 +113,12 @@ class PaymentsEntity extends AbstractRepository
         return $payment;
     }
 
+    /**
+     * Implementation of abstract method
+     * @param PDOStatement $statement
+     * @param object $object
+     * @return bool
+     */
     public function updateStatement(PDOStatement $statement, object $object): bool
     {
         $statement->bindValue(':customers_id', $object->getCustomerId());
@@ -86,7 +128,10 @@ class PaymentsEntity extends AbstractRepository
         return $statement->execute();
     }
 
-    public function leftInnerJoinQuery()
+    /**
+     * @return string left inner join of 'payments' and 'customers' query
+     */
+    public function leftInnerJoinQuery(): string
     {
         return $sql = "SELECT *
                 FROM payments
@@ -94,6 +139,11 @@ class PaymentsEntity extends AbstractRepository
                 ON payments.customers_id = customers.id";
     }
 
+    /**
+     * Left inner join entities 'payments' and 'customers'
+     * @param PDO $pdo
+     * @return array|false
+     */
     public function getFullInformationAboutPayments(PDO $pdo): array|false
     {
         $stmt = $pdo->query($this->leftInnerJoinQuery());

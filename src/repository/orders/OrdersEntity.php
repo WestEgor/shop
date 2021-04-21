@@ -1,8 +1,6 @@
 <?php
 
-
 namespace repository\orders;
-
 
 use DateTime;
 use model\Order;
@@ -10,25 +8,47 @@ use PDO;
 use PDOStatement;
 use repository\AbstractRepository;
 
+/**
+ * Class OrdersEntity
+ * Extends AbstractRepository
+ * Class for work with entity 'orders'
+ * @package repository\orders
+ */
 class OrdersEntity extends AbstractRepository
 {
 
-    public function readAllQuery(): string
-    {
-        return 'SELECT * FROM orders';
-    }
-
-    public function readByKeyQuery(): string
-    {
-        return 'SELECT * FROM orders WHERE id = :id';
-    }
-
+    /**
+     * Implementation of abstract method
+     * @return string query of insert in 'orders'
+     */
     public function createQuery(): string
     {
         return 'INSERT INTO orders(order_date, required_date,status,comments,customers_id) 
                 VALUES(:order_date, :required_date, :status, :comments, :customers_id)';
     }
 
+    /**
+     * Implementation of abstract method
+     * @return string query of select all in 'orders'
+     */
+    public function readAllQuery(): string
+    {
+        return 'SELECT * FROM orders';
+    }
+
+    /**
+     * Implementation of abstract method
+     * @return string query of select all in 'orders' with id
+     */
+    public function readByKeyQuery(): string
+    {
+        return 'SELECT * FROM orders WHERE id = :id';
+    }
+
+    /**
+     * Implementation of abstract method
+     * @return string query of update in 'orders'
+     */
     public function updateQuery(): string
     {
         return 'UPDATE orders 
@@ -37,11 +57,21 @@ class OrdersEntity extends AbstractRepository
                 WHERE id = :id';
     }
 
+    /**
+     * Implementation of abstract method
+     * @return string query of delete in 'orders' with
+     */
     public function deleteQuery(): string
     {
         return 'DELETE FROM orders WHERE id = :id';
     }
 
+    /**
+     * Implementation of abstract method
+     * @param PDOStatement $statement
+     * @param object $object
+     * @return bool
+     */
     public function createStatement(PDOStatement $statement, object $object): bool
     {
         $statement->bindValue(':order_date', $object->getOrderDate()->format('Y-m-d'));
@@ -52,6 +82,11 @@ class OrdersEntity extends AbstractRepository
         return $statement->execute();
     }
 
+    /**
+     * Implementation of abstract method
+     * @param PDOStatement $statement
+     * @return array|false
+     */
     public function readAllStatement(PDOStatement $statement): array|false
     {
         $orders = [];
@@ -69,6 +104,12 @@ class OrdersEntity extends AbstractRepository
         return $orders;
     }
 
+    /**
+     * Implementation of abstract method
+     * @param PDOStatement $statement
+     * @param int $key
+     * @return Order|false
+     */
     public function readByKeyStatement(PDOStatement $statement, int $key): object|false
     {
         $order = new Order();
@@ -78,6 +119,12 @@ class OrdersEntity extends AbstractRepository
         return $order;
     }
 
+    /**
+     * Implementation of abstract method
+     * @param PDOStatement $statement
+     * @param object $object
+     * @return bool
+     */
     public function updateStatement(PDOStatement $statement, object $object): bool
     {
         $statement->bindValue(':order_date', $object->getOrderDate()->format('Y-m-d'));

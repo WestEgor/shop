@@ -60,12 +60,10 @@ class Product implements ModelInterface
      * @param float $msrp
      * @return Product
      */
-    //TODO
-    public static function parameterizedConstructor(int $id, string $name, int $quantity,
+    public static function parameterizedConstructor(string $name, int $quantity,
                                                     float $price, float $msrp): Product
     {
         $product = new self();
-        $product->id = $id;
         $product->name = $name;
         $product->quantity = $quantity;
         $product->price = $price;

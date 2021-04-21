@@ -5,9 +5,8 @@ namespace config;
 use PDO;
 
 /**
- * Class @Connector
- * Class for get connection from database using @PDO
- *
+ * Class Connector
+ * Class for get connection from database using PDO
  * @package config
  */
 class Connector
@@ -27,19 +26,16 @@ class Connector
      */
     private static $connection;
 
-
     /**
-     * Private @Connector constructor
+     * Private Connector constructor
      * Cannot call in others classes to avoid unnecessary connections
      */
     private function __construct()
     {
-
     }
 
     /**
-     * Method to connect to database and return @PDO object
-     *
+     * Method to connect to database and return PDO object
      * @return PDO
      */
     public
@@ -56,7 +52,6 @@ class Connector
 
     /**
      * Create instance of Connector
-     *
      * @return Connector
      */
     public

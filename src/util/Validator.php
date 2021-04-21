@@ -2,12 +2,10 @@
 
 namespace util;
 
-use JetBrains\PhpStorm\Pure;
 
 /**
- * Class @Validator
+ * Class Validator
  * Class to validate input variables
- *
  * @package util
  */
 class Validator
@@ -41,11 +39,17 @@ class Validator
      * return TRUE iff $str is not empty string
      * return FALSE if $str is empty string
      */
-    public static function validateString($str): bool
+    public static function validateString(&$str): bool
     {
         return trim($str) !== '';
     }
 
+    /**
+     * @param string $email
+     * @return bool
+     * return TRUE iff $email after sanitize is valid
+     * return FALSE if $email after sanitize is not valid
+     */
     public static function validateEmail(string &$email): bool
     {
         $email = filter_var($email, FILTER_SANITIZE_EMAIL);

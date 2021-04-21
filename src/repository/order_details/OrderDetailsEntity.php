@@ -1,34 +1,53 @@
 <?php
 
-
 namespace repository\order_details;
 
-
-use model\Order;
 use model\OrderDetails;
 use PDO;
 use PDOStatement;
 use repository\AbstractRepository;
 
+/**
+ * Class OrderDetailsEntity
+ * Extends AbstractRepository
+ * Class for work with entity 'order_details'
+ * @package repository\order_details
+ */
 class OrderDetailsEntity extends AbstractRepository
 {
 
+    /**
+     * Implementation of abstract method
+     * @return string query of select all in 'order_details'
+     */
     public function readAllQuery(): string
     {
         return 'SELECT * FROM order_details';
     }
 
+    /**
+     * Implementation of abstract method
+     * @return string query of select all in 'order_details' with id
+     */
     public function readByKeyQuery(): string
     {
         return 'SELECT * FROM order_details WHERE id = :id';
     }
 
+    /**
+     * Implementation of abstract method
+     * @return string query of insert in 'order_details'
+     */
     public function createQuery(): string
     {
         return 'INSERT INTO order_details(products_id,orders_id, quantity_ordered, price) 
                 VALUES(:products_id, :orders_id, :quantity_ordered, :price)';
     }
 
+    /**
+     * Implementation of abstract method
+     * @return string query of update in 'order_details'
+     */
     public function updateQuery(): string
     {
         return 'UPDATE order_details 
@@ -37,11 +56,21 @@ class OrderDetailsEntity extends AbstractRepository
                 WHERE id = :id';
     }
 
+    /**
+     * Implementation of abstract method
+     * @return string query of delete in 'order_details' with id
+     */
     public function deleteQuery(): string
     {
         return 'DELETE FROM order_details WHERE id = :id';
     }
 
+    /**
+     * Implementation of abstract method
+     * @param PDOStatement $statement
+     * @param object $object
+     * @return bool
+     */
     public function createStatement(PDOStatement $statement, object $object): bool
     {
         $statement->bindValue(':products_id', $object->getProductId());
@@ -51,6 +80,11 @@ class OrderDetailsEntity extends AbstractRepository
         return $statement->execute();
     }
 
+    /**
+     * Implementation of abstract method
+     * @param PDOStatement $statement
+     * @return array|false
+     */
     public function readAllStatement(PDOStatement $statement): array|false
     {
         $orderDetailsArray = [];
@@ -67,6 +101,12 @@ class OrderDetailsEntity extends AbstractRepository
         return $orderDetailsArray;
     }
 
+    /**
+     * Implementation of abstract method
+     * @param PDOStatement $statement
+     * @param int $key
+     * @return object|false
+     */
     public function readByKeyStatement(PDOStatement $statement, int $key): object|false
     {
         $orderDetails = new OrderDetails();
@@ -76,6 +116,12 @@ class OrderDetailsEntity extends AbstractRepository
         return $orderDetails;
     }
 
+    /**
+     * Implementation of abstract method
+     * @param PDOStatement $statement
+     * @param object $object
+     * @return bool
+     */
     public function updateStatement(PDOStatement $statement, object $object): bool
     {
         $statement->bindValue(':products_id', $object->getProductId());

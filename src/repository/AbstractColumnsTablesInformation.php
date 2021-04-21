@@ -7,6 +7,10 @@ use PDO;
 abstract class AbstractColumnsTablesInformation extends TablesInformation
 {
 
+    /**
+     * Abstract method
+     * @return string get all names of columns from table query
+     */
     abstract public function getColumnsQuery(): string;
 
     /**

@@ -8,17 +8,17 @@ use repository\AbstractRepository;
 use PDO;
 
 /**
- * Class @ProductsEntity
- * Extends @AbstractRepository
+ * Class ProductsEntity
+ * Extends AbstractRepository
  * Class for work with entity 'products'
- *
  * @package repository\products
  */
 class ProductsEntity extends AbstractRepository
 {
 
     /**
-     * @return string
+     * Implementation of abstract method
+     * @return string query of insert in 'products'
      */
     public function createQuery(): string
     {
@@ -27,7 +27,8 @@ class ProductsEntity extends AbstractRepository
     }
 
     /**
-     * @return string
+     * Implementation of abstract method
+     * @return string query of select all in 'products'
      */
     public function readAllQuery(): string
     {
@@ -35,7 +36,8 @@ class ProductsEntity extends AbstractRepository
     }
 
     /**
-     * @return string
+     * Implementation of abstract method
+     * @return string query of select all in 'products' with id
      */
     public function readByKeyQuery(): string
     {
@@ -43,7 +45,8 @@ class ProductsEntity extends AbstractRepository
     }
 
     /**
-     * @return string
+     * Implementation of abstract method
+     * @return string query of update in 'products'
      */
     public function updateQuery(): string
     {
@@ -53,7 +56,8 @@ class ProductsEntity extends AbstractRepository
     }
 
     /**
-     * @return string
+     * Implementation of abstract method
+     * @return string query of delete in 'products' with id
      */
     public function deleteQuery(): string
     {
@@ -62,6 +66,7 @@ class ProductsEntity extends AbstractRepository
 
 
     /**
+     * Implementation of abstract method
      * @param PDOStatement $statement
      * @return array|false
      */
@@ -74,13 +79,15 @@ class ProductsEntity extends AbstractRepository
             $quantity = $row['quantity'];
             $price = $row['price'];
             $msrp = $row['msrp'];
-            $product = Product::parameterizedConstructor($id, $name, $quantity, $price, $msrp);
+            $product = Product::parameterizedConstructor($name, $quantity, $price, $msrp);
+            $product->setId($id);
             $products[] = $product;
         }
         return $products;
     }
 
     /**
+     * Implementation of abstract method
      * @param PDOStatement $statement
      * @param int $key
      * @return Product|false
@@ -95,6 +102,7 @@ class ProductsEntity extends AbstractRepository
     }
 
     /**
+     * Implementation of abstract method
      * @param PDOStatement $statement
      * @param object $object
      * @return bool
@@ -110,6 +118,7 @@ class ProductsEntity extends AbstractRepository
 
 
     /**
+     * Implementation of abstract method
      * @param PDOStatement $statement
      * @param object $object
      * @return bool

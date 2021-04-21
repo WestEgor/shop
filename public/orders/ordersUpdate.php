@@ -51,7 +51,7 @@ if (isset($_POST['create_submit'])) :
 
 
     if ($errorMessage === '') :
-        OrdersEntityMethods::createOrder($orderDate, $requiredDate, $status, $comments, $customersId);
+        OrdersEntityMethods::updateOrder($pdo, $id, $orderDate, $requiredDate, $status, $comments, $customersId);
         foreach ($_SESSION as $key) {
             unset($_SESSION[$key]);
         }

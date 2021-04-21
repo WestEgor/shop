@@ -1,19 +1,29 @@
 <?php
 
-
 namespace repository\payments;
-
 
 use model\Customer;
 use model\Payment;
 
+/**
+ * Class PaymentsJoin
+ * Class for join entities 'payments' and 'customers'
+ * @package repository\payments
+ */
 class PaymentsJoin
 {
+    /**
+     * @var Payment payments entity
+     */
     private Payment $payment;
+
+    /**
+     * @var Customer customers entity
+     */
     private Customer $customer;
 
     /**
-     * PaymentsJoin constructor.
+     * PaymentsJoin parameterized constructor.
      * @param Payment $payment
      * @param Customer $customer
      */
@@ -24,7 +34,7 @@ class PaymentsJoin
     }
 
     /**
-     * @return Payment
+     * @return Payment payments object
      */
     public function getPayment(): Payment
     {
@@ -32,7 +42,7 @@ class PaymentsJoin
     }
 
     /**
-     * @param Payment $payment
+     * @param Payment $payment payments object
      */
     public function setPayment(Payment $payment): void
     {
@@ -40,7 +50,7 @@ class PaymentsJoin
     }
 
     /**
-     * @return Customer
+     * @return Customer customers object
      */
     public function getCustomer(): Customer
     {
@@ -48,7 +58,7 @@ class PaymentsJoin
     }
 
     /**
-     * @param Customer $customer
+     * @param Customer $customer customers object
      */
     public function setCustomer(Customer $customer): void
     {

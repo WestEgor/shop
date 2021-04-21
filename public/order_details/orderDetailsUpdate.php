@@ -38,7 +38,7 @@ if (isset($_POST['update_submit'])) :
     }
 
     if ($errorMessage === '') :
-        OrderDetailsEntityMethods::createOrderDetails($productId, $orderId, $quantityOrdered, $price);
+        OrderDetailsEntityMethods::updateOrderDetails($pdo, $id, $productId, $orderId, $quantityOrdered, $price);
         foreach ($_SESSION as $key) {
             unset($_SESSION[$key]);
         }
