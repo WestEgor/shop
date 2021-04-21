@@ -6,16 +6,29 @@ use DateTime;
 
 class Payment implements ModelInterface
 {
+    /**
+     * @var int id of entity 'payments'
+     */
     private int $id;
-    private float $amount;
-    private DateTime $paymentDate;
-    private int $customerId;
 
     /**
-     * Payment constructor.
-     * @param float $amount
-     * @param DateTime $paymentDate
-     * @param int $customerId
+     * @var float amount of entity 'payments'
+     */
+    private float $amount;
+
+    /**
+     * @var DateTime payment_date of entity 'payments'
+     */
+    private DateTime $paymentDate;
+
+    /**
+     * @var int customer_id of entity 'payments', who paid
+     */
+    private int $customerId;
+
+
+    /**
+     * Payment default constructor.
      */
     public function __construct()
     {
@@ -24,8 +37,14 @@ class Payment implements ModelInterface
         $this->customerId = -1;
     }
 
-
-    public static function parameterizedConstructor($customerId, $amount, DateTime $paymentDate)
+    /**
+     * Method, that represent Payment parameterized constructor.
+     * @param float $amount
+     * @param DateTime $paymentDate
+     * @param int $customerId
+     * @return Payment
+     */
+    public static function parameterizedConstructor(int $customerId, float $amount, DateTime $paymentDate): Payment
     {
         $payment = new self();
         $payment->customerId = $customerId;
@@ -35,7 +54,7 @@ class Payment implements ModelInterface
     }
 
     /**
-     * @return int
+     * @return int id of payments
      */
     public function getId(): int
     {
@@ -43,7 +62,7 @@ class Payment implements ModelInterface
     }
 
     /**
-     * @param int $id
+     * @param int $id id of payments
      */
     public function setId(int $id): void
     {
@@ -51,7 +70,7 @@ class Payment implements ModelInterface
     }
 
     /**
-     * @return float
+     * @return float amount of payments
      */
     public function getAmount(): float
     {
@@ -59,7 +78,7 @@ class Payment implements ModelInterface
     }
 
     /**
-     * @param float $amount
+     * @param float $amount amount of payments
      */
     public function setAmount(float $amount): void
     {
@@ -67,7 +86,7 @@ class Payment implements ModelInterface
     }
 
     /**
-     * @return DateTime
+     * @return DateTime payment date
      */
     public function getPaymentDate(): DateTime
     {
@@ -75,7 +94,7 @@ class Payment implements ModelInterface
     }
 
     /**
-     * @param DateTime $paymentDate
+     * @param DateTime $paymentDate payment date
      */
     public function setPaymentDate(DateTime $paymentDate): void
     {
@@ -83,7 +102,7 @@ class Payment implements ModelInterface
     }
 
     /**
-     * @return int
+     * @return int customer id
      */
     public function getCustomerId(): int
     {
@@ -91,13 +110,18 @@ class Payment implements ModelInterface
     }
 
     /**
-     * @param int $customerId
+     * @param int $customerId customer id
      */
     public function setCustomerId(int $customerId): void
     {
         $this->customerId = $customerId;
     }
 
+    /**
+     * Implemented method from ModelInterface
+     * @param object $keys
+     * @return bool
+     */
     public function setAll(object $keys): bool
     {
         if (!$keys) return false;

@@ -1,50 +1,46 @@
 <?php
 
 namespace model;
+
 /**
  * Class Product
- * instance will be used to manipulate of entity of table´products´
- *
+ * Instance will be used to manipulate of entity of table ´products´
  * @package model
  */
 class Product implements ModelInterface
 {
     /**
-     * id of table 'products'
+     * id of entity 'products'
      * @var int
      */
     private int $id;
 
     /**
-     * name of table 'products'
+     * name of entity 'products'
      * @var string
      */
     private string $name;
 
     /**
-     * quantity of table 'products'
+     * quantity of entity 'products'
      * @var int
      */
     private int $quantity;
 
     /**
-     * price of table 'products'
+     * price of entity 'products'
      * @var float
      */
     private float $price;
 
     /**
-     * msrp of table 'products'
+     * msrp of entity 'products'
      * @var float
      */
     private float $msrp;
 
     /**
-     * Product constructor.
-     * @param string $name
-     * @param int $quantity
-     * @param float $price
-     * @param float $msrp
+     * Product default constructor.
      */
     public function __construct()
     {
@@ -57,16 +53,14 @@ class Product implements ModelInterface
 
 
     /**
-     * Method to .
-     *
-     * @param int $id
+     * Method, that represents Product parameterized constructor
      * @param string $name
      * @param int $quantity
      * @param float $price
      * @param float $msrp
      * @return Product
      */
-
+    //TODO
     public static function parameterizedConstructor(int $id, string $name, int $quantity,
                                                     float $price, float $msrp): Product
     {
@@ -161,6 +155,11 @@ class Product implements ModelInterface
     }
 
 
+    /**
+     * Implemented method from ModelInterface
+     * @param object $keys
+     * @return bool
+     */
     public function setAll(object $keys): bool
     {
         if (!$keys) return false;

@@ -4,18 +4,48 @@ namespace model;
 
 class OrderDetails implements ModelInterface
 {
+    /**
+     * @var int id of entity 'order_details'
+     */
     private int $id;
+
+    /**
+     * @var int product id of entity 'order_details'
+     */
     private int $productId;
+
+    /**
+     * @var int order id of entity 'order_details'
+     */
     private int $orderId;
+
+    /**
+     * @var int quantity_ordered of entity 'order_details'
+     */
     private int $quantityOrdered;
+
+    /**
+     * @var float price of entity 'order_details'
+     */
     private float $price;
 
+    /**
+     * OrderDetails default constructor.
+     */
     public function __construct()
     {
-
     }
 
-    public static function parameterizedConstructor(int $productId, int $orderId, int $quantityOrdered, float $price)
+    /**
+     * Method, that represents OrderDetails parameterized constructor
+     * @param int $productId
+     * @param int $orderId
+     * @param int $quantityOrdered
+     * @param float $price
+     * @return OrderDetails
+     */
+    public static function parameterizedConstructor(int $productId, int $orderId,
+                                                    int $quantityOrdered, float $price): OrderDetails
     {
         $orderDetails = new self();
         $orderDetails->productId = $productId;
@@ -26,7 +56,7 @@ class OrderDetails implements ModelInterface
     }
 
     /**
-     * @return int
+     * @return int id
      */
     public function getId(): int
     {
@@ -34,7 +64,7 @@ class OrderDetails implements ModelInterface
     }
 
     /**
-     * @param int $id
+     * @param int $id id
      */
     public function setId(int $id): void
     {
@@ -42,7 +72,7 @@ class OrderDetails implements ModelInterface
     }
 
     /**
-     * @return int
+     * @return int quantity ordered
      */
     public function getQuantityOrdered(): int
     {
@@ -50,7 +80,7 @@ class OrderDetails implements ModelInterface
     }
 
     /**
-     * @param int $quantityOrdered
+     * @param int $quantityOrdered quantity ordered
      */
     public function setQuantityOrdered(int $quantityOrdered): void
     {
@@ -58,7 +88,7 @@ class OrderDetails implements ModelInterface
     }
 
     /**
-     * @return float
+     * @return float proce
      */
     public function getPrice(): float
     {
@@ -66,7 +96,7 @@ class OrderDetails implements ModelInterface
     }
 
     /**
-     * @param float $price
+     * @param float $price price
      */
     public function setPrice(float $price): void
     {
@@ -74,7 +104,7 @@ class OrderDetails implements ModelInterface
     }
 
     /**
-     * @return int
+     * @return int product id
      */
     public function getProductId(): int
     {
@@ -82,7 +112,7 @@ class OrderDetails implements ModelInterface
     }
 
     /**
-     * @param int $productId
+     * @param int $productId product id
      */
     public function setProductId(int $productId): void
     {
@@ -90,7 +120,7 @@ class OrderDetails implements ModelInterface
     }
 
     /**
-     * @return int
+     * @return int order id
      */
     public function getOrderId(): int
     {
@@ -98,14 +128,19 @@ class OrderDetails implements ModelInterface
     }
 
     /**
-     * @param int $orderId
+     * @param int $orderId order id
      */
     public function setOrderId(int $orderId): void
     {
         $this->orderId = $orderId;
     }
 
-    public function setAll(object $keys)
+    /**
+     * Implemented method from ModelInterface
+     * @param object $keys
+     * @return bool
+     */
+    public function setAll(object $keys): bool
     {
         if (!$keys) return false;
         foreach ($keys as $key => $value) {
@@ -117,6 +152,4 @@ class OrderDetails implements ModelInterface
         }
         return true;
     }
-
-
 }

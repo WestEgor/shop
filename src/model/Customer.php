@@ -6,24 +6,53 @@ use model\support_classes\Contacts;
 use model\support_classes\Location;
 use model\support_classes\Person;
 
+/**
+ * Class Customer
+ * Implement ModelInterface
+ * Instance will be used to manipulate of entity of table ´customers´
+ * @package model
+ */
 class Customer implements ModelInterface
 {
+    /**
+     * @var int id of entity 'customer'
+     */
     private int $id;
+
+    /**
+     * @var Person persons information of entity 'customer'
+     */
     private Person $person;
+
+    /**
+     * @var Location location information of entity 'customer'
+     */
     private Location $location;
+
+    /**
+     * @var Contacts $contacts information of entity 'customer'
+     */
     private Contacts $contacts;
 
     /**
-     * Customer constructor.
-     * @param Person $person
-     * @param Location $location
-     * @param Contacts $contacts
+     * Customer default constructor.
      */
     public function __construct()
     {
+        $this->id = -1;
+        $this->person = new Person();
+        $this->location = new Location();
+        $this->contacts = new Contacts();
     }
 
-    public static function parameterizedConstructor(Person $person, Location $location, Contacts $contacts)
+    /**
+     * Method, that represents customer parameterized constructor.
+     * @param Person $person
+     * @param Location $location
+     * @param Contacts $contacts
+     * @return Customer
+     */
+    public static function parameterizedConstructor(Person $person, Location $location, Contacts $contacts): Customer
     {
         $customer = new self();
         $customer->person = $person;
@@ -34,7 +63,7 @@ class Customer implements ModelInterface
 
 
     /**
-     * @return int
+     * @return int customer id
      */
     public function getId(): int
     {
@@ -42,7 +71,7 @@ class Customer implements ModelInterface
     }
 
     /**
-     * @param int $id
+     * @param int $id id of customer
      */
     public function setId(int $id): void
     {
@@ -50,7 +79,7 @@ class Customer implements ModelInterface
     }
 
     /**
-     * @return Person
+     * @return Person persons information of customer
      */
     public function getPerson(): Person
     {
@@ -58,7 +87,7 @@ class Customer implements ModelInterface
     }
 
     /**
-     * @param Person $person
+     * @param Person $person persons information of customer
      */
     public function setPerson(Person $person): void
     {
@@ -66,7 +95,7 @@ class Customer implements ModelInterface
     }
 
     /**
-     * @return Location
+     * @return Location location of customer
      */
     public function getLocation(): Location
     {
@@ -74,7 +103,7 @@ class Customer implements ModelInterface
     }
 
     /**
-     * @param Location $location
+     * @param Location $location location of customer
      */
     public function setLocation(Location $location): void
     {
@@ -82,7 +111,7 @@ class Customer implements ModelInterface
     }
 
     /**
-     * @return Contacts
+     * @return Contacts contacts information of customer
      */
     public function getContacts(): Contacts
     {
@@ -90,58 +119,91 @@ class Customer implements ModelInterface
     }
 
     /**
-     * @param Contacts $contacts
+     * @param Contacts $contacts contacts information of customer
      */
     public function setContacts(Contacts $contacts): void
     {
         $this->contacts = $contacts;
     }
 
+
+    /**
+     * @return string persons name
+     */
     public function getPersonName(): string
     {
         return $this->getPerson()->getName();
     }
 
+    /**
+     * @return string persons last name
+     */
     public function getPersonLastName(): string
     {
         return $this->getPerson()->getLastname();
     }
 
+    /**
+     * @return string persons age
+     */
     public function getPersonAge(): string
     {
         return $this->getPerson()->getAge();
     }
 
+    /**
+     * @return string location country
+     */
     public function getLocationCountry(): string
     {
         return $this->getLocation()->getCountry();
     }
 
+    /**
+     * @return string location city
+     */
     public function getLocationCity(): string
     {
         return $this->getLocation()->getCity();
     }
 
+    /**
+     * @return string location address
+     */
     public function getLocationAddress(): string
     {
         return $this->getLocation()->getAddress();
     }
 
+    /**
+     * @return string zip code
+     */
     public function getLocationZipCode(): string
     {
         return $this->getLocation()->getZipCode();
     }
 
+    /**
+     * @return string contacts email
+     */
     public function getContactsEmail(): string
     {
         return $this->getContacts()->getEmail();
     }
 
+    /**
+     * @return string contacts phone number
+     */
     public function getContactsPhoneNumber(): string
     {
         return $this->getContacts()->getPhoneNumber();
     }
 
+    /**
+     * Implemented method from ModelInterface
+     * @param object $keys
+     * @return bool
+     */
     public function setAll(object $keys): bool
     {
         if (!$keys) return false;

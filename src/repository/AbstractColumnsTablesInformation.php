@@ -1,6 +1,5 @@
 <?php
 
-
 namespace repository;
 
 use PDO;
@@ -12,7 +11,6 @@ abstract class AbstractColumnsTablesInformation extends TablesInformation
 
     /**
      * Method to get all columns of tables
-     *
      * @return array|false
      * return ARRAY if columns exist
      * return FALSE if no columns in table

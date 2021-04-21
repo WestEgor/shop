@@ -5,23 +5,22 @@ namespace repository;
 use PDO;
 
 /**
- * Class @TablesInformation
+ * Class TablesInformation
+ * Get information from all tables in scheme
  * @package repository
  */
 class TablesInformation
 {
 
     /**
-     * Contain instance of @PDO
-     *
+     * Contain instance of PDO
      * @var PDO
      */
     protected PDO $pdo;
 
     /**
      * TablesInformation constructor
-     *
-     * @param PDO $pdo instance of @PDO
+     * @param PDO $pdo instance of PDO
      */
     public function __construct(PDO $pdo)
     {
@@ -30,7 +29,6 @@ class TablesInformation
 
     /**
      * Method to get all tables from scheme
-     *
      * @return array|false
      * return ARRAY iff minimum 1 table exists
      * return FALSE if no tables in scheme

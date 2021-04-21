@@ -4,23 +4,68 @@ namespace model;
 
 use DateTime;
 
+/** Class Order
+ * Implement ModelInterface
+ * Instance will be used to manipulate of entity of table ´orders´
+ * @package model
+ */
 class Order implements ModelInterface
 {
+    /**
+     * @var int id of entity 'orders'
+     */
     private int $id;
+
+    /**
+     * @var DateTime order_date of entity 'orders'
+     */
     private DateTime $orderDate;
+
+    /**
+     * @var DateTime required_date of entity 'orders'
+     */
     private DateTime $requiredDate;
+
+    /**
+     * @var string status of order in entity 'orders'
+     */
     private string $status;
+
+    /**
+     * @var string  comments to order in entity 'orders'
+     */
     private string $comments;
+
+    /**
+     * @var int customer_id of entity 'orders', who made this order
+     */
     private int $customerId;
 
 
+    /**
+     * Order default constructor
+     */
     public function __construct()
     {
-
+        $this->id = -1;
+        $this->orderDate = new DateTime('now');
+        $this->requiredDate = new DateTime('now');
+        $this->status = '';
+        $this->comments = '';
+        $this->customerId = -1;
     }
 
+    /**
+     * Method, that represents Order parameterized constructor
+     * @param DateTime $orderDate
+     * @param DateTime $requiredDate
+     * @param string $status
+     * @param string $comments
+     * @param int $customerId
+     * @return Order
+     */
     public static function parameterizedConstructor(DateTime $orderDate, DateTime $requiredDate,
-                                                    string $status, string $comments, int $customerId)
+                                                    string $status, string $comments, int $customerId): Order
     {
         $order = new self();
         $order->orderDate = $orderDate;
@@ -32,7 +77,7 @@ class Order implements ModelInterface
     }
 
     /**
-     * @return mixed
+     * @return int id of order
      */
     public function getId(): int
     {
@@ -40,7 +85,7 @@ class Order implements ModelInterface
     }
 
     /**
-     * @param int $id
+     * @param int $id id of order
      */
     public function setId(int $id): void
     {
@@ -48,7 +93,7 @@ class Order implements ModelInterface
     }
 
     /**
-     * @return DateTime
+     * @return DateTime date of order
      */
     public function getOrderDate(): DateTime
     {
@@ -56,7 +101,7 @@ class Order implements ModelInterface
     }
 
     /**
-     * @param DateTime $orderDate
+     * @param DateTime $orderDate date of order
      */
     public function setOrderDate(DateTime $orderDate): void
     {
@@ -64,7 +109,7 @@ class Order implements ModelInterface
     }
 
     /**
-     * @return DateTime
+     * @return DateTime required date to order
      */
     public function getRequiredDate(): DateTime
     {
@@ -72,7 +117,7 @@ class Order implements ModelInterface
     }
 
     /**
-     * @param DateTime $requiredDate
+     * @param DateTime $requiredDate required date to order
      */
     public function setRequiredDate(DateTime $requiredDate): void
     {
@@ -80,7 +125,7 @@ class Order implements ModelInterface
     }
 
     /**
-     * @return string
+     * @return string status of order
      */
     public function getStatus(): string
     {
@@ -88,7 +133,7 @@ class Order implements ModelInterface
     }
 
     /**
-     * @param string $status
+     * @param string $status status of order
      */
     public function setStatus(string $status): void
     {
@@ -96,7 +141,7 @@ class Order implements ModelInterface
     }
 
     /**
-     * @return string
+     * @return string comments to order
      */
     public function getComments(): string
     {
@@ -104,7 +149,7 @@ class Order implements ModelInterface
     }
 
     /**
-     * @param string $comments
+     * @param string $comments comments to order
      */
     public function setComments(string $comments): void
     {
@@ -112,7 +157,7 @@ class Order implements ModelInterface
     }
 
     /**
-     * @return int
+     * @return int customer id (who made this order)
      */
     public function getCustomerId(): int
     {
@@ -120,15 +165,19 @@ class Order implements ModelInterface
     }
 
     /**
-     * @param int $customerId
+     * @param int $customerId customer id (who made this order)
      */
     public function setCustomerId(int $customerId): void
     {
         $this->customerId = $customerId;
     }
 
-
-    public function setAll(object $keys)
+    /**
+     * Implemented method from ModelInterface
+     * @param object $keys
+     * @return bool
+     */
+    public function setAll(object $keys): bool
     {
         if (!$keys) return false;
         foreach ($keys as $key => $value) {

@@ -28,6 +28,11 @@ use repository\payments\PaymentsEntityMethods;
             <button class="btn btn-primary" type="submit" name="submit" style="margin-left: 3px">Submit</button>
         </label>
     </form>
+    <form method="get" action="paymentsJoin.php" style="margin-left: 10px">
+        <label> Get full info about payments (join):
+            <button class="btn btn-primary" type="submit" name="submit" style="margin-left: 3px">Get</button>
+        </label>
+    </form>
 </div>
 <?php
 if (isset($_GET['submit'])):
@@ -68,6 +73,7 @@ if (isset($_GET['submit'])):
     <?php
     endif;
 endif;
+
 session_destroy();
 ?>
 

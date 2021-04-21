@@ -6,24 +6,21 @@ use PDO;
 use PDOStatement;
 
 /**
- * Class @AbstractRepository
- * Implements @RepositoryInterface
- *
- *
+ * Class AbstractRepository
+ * Implements RepositoryInterface
  * @package repository
  */
 abstract class AbstractRepository implements RepositoryInterface
 {
     /**
-     * @PDO instance
-     *
+     * PDO instance
      * @var PDO
      */
     private PDO $pdo;
 
     /**
      * AbstractRepository constructor.
-     * @param PDO $pdo instance of @PDO
+     * @param PDO $pdo instance of PDO
      */
     public function __construct(PDO $pdo)
     {
@@ -32,35 +29,30 @@ abstract class AbstractRepository implements RepositoryInterface
 
     /**
      * Abstract method
-     *
      * @return string query of selecting all
      */
     public abstract function readAllQuery(): string;
 
     /**
      * Abstract method
-     *
      * @return string query of selecting with specified id
      */
     public abstract function readByKeyQuery(): string;
 
     /**
      * Abstract method
-     *
      * @return string query of inserting in table a record
      */
     public abstract function createQuery(): string;
 
     /**
      * Abstract method
-     *
      * @return string query of updating a record in table
      */
     public abstract function updateQuery(): string;
 
     /**
      * Abstract method
-     *
      * @return string query of deleting a record in table
      */
     public abstract function deleteQuery(): string;
@@ -69,7 +61,6 @@ abstract class AbstractRepository implements RepositoryInterface
     /**
      * Abstract method
      * Work with statement to create record in table
-     *
      * @param PDOStatement $statement statement of prepared query
      * @param object $object object of entity
      * @return bool
@@ -112,7 +103,7 @@ abstract class AbstractRepository implements RepositoryInterface
 
 
     /**
-     * Implementing RepositoryInterface Method
+     * Implementing RepositoryInterface
      *
      * @return array|false
      */
@@ -123,8 +114,7 @@ abstract class AbstractRepository implements RepositoryInterface
     }
 
     /**
-     * Implementing RepositoryInterface Method
-     *
+     * Implementing RepositoryInterface
      * @param int $key
      * @return object|false
      */
@@ -138,8 +128,7 @@ abstract class AbstractRepository implements RepositoryInterface
 
 
     /**
-     * Implementing RepositoryInterface Method
-     *
+     * Implementing RepositoryInterface
      * @param object $object
      * @return bool
      */
@@ -151,7 +140,6 @@ abstract class AbstractRepository implements RepositoryInterface
 
     /**
      * Implementing RepositoryInterface Method
-     *
      * @param object $object
      * @return bool
      */
@@ -163,7 +151,6 @@ abstract class AbstractRepository implements RepositoryInterface
 
     /**
      * Implementing RepositoryInterface Method
-     *
      * @param int $key
      * @return bool
      */

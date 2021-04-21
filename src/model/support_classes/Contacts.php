@@ -2,17 +2,38 @@
 
 namespace model\support_classes;
 
+/**
+ * Class Contacts
+ * Support class for entities
+ * @package model\support_classes
+ */
 class Contacts
 {
+    /**
+     * @var string email
+     */
     private string $email;
+    /**
+     * @var string phone number
+     */
     private string $phoneNumber;
 
     /**
-     * Contacts constructor.
+     * Contacts default constructor.
+     */
+    public function __construct()
+    {
+        $this->email = '';
+        $this->phoneNumber = '';
+    }
+
+    /**
+     * Method, that represents @Contacts parameterized constructor.
      * @param string $email
      * @param string $phoneNumber
+     * @return Contacts
      */
-    public static function parameterizedConstructor(string $email, string $phoneNumber)
+    public static function parameterizedConstructor(string $email, string $phoneNumber): Contacts
     {
         $contacts = new self();
         $contacts->email = $email;
@@ -20,9 +41,8 @@ class Contacts
         return $contacts;
     }
 
-
     /**
-     * @return string
+     * @return string email
      */
     public function getEmail(): string
     {
@@ -30,7 +50,7 @@ class Contacts
     }
 
     /**
-     * @param string $email
+     * @param string $email email
      */
     public function setEmail(string $email): void
     {
@@ -38,7 +58,7 @@ class Contacts
     }
 
     /**
-     * @return string
+     * @return string phone number
      */
     public function getPhoneNumber(): string
     {
@@ -46,7 +66,7 @@ class Contacts
     }
 
     /**
-     * @param string $phoneNumber
+     * @param string $phoneNumber phone number
      */
     public function setPhoneNumber(string $phoneNumber): void
     {

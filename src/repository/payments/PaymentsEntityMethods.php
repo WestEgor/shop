@@ -40,8 +40,8 @@ class PaymentsEntityMethods
         return $paymentEntity->read($id);
     }
 
-    public static function updatePayment(PDO $pdo, int $id,int $customersId,
-                                         float $amount, DateTime $paymentDate ): bool
+    public static function updatePayment(PDO $pdo, int $id, int $customersId,
+                                         float $amount, DateTime $paymentDate): bool
     {
         $payment = Payment::parameterizedConstructor($customersId, $amount, $paymentDate);
         $payment->setId($id);
@@ -57,5 +57,16 @@ class PaymentsEntityMethods
         return $paymentEntity->delete($id);
     }
 
+    public static function getColumns(array $arr)
+    {
+        $columns = array();
+        $length = count($arr);
+        for ($i = 0; $i < $length; $i++) {
+            foreach ($arr[$i] as $key => $value) {
+                $columns[$i] = $key;
+            }
+        }
+        return $columns;
+    }
 
 }

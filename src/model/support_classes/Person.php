@@ -2,13 +2,31 @@
 
 namespace model\support_classes;
 
+/**
+ * Class Person
+ * Support class for entities
+ * @package model\support_classes
+ */
 class Person
 {
+    /**
+     * @var string name
+     */
     private string $name;
+
+    /**
+     * @var string last name
+     */
     private string $lastname;
+
+    /**
+     * @var int age
+     */
     private int $age;
 
-
+    /**
+     * Person default constructor.
+     */
     public function __construct()
     {
         $this->name = '';
@@ -17,12 +35,13 @@ class Person
     }
 
     /**
-     * Person constructor.
+     * Method, that represents @Person parameterized constructor.
      * @param string $name
      * @param string $lastname
      * @param int $age
+     * @return Person
      */
-    public static function  parameterizedConstructor(string $name, string $lastname, int $age)
+    public static function parameterizedConstructor(string $name, string $lastname, int $age): Person
     {
         $person = new self();
         $person->name = $name;
@@ -32,7 +51,7 @@ class Person
     }
 
     /**
-     * @return string
+     * @return string name
      */
     public function getName(): string
     {
@@ -40,7 +59,7 @@ class Person
     }
 
     /**
-     * @param string $name
+     * @param string $name name
      */
     public function setName(string $name): void
     {
@@ -48,7 +67,7 @@ class Person
     }
 
     /**
-     * @return string
+     * @return string last name
      */
     public function getLastname(): string
     {
@@ -56,7 +75,7 @@ class Person
     }
 
     /**
-     * @param string $lastname
+     * @param string $lastname last name
      */
     public function setLastname(string $lastname): void
     {
@@ -64,7 +83,7 @@ class Person
     }
 
     /**
-     * @return int
+     * @return int age
      */
     public function getAge(): int
     {
@@ -72,12 +91,11 @@ class Person
     }
 
     /**
-     * @param int $age
+     * @param int $age age
      */
     public function setAge(int $age): void
     {
         $this->age = $age;
     }
-
 
 }
