@@ -1,8 +1,7 @@
 # shop
 Table of contents
 1. About the project
-1.1. [Built with](https://www.google.com)
-2.
+⋅⋅1.Built with
 
 1. About the project
 First project. Represents database of e-shop. 
