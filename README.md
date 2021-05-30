@@ -19,7 +19,7 @@ This project represents a simple interaction with PostgreSQL via PHP.
     2. Uncomment this extensions
     >>;extension=php_pgsql.dll  ;extension=php_pdo_pgsql.dll
 3. Install a composer [click](https://getcomposer.org/download/)
-4. Install a server, in my case OpenServer[click](https://ospanel.io/download/).  Then do next change: 
+4. Install a server, in my case OpenServer [click](https://ospanel.io/download/).  Then do next change: 
 + HTTP-> Apache_2.4-PHP_8.0, PHP -> PHP_8.0, PostgreSQL -> PostgreSQL-12.2
 + By default, postresql port will be 5432, you may change it at installing or in OpenServer-> Server-> Postgres
 ## Roadmap
