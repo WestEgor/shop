@@ -16,9 +16,9 @@ This project represents a simple interaction with PostgreSQL via PHP.
 ## Getting started
 1. You need to install PHP 8.* [click](https://www.php.net/downloads.php)
 2. Make changes in php.ini file
-   2.1. Uncomment this extensions
- ;extension=php_pgsql.dll 
- ;extension=php_pdo_pgsql.dll
+   Uncomment this extensions
+   ;extension=php_pgsql.dll 
+   ;extension=php_pdo_pgsql.dll
 3. Install composer [click](https://getcomposer.org/download/)
 4. Install server, in my case OpenServer[click](https://ospanel.io/download/).
 And do next changes: 
