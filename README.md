@@ -7,8 +7,8 @@ This project represents a simple interaction with PostgreSQL via PHP.
 * postgresql 12.0;
 * bootstrap.
 ### Project structure
-+ Diagram of classes (click)[https://github.com/WestEgor/shop/blob/master/images/diagrams.PNG]
-+ Tables struture (click)[https://github.com/WestEgor/shop/blob/master/images/tables_structures.PNG]
++ Diagram of classes [click](https://github.com/WestEgor/shop/blob/master/images/diagrams.PNG)
++ Tables struture (click)(https://github.com/WestEgor/shop/blob/master/images/tables_structures.PNG)
 ## Getting started
 1. You need to install PHP 8.* [click](https://www.php.net/downloads.php)
 2. Uncomment extensions in php.ini file (look below)
