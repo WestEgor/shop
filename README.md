@@ -1,7 +1,7 @@
 # shop
 Table of contents
-1. About the project
-  1.1. Built with
+Markup : 1. About the project
+          1. Built with
 2. Getting started
 3. Roadmap
 4. Usage
