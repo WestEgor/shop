@@ -8,7 +8,7 @@ Table of contents
 First project. Represents database of e-shop. 
 
 1.1. Built with
-⋅⋅*PHP 8.0;
-⋅⋅*PDO;
-⋅⋅*postgresql 12.0;
-⋅⋅*bootstrap.
+*PHP 8.0;
+*PDO;
+*postgresql 12.0;
+*bootstrap.
