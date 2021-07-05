@@ -10,24 +10,43 @@ namespace model\support_classes;
 class Location
 {
     /**
-     * @var string country
+     * @var string|null country
      */
-    private string $country;
+    private ?string $country;
 
     /**
-     * @var string city
+     * @var string|null city
      */
-    private string $city;
+    private ?string $city;
 
     /**
-     * @var string address
+     * @var string|null address
      */
-    private string $address;
+    private ?string $address;
 
     /**
-     * @var string zip code
+     * @var string|null zip code
      */
-    private string $zipCode;
+    private ?string $zipCode;
+
+    /**
+     * Location constructor.
+     * @param string|null $country
+     * @param string|null $city
+     * @param string|null $address
+     * @param string|null $zipCode
+     */
+    public function __construct(?string $country = null,
+                                ?string $city = null,
+                                ?string $address = null,
+                                ?string $zipCode = null)
+    {
+        $this->country = $country;
+        $this->city = $city;
+        $this->address = $address;
+        $this->zipCode = $zipCode;
+    }
+
 
     /**
      * Method, that represents @Location parameterized constructor.

@@ -142,7 +142,6 @@ class OrderDetails implements ModelInterface
      */
     public function setAll(object $keys): bool
     {
-        if (!$keys) return false;
         foreach ($keys as $key => $value) {
             if ($key === 'id') $this->id = $value;
             if ($key === 'products_id') $this->productId = $value;

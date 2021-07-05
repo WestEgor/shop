@@ -11,10 +11,11 @@ use repository\order_details\OrderDetailsTablesInformation;
         <?php $pdo = Connection::get()->getConnect();
         $columns = new OrderDetailsTablesInformation($pdo);
         $col = $columns->getColumnName();
-        foreach ($col as $column):
-            ?>
-            <th scope="col"><?php echo $column ?></th>
-        <?php endforeach; ?>
+        if (is_array($col)):
+            foreach ($col as $column):
+                ?>
+                <th scope="col"><?php echo $column ?></th>
+            <?php endforeach; endif; ?>
         <th scope="col">Update column</th>
         <th scope="col">Delete column</th>
     </tr>

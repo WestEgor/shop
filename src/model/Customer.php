@@ -15,50 +15,37 @@ use model\support_classes\Person;
 class Customer implements ModelInterface
 {
     /**
-     * @var int id of entity 'customer'
+     * @var int|null id of entity 'customer'
      */
-    private int $id;
+    private ?int $id;
 
     /**
-     * @var Person persons information of entity 'customer'
+     * @var Person|null persons information of entity 'customer'
      */
-    private Person $person;
+    private ?Person $person;
 
     /**
-     * @var Location location information of entity 'customer'
+     * @var Location|null location information of entity 'customer'
      */
-    private Location $location;
+    private ?Location $location;
 
     /**
-     * @var Contacts $contacts information of entity 'customer'
+     * @var Contacts|null $contacts information of entity 'customer'
      */
-    private Contacts $contacts;
+    private ?Contacts $contacts;
 
-    /**
-     * Customer default constructor.
-     */
-    public function __construct()
+
+    public function __construct(
+        ?Person $person = null,
+        ?Location $location = null,
+        ?Contacts $contacts = null,
+        ?int $id = null
+    )
     {
-        $this->id = -1;
-        $this->person = new Person();
-        $this->location = new Location();
-        $this->contacts = new Contacts();
-    }
-
-    /**
-     * Method, that represents customer parameterized constructor.
-     * @param Person $person
-     * @param Location $location
-     * @param Contacts $contacts
-     * @return Customer
-     */
-    public static function parameterizedConstructor(Person $person, Location $location, Contacts $contacts): Customer
-    {
-        $customer = new self();
-        $customer->person = $person;
-        $customer->location = $location;
-        $customer->contacts = $contacts;
-        return $customer;
+        $this->person = $person;
+        $this->location = $location;
+        $this->contacts = $contacts;
+        $this->id = $id;
     }
 
 
@@ -144,9 +131,9 @@ class Customer implements ModelInterface
     }
 
     /**
-     * @return string persons age
+     * @return int persons age
      */
-    public function getPersonAge(): string
+    public function getPersonAge(): int
     {
         return $this->getPerson()->getAge();
     }
@@ -206,26 +193,25 @@ class Customer implements ModelInterface
      */
     public function setAll(object $keys): bool
     {
-        if (!$keys) return false;
-        $person = new Person();
-        $location = new Location();
-        $contacts = new Contacts();
-        foreach ($keys as $key => $value) {
-            if ($key === 'id') $this->id = $value;
-            if ($key === 'name') $person->setName($value);
-            if ($key === 'last_name') $person->setLastname($value);
-            if ($key === 'age') $person->setAge($value);
-            if ($key === 'country') $location->setCountry($value);
-            if ($key === 'city') $location->setCity($value);
-            if ($key === 'address') $location->setAddress($value);
-            if ($key === 'zip_code') $location->setZipCode($value);
-            if ($key === 'email') $contacts->setEmail($value);
-            if ($key === 'phone_number') $contacts->setPhoneNumber($value);
-        }
-        $this->setPerson($person);
-        $this->setLocation($location);
-        $this->setContacts($contacts);
-        return true;
+            $person = new Person();
+            $location = new Location();
+            $contacts = new Contacts();
+            foreach ($keys as $key => $value) {
+                if ($key === 'id') $this->id = $value;
+                if ($key === 'name') $person->setName($value);
+                if ($key === 'last_name') $person->setLastname($value);
+                if ($key === 'age') $person->setAge($value);
+                if ($key === 'country') $location->setCountry($value);
+                if ($key === 'city') $location->setCity($value);
+                if ($key === 'address') $location->setAddress($value);
+                if ($key === 'zip_code') $location->setZipCode($value);
+                if ($key === 'email') $contacts->setEmail($value);
+                if ($key === 'phone_number') $contacts->setPhoneNumber($value);
+            }
+            $this->setPerson($person);
+            $this->setLocation($location);
+            $this->setContacts($contacts);
+            return true;
     }
 
 }

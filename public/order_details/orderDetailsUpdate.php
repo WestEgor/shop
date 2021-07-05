@@ -6,6 +6,7 @@ require __DIR__ . '/../../vendor/autoload.php';
 require '../navbar.php';
 
 use config\Connector as Connection;
+use model\OrderDetails;
 use repository\order_details\OrderDetailsEntityMethods;
 use util\Validator;
 
@@ -54,32 +55,32 @@ if (isset($_POST['update_submit'])) :
 endif;
 ?>
 
-
-<form action="orderDetailsUpdate.php?id=<?php echo $orderDetails->getId(); ?>" method="POST">
-    <div class="row g-3 align-items-center" style="margin-left: 5px">
-        <div class="col-auto" style="margin-bottom:10px; margin-top: 15px">
-            <label for="pname" class="form-label" style="margin-top: 15px">Product ID:</label>
-            <input type="text" id="pname" name="product_id" class="form-control"
-                   value="<?php echo $orderDetails->getProductId(); ?>">
+<?php if ($orderDetails instanceof OrderDetails): ?>
+    <form action="orderDetailsUpdate.php?id=<?php echo $orderDetails->getId(); ?>" method="POST">
+        <div class="row g-3 align-items-center" style="margin-left: 5px">
+            <div class="col-auto" style="margin-bottom:10px; margin-top: 15px">
+                <label for="pname" class="form-label" style="margin-top: 15px">Product ID:</label>
+                <input type="text" id="pname" name="product_id" class="form-control"
+                       value="<?php echo $orderDetails->getProductId(); ?>">
+            </div>
+            <div class="col-auto" style="margin-bottom:10px; margin-top: 15px">
+                <label for="pquantity" class="form-label" style="margin-top: 15px">Order ID:</label>
+                <input type="text" id="pquantity" name="order_id" class="form-control"
+                       value="<?php echo $orderDetails->getOrderId(); ?>">
+            </div>
+            <div class="col-auto" style="margin-bottom:10px; margin-top: 15px">
+                <label for="pprice" class="form-label" style="margin-top: 15px">Quantity ordered:</label>
+                <input type="text" id="pprice" name="quantity_ordered" class="form-control"
+                       value="<?php echo $orderDetails->getQuantityOrdered(); ?>">
+            </div>
+            <div class="col-auto" style="margin-bottom:10px; margin-top: 15px">
+                <label for="pmsrp" class="form-label" style="margin-top: 15px">Price:</label>
+                <input type="text" id="pmsrp" name="price" class="form-control"
+                       value="<?php echo $orderDetails->getPrice(); ?>">
+            </div>
         </div>
-        <div class="col-auto" style="margin-bottom:10px; margin-top: 15px">
-            <label for="pquantity" class="form-label" style="margin-top: 15px">Order ID:</label>
-            <input type="text" id="pquantity" name="order_id" class="form-control"
-                   value="<?php echo $orderDetails->getOrderId(); ?>">
-        </div>
-        <div class="col-auto" style="margin-bottom:10px; margin-top: 15px">
-            <label for="pprice" class="form-label" style="margin-top: 15px">Quantity ordered:</label>
-            <input type="text" id="pprice" name="quantity_ordered" class="form-control"
-                   value="<?php echo $orderDetails->getQuantityOrdered(); ?>">
-        </div>
-        <div class="col-auto" style="margin-bottom:10px; margin-top: 15px">
-            <label for="pmsrp" class="form-label" style="margin-top: 15px">Price:</label>
-            <input type="text" id="pmsrp" name="price" class="form-control"
-                   value="<?php echo $orderDetails->getPrice(); ?>">
-        </div>
-    </div>
-    <button type="submit" name="update_submit" class="btn btn-success"
-            style="margin: 12px">Update
-    </button>
-</form>
-
+        <button type="submit" name="update_submit" class="btn btn-success"
+                style="margin: 12px">Update
+        </button>
+    </form>
+<?php endif; ?>

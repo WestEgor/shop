@@ -5,6 +5,7 @@ if (!session_id()) {
 require __DIR__ . '/../../vendor/autoload.php';
 
 use config\Connector as Connection;
+use model\Customer;
 use repository\customers\CustomersEntityMethods;
 
 ?>
@@ -48,16 +49,18 @@ if (isset($_GET['submit'])):
                 </thead>
                 <tbody>
                 <tr>
-                    <th scope="row"><?php echo $customer->getId(); ?></th>
-                    <td><?php echo $customer->getPersonName(); ?></td>
-                    <td><?php echo $customer->getPersonLastName(); ?></td>
-                    <td><?php echo $customer->getPersonAge(); ?></td>
-                    <td><?php echo $customer->getLocationCountry(); ?></td>
-                    <td><?php echo $customer->getLocationCity(); ?></td>
-                    <td><?php echo $customer->getLocationAddress(); ?></td>
-                    <td><?php echo $customer->getLocationZipCode(); ?></td>
-                    <td><?php echo $customer->getContactsEmail(); ?></td>
-                    <td><?php echo $customer->getContactsPhoneNumber(); ?></td>
+                    <?php if ($customer instanceof Customer): ?>
+                        <th scope="row"><?php echo $customer->getId(); ?></th>
+                        <td><?php echo $customer->getPersonName(); ?></td>
+                        <td><?php echo $customer->getPersonLastName(); ?></td>
+                        <td><?php echo $customer->getPersonAge(); ?></td>
+                        <td><?php echo $customer->getLocationCountry(); ?></td>
+                        <td><?php echo $customer->getLocationCity(); ?></td>
+                        <td><?php echo $customer->getLocationAddress(); ?></td>
+                        <td><?php echo $customer->getLocationZipCode(); ?></td>
+                        <td><?php echo $customer->getContactsEmail(); ?></td>
+                        <td><?php echo $customer->getContactsPhoneNumber(); ?></td>
+                    <?php endif; ?>
                 </tr>
                 </tbody>
             </table>
@@ -76,6 +79,5 @@ if (isset($_GET['submit'])):
 endif;
 session_destroy();
 ?>
-
 </body>
 </html>

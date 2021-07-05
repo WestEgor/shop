@@ -10,21 +10,24 @@ namespace model\support_classes;
 class Contacts
 {
     /**
-     * @var string email
+     * @var string|null email
      */
-    private string $email;
+    private ?string $email;
     /**
-     * @var string phone number
+     * @var string|null phone number
      */
-    private string $phoneNumber;
+    private ?string $phoneNumber;
 
     /**
-     * Contacts default constructor.
+     * Contacts constructor.
+     * @param string $email
+     * @param string $phoneNumber
      */
-    public function __construct()
+    public function __construct(?string $email = null,
+                                ?string $phoneNumber = null)
     {
-        $this->email = '';
-        $this->phoneNumber = '';
+        $this->email = $email;
+        $this->phoneNumber = $phoneNumber;
     }
 
     /**

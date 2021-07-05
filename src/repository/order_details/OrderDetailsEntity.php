@@ -2,7 +2,9 @@
 
 namespace repository\order_details;
 
+use model\Order;
 use model\OrderDetails;
+use model\Product;
 use PDO;
 use PDOStatement;
 use repository\AbstractRepository;
@@ -73,11 +75,14 @@ class OrderDetailsEntity extends AbstractRepository
      */
     public function createStatement(PDOStatement $statement, object $object): bool
     {
-        $statement->bindValue(':products_id', $object->getProductId());
-        $statement->bindValue(':orders_id', $object->getOrderId());
-        $statement->bindValue(':quantity_ordered', $object->getQuantityOrdered());
-        $statement->bindValue(':price', $object->getPrice());
-        return $statement->execute();
+        if ($object instanceof OrderDetails) {
+            $statement->bindValue(':products_id', $object->getProductId());
+            $statement->bindValue(':orders_id', $object->getOrderId());
+            $statement->bindValue(':quantity_ordered', $object->getQuantityOrdered());
+            $statement->bindValue(':price', $object->getPrice());
+            return $statement->execute();
+        }
+        return false;
     }
 
     /**
@@ -85,7 +90,8 @@ class OrderDetailsEntity extends AbstractRepository
      * @param PDOStatement $statement
      * @return array|false
      */
-    public function readAllStatement(PDOStatement $statement): array|false
+    public
+    function readAllStatement(PDOStatement $statement): array|false
     {
         $orderDetailsArray = [];
         while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
@@ -107,7 +113,8 @@ class OrderDetailsEntity extends AbstractRepository
      * @param int $key
      * @return object|false
      */
-    public function readByKeyStatement(PDOStatement $statement, int $key): object|false
+    public
+    function readByKeyStatement(PDOStatement $statement, int $key): object|false
     {
         $orderDetails = new OrderDetails();
         $obj = $statement->fetchObject();
@@ -122,13 +129,17 @@ class OrderDetailsEntity extends AbstractRepository
      * @param object $object
      * @return bool
      */
-    public function updateStatement(PDOStatement $statement, object $object): bool
+    public
+    function updateStatement(PDOStatement $statement, object $object): bool
     {
-        $statement->bindValue(':products_id', $object->getProductId());
-        $statement->bindValue(':orders_id', $object->getOrderId());
-        $statement->bindValue(':quantity_ordered', $object->getQuantityOrdered());
-        $statement->bindValue(':price', $object->getPrice());
-        $statement->bindValue(':id', $object->getId());
-        return $statement->execute();
+        if ($object instanceof OrderDetails) {
+            $statement->bindValue(':products_id', $object->getProductId());
+            $statement->bindValue(':orders_id', $object->getOrderId());
+            $statement->bindValue(':quantity_ordered', $object->getQuantityOrdered());
+            $statement->bindValue(':price', $object->getPrice());
+            $statement->bindValue(':id', $object->getId());
+            return $statement->execute();
+        }
+        return false;
     }
 }

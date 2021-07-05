@@ -5,6 +5,7 @@ if (!session_id()) {
 require __DIR__ . '/../../vendor/autoload.php';
 
 use config\Connector as Connection;
+use model\OrderDetails;
 use repository\order_details\OrderDetailsEntityMethods;
 
 ?>
@@ -47,13 +48,15 @@ if (isset($_GET['submit'])):
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <th scope="row"><?php echo $orderDetails->getId(); ?></th>
-                    <td><?php echo $orderDetails->getProductId(); ?></td>
-                    <td><?php echo $orderDetails->getOrderId(); ?></td>
-                    <td><?php echo $orderDetails->getQuantityOrdered(); ?></td>
-                    <td><?php echo $orderDetails->getPrice(); ?></td>
-                </tr>
+                <?php if ($orderDetails instanceof OrderDetails): ?>
+                    <tr>
+                        <th scope="row"><?php echo $orderDetails->getId(); ?></th>
+                        <td><?php echo $orderDetails->getProductId(); ?></td>
+                        <td><?php echo $orderDetails->getOrderId(); ?></td>
+                        <td><?php echo $orderDetails->getQuantityOrdered(); ?></td>
+                        <td><?php echo $orderDetails->getPrice(); ?></td>
+                    </tr>
+                <?php endif ?>
                 </tbody>
             </table>
         <?php else: ?>
@@ -71,9 +74,6 @@ if (isset($_GET['submit'])):
 endif;
 session_destroy();
 ?>
-
-
 </body>
-
 </html>
 

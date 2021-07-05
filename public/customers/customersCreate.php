@@ -5,9 +5,9 @@ if (!session_id()) {
 require __DIR__ . '/../../vendor/autoload.php';
 require '../navbar.php';
 
-use model\Contacts;
-use model\Location;
-use model\Person;
+use model\support_classes\Contacts;
+use model\support_classes\Location;
+use model\support_classes\Person;
 use repository\customers\CustomersEntityMethods;
 use util\Validator;
 
@@ -61,7 +61,7 @@ if (isset($_POST['create_submit'])) :
     $_SESSION['email'] = $_POST['email'];
     $email = $_SESSION['email'];
     if (!Validator::validateEmail($email)) {
-        $errorMessage .= 'Zip code cannot be empty or cannot be string' . '</br>';
+        $errorMessage .= 'Email cannot be empty or cannot be string' . '</br>';
     }
     $_SESSION['phone_number'] = $_POST['phone_number'];
     $phoneNumber = $_SESSION['phone_number'];
@@ -71,10 +71,10 @@ if (isset($_POST['create_submit'])) :
 
 
     if ($errorMessage === '') :
-        $person = Person::parameterizedConstructor($name, $lastName, $age);
-        $location = Location::parameterizedConstructor($country, $city, $address, $zipCode);
-        $contacts = Contacts::parameterizedConstructor($email, $phoneNumber);
-        CustomersEntityMethods::createCustomer($person, $location, $contacts);
+        $person = new Person($name, $lastName, $age);
+        $location = new Location($country, $city, $address, $zipCode);
+        $contacts = new Contacts($email, $phoneNumber);
+        CustomersEntityMethods::createCustomer($person, $location, $contacts,);
         foreach ($_SESSION as $key) {
             unset($_SESSION[$key]);
         }
@@ -95,9 +95,10 @@ endif;
 <form action="<? echo $_SERVER['PHP_SELF'] ?>" method="POST">
     <div class="row g-3 align-items-center" style="margin-left: 5px">
         <div class="col-auto" style="margin-bottom:10px; margin-top: 15px">
-            <label for="cname" class="form-label" style="margin-top: 15px">Name:</label>
-            <input type="text" id="pname" name="person_name" class="form-control"
-                   value="<?php echo $name ?>">
+            <label for="cname" class="form-label" style="margin-top: 15px">Name:
+                <input type="text" id="pname" name="person_name" class="form-control"
+                       value="<?php echo $name ?>">
+            </label>
         </div>
         <div class="col-auto" style="margin-bottom:10px; margin-top: 15px">
             <label for="clastname" class="form-label" style="margin-top: 15px">Last name:</label>

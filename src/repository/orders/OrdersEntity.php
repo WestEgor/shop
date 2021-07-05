@@ -7,6 +7,7 @@ use model\Order;
 use PDO;
 use PDOStatement;
 use repository\AbstractRepository;
+use util\DateMethods;
 
 /**
  * Class OrdersEntity
@@ -74,12 +75,15 @@ class OrdersEntity extends AbstractRepository
      */
     public function createStatement(PDOStatement $statement, object $object): bool
     {
-        $statement->bindValue(':order_date', $object->getOrderDate()->format('Y-m-d'));
-        $statement->bindValue(':required_date', $object->getRequiredDate()->format('Y-m-d'));
-        $statement->bindValue(':status', $object->getStatus());
-        $statement->bindValue(':comments', $object->getComments());
-        $statement->bindValue(':customers_id', $object->getCustomerId());
-        return $statement->execute();
+        if ($object instanceof Order) {
+            $statement->bindValue(':order_date', $object->getOrderDate()->format('Y-m-d'));
+            $statement->bindValue(':required_date', $object->getRequiredDate()->format('Y-m-d'));
+            $statement->bindValue(':status', $object->getStatus());
+            $statement->bindValue(':comments', $object->getComments());
+            $statement->bindValue(':customers_id', $object->getCustomerId());
+            return $statement->execute();
+        }
+        return false;
     }
 
     /**
@@ -92,13 +96,12 @@ class OrdersEntity extends AbstractRepository
         $orders = [];
         while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
             $id = $row['id'];
-            $orderDate = DateTime::createFromFormat('Y-m-d', $row['order_date']);
-            $requiredDate = DateTime::createFromFormat('Y-m-d', $row['required_date']);
+            $orderDate = DateMethods::setDate(DateTime::createFromFormat('Y-m-d', $row['order_date']));
+            $requiredDate = DateMethods::setDate(DateTime::createFromFormat('Y-m-d', $row['required_date']));
             $status = $row['status'];
             $comments = $row['comments'];
             $customersId = $row['customers_id'];
-            $order = Order::parameterizedConstructor($orderDate, $requiredDate, $status, $comments, $customersId);
-            $order->setId($id);
+            $order = new Order($orderDate, $requiredDate, $status, $comments, $customersId, $id);
             $orders[] = $order;
         }
         return $orders;
@@ -127,12 +130,15 @@ class OrdersEntity extends AbstractRepository
      */
     public function updateStatement(PDOStatement $statement, object $object): bool
     {
-        $statement->bindValue(':order_date', $object->getOrderDate()->format('Y-m-d'));
-        $statement->bindValue(':required_date', $object->getRequiredDate()->format('Y-m-d'));
-        $statement->bindValue(':status', $object->getStatus());
-        $statement->bindValue(':comments', $object->getComments());
-        $statement->bindValue(':customers_id', $object->getCustomerId());
-        $statement->bindValue(':id', $object->getId());
-        return $statement->execute();
+        if ($object instanceof Order) {
+            $statement->bindValue(':order_date', $object->getOrderDate()->format('Y-m-d'));
+            $statement->bindValue(':required_date', $object->getRequiredDate()->format('Y-m-d'));
+            $statement->bindValue(':status', $object->getStatus());
+            $statement->bindValue(':comments', $object->getComments());
+            $statement->bindValue(':customers_id', $object->getCustomerId());
+            $statement->bindValue(':id', $object->getId());
+            return $statement->execute();
+        }
+        return false;
     }
 }

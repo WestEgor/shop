@@ -110,6 +110,7 @@ abstract class AbstractRepository implements RepositoryInterface
     public function readAll(): array|false
     {
         $statement = $this->pdo->query($this->readAllQuery());
+        if (!$statement) return false;
         return $this->readAllStatement($statement);
     }
 

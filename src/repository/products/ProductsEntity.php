@@ -79,8 +79,7 @@ class ProductsEntity extends AbstractRepository
             $quantity = $row['quantity'];
             $price = $row['price'];
             $msrp = $row['msrp'];
-            $product = Product::parameterizedConstructor($name, $quantity, $price, $msrp);
-            $product->setId($id);
+            $product = new Product($name, $quantity, $price, $msrp, $id);
             $products[] = $product;
         }
         return $products;
@@ -109,11 +108,14 @@ class ProductsEntity extends AbstractRepository
      */
     public function createStatement(PDOStatement $statement, object $object): bool
     {
-        $statement->bindValue(':name', $object->getName());
-        $statement->bindValue(':quantity', $object->getQuantity());
-        $statement->bindValue(':price', $object->getPrice());
-        $statement->bindValue(':msrp', $object->getMsrp());
-        return $statement->execute();
+        if ($object instanceof Product) {
+            $statement->bindValue(':name', $object->getName());
+            $statement->bindValue(':quantity', $object->getQuantity());
+            $statement->bindValue(':price', $object->getPrice());
+            $statement->bindValue(':msrp', $object->getMsrp());
+            return $statement->execute();
+        }
+        return false;
     }
 
 
@@ -125,11 +127,14 @@ class ProductsEntity extends AbstractRepository
      */
     public function updateStatement(PDOStatement $statement, object $object): bool
     {
-        $statement->bindValue(':name', $object->getName());
-        $statement->bindValue(':quantity', $object->getQuantity());
-        $statement->bindValue(':price', $object->getPrice());
-        $statement->bindValue(':msrp', $object->getMsrp());
-        $statement->bindValue(':id', $object->getId());
-        return $statement->execute();
+        if ($object instanceof Product) {
+            $statement->bindValue(':name', $object->getName());
+            $statement->bindValue(':quantity', $object->getQuantity());
+            $statement->bindValue(':price', $object->getPrice());
+            $statement->bindValue(':msrp', $object->getMsrp());
+            $statement->bindValue(':id', $object->getId());
+            return $statement->execute();
+        }
+        return false;
     }
 }

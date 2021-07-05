@@ -29,7 +29,7 @@ class OrdersEntityMethods
                                        string $status, string $comments, int $customersId): bool
     {
         $pdo = Connection::get()->getConnect();
-        $order = Order::parameterizedConstructor($orderDate, $requiredDate, $status, $comments, $customersId);
+        $order = new Order($orderDate, $requiredDate, $status, $comments, $customersId);
         $ordersEntity = new OrdersEntity($pdo);
         return $ordersEntity->create($order);
     }
@@ -77,8 +77,7 @@ class OrdersEntityMethods
     public static function updateOrder(PDO $pdo, int $id, DateTime $orderDate, DateTime $requiredDate,
                                        string $status, string $comments, int $customersId): bool
     {
-        $order = Order::parameterizedConstructor($orderDate, $requiredDate, $status, $comments, $customersId);
-        $order->setId($id);
+        $order = new Order($orderDate, $requiredDate, $status, $comments, $customersId, $id);
         $ordersEntity = new OrdersEntity($pdo);
         return $ordersEntity->update($order);
     }

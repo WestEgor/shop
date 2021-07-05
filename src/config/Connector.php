@@ -24,13 +24,13 @@ class Connector
     /**
      * Connection instance
      */
-    private static $connection;
+    private static Connector $connection;
 
     /**
      * Private Connector constructor
      * Cannot call in others classes to avoid unnecessary connections
      */
-    private function __construct()
+    private final function __construct()
     {
     }
 
@@ -57,11 +57,7 @@ class Connector
     public
     static function get(): Connector
     {
-        if (static::$connection === null) {
-            static::$connection = new static();
-        }
-
-        return static::$connection;
+        return static::$connection = new static();
     }
 
 }

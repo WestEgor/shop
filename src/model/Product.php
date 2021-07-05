@@ -11,64 +11,53 @@ class Product implements ModelInterface
 {
     /**
      * id of entity 'products'
-     * @var int
+     * @var int|null
      */
-    private int $id;
+    private ?int $id;
 
     /**
      * name of entity 'products'
-     * @var string
+     * @var string|null
      */
-    private string $name;
+    private ?string $name;
 
     /**
      * quantity of entity 'products'
-     * @var int
+     * @var int|null
      */
-    private int $quantity;
+    private ?int $quantity;
 
     /**
      * price of entity 'products'
-     * @var float
+     * @var float|null
      */
-    private float $price;
+    private ?float $price;
 
     /**
      * msrp of entity 'products'
-     * @var float
+     * @var float|null
      */
-    private float $msrp;
+    private ?float $msrp;
 
     /**
-     * Product default constructor.
+     * Product constructor.
+     * @param string|null $name
+     * @param int|null $quantity
+     * @param float|null $price
+     * @param float|null $msrp
+     * @param int|null $id
      */
-    public function __construct()
+    public function __construct(?string $name = null,
+                                ?int $quantity = null,
+                                ?float $price = null,
+                                ?float $msrp = null,
+                                ?int $id = null)
     {
-        $this->id = -1;
-        $this->name = '';
-        $this->quantity = -1;
-        $this->price = -1.0;
-        $this->msrp = -1.0;
-    }
-
-
-    /**
-     * Method, that represents Product parameterized constructor
-     * @param string $name
-     * @param int $quantity
-     * @param float $price
-     * @param float $msrp
-     * @return Product
-     */
-    public static function parameterizedConstructor(string $name, int $quantity,
-                                                    float $price, float $msrp): Product
-    {
-        $product = new self();
-        $product->name = $name;
-        $product->quantity = $quantity;
-        $product->price = $price;
-        $product->msrp = $msrp;
-        return $product;
+        $this->name = $name;
+        $this->quantity = $quantity;
+        $this->price = $price;
+        $this->msrp = $msrp;
+        $this->id = $id;
     }
 
 
@@ -160,7 +149,6 @@ class Product implements ModelInterface
      */
     public function setAll(object $keys): bool
     {
-        if (!$keys) return false;
         foreach ($keys as $key => $value) {
             if ($key === 'id') $this->id = $value;
             if ($key === 'name') $this->name = $value;

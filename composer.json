@@ -14,5 +14,8 @@
       "repository\\": "src/repository",
       "util\\": "src/util"
     }
+  },
+  "require-dev": {
+    "phpstan/phpstan": "^0.12.91"
   }
 }

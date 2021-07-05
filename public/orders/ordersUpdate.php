@@ -6,6 +6,7 @@ require __DIR__ . '/../../vendor/autoload.php';
 require '../navbar.php';
 
 use config\Connector as Connection;
+use model\Order;
 use repository\orders\OrdersEntityMethods;
 use util\Parser;
 use util\Validator;
@@ -67,38 +68,38 @@ if (isset($_POST['create_submit'])) :
 endif;
 ?>
 
+<?php if ($order instanceof Order): ?>
+    <form action="ordersUpdate.php?id=<?php echo $order->getId(); ?>" method="POST">
+        <div class="row g-3 align-items-center" style="margin-left: 5px">
 
-<form action="ordersUpdate.php?id=<?php echo $order->getId(); ?>" method="POST">
-    <div class="row g-3 align-items-center" style="margin-left: 5px">
-
-        <div class="col-auto" style="margin-bottom:10px; margin-top: 15px">
-            <label for="pprice" class="form-label" style="margin-top: 15px">Order date:</label>
-            <input type="date" id="pprice" name="order_date" class="form-control"
-                   value="<?php echo $order->getOrderDate()->format('Y-m-d'); ?>">
+            <div class="col-auto" style="margin-bottom:10px; margin-top: 15px">
+                <label for="pprice" class="form-label" style="margin-top: 15px">Order date:</label>
+                <input type="date" id="pprice" name="order_date" class="form-control"
+                       value="<?php echo $order->getOrderDate()->format('Y-m-d'); ?>">
+            </div>
+            <div class="col-auto" style="margin-bottom:10px; margin-top: 15px">
+                <label for="pprice" class="form-label" style="margin-top: 15px">Required date:</label>
+                <input type="date" id="pprice" name="required_date" class="form-control"
+                       value="<?php echo $order->getRequiredDate()->format('Y-m-d'); ?>">
+            </div>
+            <div class="col-auto" style="margin-bottom:10px; margin-top: 15px">
+                <label for="pquantity" class="form-label" style="margin-top: 15px">Status:</label>
+                <input type="text" id="pquantity" name="status" class="form-control"
+                       value="<?php echo $order->getStatus(); ?>">
+            </div>
+            <div class="col-auto" style="margin-bottom:10px; margin-top: 15px">
+                <label for="pquantity" class="form-label" style="margin-top: 15px">Comments:</label>
+                <input type="text" id="pquantity" name="comments" class="form-control"
+                       value="<?php echo $order->getComments(); ?>">
+            </div>
+            <div class="col-auto" style="margin-bottom:10px; margin-top: 15px">
+                <label for="pname" class="form-label" style="margin-top: 15px">Customers ID:</label>
+                <input type="text" id="pname" name="customers_id" class="form-control"
+                       value="<?php echo $order->getCustomerId(); ?>">
+            </div>
         </div>
-        <div class="col-auto" style="margin-bottom:10px; margin-top: 15px">
-            <label for="pprice" class="form-label" style="margin-top: 15px">Required date:</label>
-            <input type="date" id="pprice" name="required_date" class="form-control"
-                   value="<?php echo $order->getRequiredDate()->format('Y-m-d'); ?>">
-        </div>
-        <div class="col-auto" style="margin-bottom:10px; margin-top: 15px">
-            <label for="pquantity" class="form-label" style="margin-top: 15px">Status:</label>
-            <input type="text" id="pquantity" name="status" class="form-control"
-                   value="<?php echo $order->getStatus(); ?>">
-        </div>
-        <div class="col-auto" style="margin-bottom:10px; margin-top: 15px">
-            <label for="pquantity" class="form-label" style="margin-top: 15px">Comments:</label>
-            <input type="text" id="pquantity" name="comments" class="form-control"
-                   value="<?php echo $order->getComments(); ?>">
-        </div>
-        <div class="col-auto" style="margin-bottom:10px; margin-top: 15px">
-            <label for="pname" class="form-label" style="margin-top: 15px">Customers ID:</label>
-            <input type="text" id="pname" name="customers_id" class="form-control"
-                   value="<?php echo $order->getCustomerId(); ?>">
-        </div>
-    </div>
-    <button type="submit" name="create_submit" class="btn btn-success"
-            style="margin: 12px">Update
-    </button>
-</form>
-
+        <button type="submit" name="create_submit" class="btn btn-success"
+                style="margin: 12px">Update
+        </button>
+    </form>
+<?php endif ?>

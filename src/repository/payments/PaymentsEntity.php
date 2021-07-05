@@ -13,6 +13,7 @@ use model\support_classes\Person;
 use PDO;
 use PDOStatement;
 use repository\AbstractRepository;
+use util\DateMethods;
 
 class PaymentsEntity extends AbstractRepository
 {
@@ -72,10 +73,13 @@ class PaymentsEntity extends AbstractRepository
      */
     public function createStatement(PDOStatement $statement, object $object): bool
     {
-        $statement->bindValue(':customers_id', $object->getCustomerId());
-        $statement->bindValue(':amount', $object->getAmount());
-        $statement->bindValue(':payment_date', $object->getPaymentDate()->format('Y-m-d'));
-        return $statement->execute();
+        if ($object instanceof Payment) {
+            $statement->bindValue(':customers_id', $object->getCustomerId());
+            $statement->bindValue(':amount', $object->getAmount());
+            $statement->bindValue(':payment_date', $object->getPaymentDate()->format('Y-m-d'));
+            return $statement->execute();
+        }
+        return false;
     }
 
     /**
@@ -90,9 +94,8 @@ class PaymentsEntity extends AbstractRepository
             $customersId = $row['customers_id'];
             $id = $row['id'];
             $amount = $row['amount'];
-            $paymentDate = DateTime::createFromFormat('Y-m-d', $row['payment_date']);
-            $payment = Payment::parameterizedConstructor($customersId, $amount, $paymentDate);
-            $payment->setId($id);
+            $paymentDate = DateMethods::setDate(DateTime::createFromFormat('Y-m-d', $row['payment_date']));
+            $payment = new Payment($amount, $paymentDate, $customersId, $id);
             $payments[] = $payment;
         }
         return $payments;
@@ -121,11 +124,14 @@ class PaymentsEntity extends AbstractRepository
      */
     public function updateStatement(PDOStatement $statement, object $object): bool
     {
-        $statement->bindValue(':customers_id', $object->getCustomerId());
-        $statement->bindValue(':amount', $object->getAmount());
-        $statement->bindValue(':payment_date', $object->getPaymentDate()->format('Y-m-d'));
-        $statement->bindValue(':id', $object->getId());
-        return $statement->execute();
+        if ($object instanceof Payment) {
+            $statement->bindValue(':customers_id', $object->getCustomerId());
+            $statement->bindValue(':amount', $object->getAmount());
+            $statement->bindValue(':payment_date', $object->getPaymentDate()->format('Y-m-d'));
+            $statement->bindValue(':id', $object->getId());
+            return $statement->execute();
+        }
+        return false;
     }
 
     /**
@@ -152,7 +158,7 @@ class PaymentsEntity extends AbstractRepository
             $customersId = $row['customers_id'];
             $id = $row['id'];
             $amount = $row['amount'];
-            $paymentDate = DateTime::createFromFormat('Y-m-d', $row['payment_date']);
+            $paymentDate = DateMethods::setDate(DateTime::createFromFormat('Y-m-d', $row['payment_date']));
             $name = $row['name'];
             $lastName = $row['last_name'];
             $age = $row['age'];
@@ -162,13 +168,11 @@ class PaymentsEntity extends AbstractRepository
             $zipCode = $row['zip_code'];
             $email = $row['email'];
             $phoneNumber = $row['phone_number'];
-            $payment = Payment::parameterizedConstructor($customersId, $amount, $paymentDate);
-            $person = Person::parameterizedConstructor($name, $lastName, $age);
-            $location = Location::parameterizedConstructor($country, $city, $address, $zipCode);
-            $contacts = Contacts::parameterizedConstructor($email, $phoneNumber);
-            $customer = Customer::parameterizedConstructor($person, $location, $contacts);
-            $customer->setId($customersId);
-            $payment->setId($id);
+            $payment = new Payment($amount, $paymentDate, $customersId, $id);
+            $person = new Person($name, $lastName, $age);
+            $location = new Location($country, $city, $address, $zipCode);
+            $contacts = new Contacts($email, $phoneNumber);
+            $customer = new Customer($person, $location, $contacts, $customersId);
             $paymentsJoin = new PaymentsJoin($payment, $customer);
             array_push($joinDataArray, $paymentsJoin);
         }

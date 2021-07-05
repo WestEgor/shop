@@ -13,10 +13,11 @@ use repository\orders\OrdersEntityMethods;
         $pdo = Connection::get()->getConnect();
         $columns = new OrdersColumnsInformation($pdo);
         $col = $columns->getColumnName();
-        foreach ($col as $column):
-            ?>
-            <th scope="col"><?php echo $column ?></th>
-        <?php endforeach; ?>
+        if (is_array($col)):
+            foreach ($col as $column):
+                ?>
+                <th scope="col"><?php echo $column ?></th>
+            <?php endforeach; endif; ?>
         <th scope="col">Update column</th>
         <th scope="col">Delete column</th>
     </tr>
@@ -24,7 +25,7 @@ use repository\orders\OrdersEntityMethods;
     </thead>
     <tbody>
     <?php
-    if (!$orders = OrdersEntityMethods::readAllOrders($pdo)):  ?>
+    if (!$orders = OrdersEntityMethods::readAllOrders($pdo)): ?>
         <tr>
             <th scope="row">No data</th>
             <td>-</td>

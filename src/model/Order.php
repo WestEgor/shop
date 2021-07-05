@@ -3,6 +3,7 @@
 namespace model;
 
 use DateTime;
+use util\DateMethods;
 
 /** Class Order
  * Implement ModelInterface
@@ -12,69 +13,60 @@ use DateTime;
 class Order implements ModelInterface
 {
     /**
-     * @var int id of entity 'orders'
+     * @var int|null  id of entity 'orders'
      */
-    private int $id;
+    private ?int $id;
 
     /**
-     * @var DateTime order_date of entity 'orders'
+     * @var DateTime|null  order_date of entity 'orders'
      */
-    private DateTime $orderDate;
+    private ?DateTime $orderDate;
 
     /**
-     * @var DateTime required_date of entity 'orders'
+     * @var DateTime|null  required_date of entity 'orders'
      */
-    private DateTime $requiredDate;
+    private ?DateTime $requiredDate;
 
     /**
-     * @var string status of order in entity 'orders'
+     * @var string|null status of order in entity 'orders'
      */
-    private string $status;
+    private ?string $status;
 
     /**
-     * @var string  comments to order in entity 'orders'
+     * @var string|null comments to order in entity 'orders'
      */
-    private string $comments;
+    private ?string $comments;
 
     /**
-     * @var int customer_id of entity 'orders', who made this order
+     * @var int|null customer_id of entity 'orders', who made this order
      */
-    private int $customerId;
+    private ?int $customerId;
 
 
     /**
-     * Order default constructor
+     * Order constructor.
+     * @param DateTime|null $orderDate
+     * @param DateTime|null $requiredDate
+     * @param string|null $status
+     * @param string|null $comments
+     * @param int|null $customerId
+     * @param int|null $id
      */
-    public function __construct()
+    public function __construct(?DateTime $orderDate = null,
+                                ?DateTime $requiredDate = null,
+                                ?string $status = null,
+                                ?string $comments = null,
+                                ?int $customerId = null,
+                                ?int $id = null)
     {
-        $this->id = -1;
-        $this->orderDate = new DateTime('now');
-        $this->requiredDate = new DateTime('now');
-        $this->status = '';
-        $this->comments = '';
-        $this->customerId = -1;
+        $this->orderDate = $orderDate;
+        $this->requiredDate = $requiredDate;
+        $this->status = $status;
+        $this->comments = $comments;
+        $this->customerId = $customerId;
+        $this->id = $id;
     }
 
-    /**
-     * Method, that represents Order parameterized constructor
-     * @param DateTime $orderDate
-     * @param DateTime $requiredDate
-     * @param string $status
-     * @param string $comments
-     * @param int $customerId
-     * @return Order
-     */
-    public static function parameterizedConstructor(DateTime $orderDate, DateTime $requiredDate,
-                                                    string $status, string $comments, int $customerId): Order
-    {
-        $order = new self();
-        $order->orderDate = $orderDate;
-        $order->requiredDate = $requiredDate;
-        $order->status = $status;
-        $order->comments = $comments;
-        $order->customerId = $customerId;
-        return $order;
-    }
 
     /**
      * @return int id of order
@@ -179,17 +171,21 @@ class Order implements ModelInterface
      */
     public function setAll(object $keys): bool
     {
-        if (!$keys) return false;
+        var_dump($keys);
+        var_dump(is_object($keys));
         foreach ($keys as $key => $value) {
             if ($key === 'id') $this->id = $value;
-            if ($key === 'order_date') $this->orderDate = DateTime::createFromFormat('Y-m-d', $value);
-            if ($key === 'required_date') $this->requiredDate = DateTime::createFromFormat('Y-m-d', $value);
+            if ($key === 'order_date') {
+                $this->orderDate = DateMethods::setDate(DateTime::createFromFormat('Y-m-d', $value));
+            }
+            if ($key === 'required_date') {
+                $this->orderDate = DateMethods::setDate(DateTime::createFromFormat('Y-m-d', $value));
+            }
             if ($key === 'status') $this->status = $value;
             if ($key === 'comments') $this->comments = $value;
             if ($key === 'customers_id') $this->customerId = $value;
         }
         return true;
     }
-
 
 }

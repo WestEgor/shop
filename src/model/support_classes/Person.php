@@ -10,45 +10,35 @@ namespace model\support_classes;
 class Person
 {
     /**
-     * @var string name
+     * @var string|null name
      */
-    private string $name;
+    private ?string $name;
 
     /**
-     * @var string last name
+     * @var string|null last name
      */
-    private string $lastname;
+    private ?string $lastname;
 
     /**
-     * @var int age
+     * @var int|null age
      */
-    private int $age;
+    private ?int $age;
 
     /**
-     * Person default constructor.
+     * Person constructor.
+     * @param string|null $name
+     * @param string|null $lastname
+     * @param int|null $age
      */
-    public function __construct()
+    public function __construct(?string $name = null,
+                                ?string $lastname = null,
+                                ?int $age = null)
     {
-        $this->name = '';
-        $this->lastname = '';
-        $this->age = -1;
+        $this->name = $name;
+        $this->lastname = $lastname;
+        $this->age = $age;
     }
 
-    /**
-     * Method, that represents @Person parameterized constructor.
-     * @param string $name
-     * @param string $lastname
-     * @param int $age
-     * @return Person
-     */
-    public static function parameterizedConstructor(string $name, string $lastname, int $age): Person
-    {
-        $person = new self();
-        $person->name = $name;
-        $person->lastname = $lastname;
-        $person->age = $age;
-        return $person;
-    }
 
     /**
      * @return string name

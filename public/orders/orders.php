@@ -5,6 +5,7 @@ if (!session_id()) {
 require __DIR__ . '/../../vendor/autoload.php';
 
 use config\Connector as Connection;
+use model\Order;
 use repository\orders\OrdersEntityMethods;
 
 ?>
@@ -50,12 +51,14 @@ if (isset($_GET['submit'])):
                 </thead>
                 <tbody>
                 <tr>
-                    <th scope="row"><?php echo $order->getId(); ?></th>
-                    <td><?php echo $order->getOrderDate()->format('Y-m-d'); ?></td>
-                    <td><?php echo $order->getRequiredDate()->format('Y-m-d'); ?></td>
-                    <td><?php echo $order->getStatus(); ?></td>
-                    <td><?php echo $order->getComments(); ?></td>
-                    <td><?php echo $order->getCustomerId(); ?></td>
+                    <?php if ($order instanceof Order): ?>
+                        <th scope="row"><?php echo $order->getId(); ?></th>
+                        <td><?php echo $order->getOrderDate()->format('Y-m-d'); ?></td>
+                        <td><?php echo $order->getRequiredDate()->format('Y-m-d'); ?></td>
+                        <td><?php echo $order->getStatus(); ?></td>
+                        <td><?php echo $order->getComments(); ?></td>
+                        <td><?php echo $order->getCustomerId(); ?></td>
+                    <?php endif; ?>
                 </tr>
                 </tbody>
             </table>

@@ -5,6 +5,7 @@ if (!session_id()) {
 require __DIR__ . '/../../vendor/autoload.php';
 
 use config\Connector as Connection;
+use model\Payment;
 use repository\payments\PaymentsEntityMethods;
 
 ?>
@@ -53,10 +54,12 @@ if (isset($_GET['submit'])):
                 </thead>
                 <tbody>
                 <tr>
-                    <th scope="row"><?php echo $payment->getCustomerId(); ?></th>
-                    <td><?php echo $payment->getId(); ?></td>
-                    <td><?php echo $payment->getAmount(); ?></td>
-                    <td><?php echo $payment->getPaymentDate()->format('Y-m-d'); ?></td>
+                    <?php if ($payment instanceof Payment): ?>
+                        <th scope="row"><?php echo $payment->getCustomerId(); ?></th>
+                        <td><?php echo $payment->getId(); ?></td>
+                        <td><?php echo $payment->getAmount(); ?></td>
+                        <td><?php echo $payment->getPaymentDate()->format('Y-m-d'); ?></td>
+                    <?php endif; ?>
                 </tr>
                 </tbody>
             </table>

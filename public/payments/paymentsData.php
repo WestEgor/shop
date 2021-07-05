@@ -12,10 +12,11 @@ use repository\payments\PaymentsEntityMethods;
         $pdo = Connection::get()->getConnect();
         $columns = new PaymentsColumnsInformation($pdo);
         $col = $columns->getColumnName();
-        foreach ($col as $column):
-            ?>
-            <th scope="col"><?php echo $column ?></th>
-        <?php endforeach; ?>
+        if (is_array($col)):
+            foreach ($col as $column):
+                ?>
+                <th scope="col"><?php echo $column ?></th>
+            <?php endforeach; endif ?>
         <th scope="col">Update column</th>
         <th scope="col">Delete column</th>
     </tr>

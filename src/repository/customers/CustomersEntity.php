@@ -78,16 +78,19 @@ class CustomersEntity extends AbstractRepository
      */
     public function createStatement(PDOStatement $statement, object $object): bool
     {
-        $statement->bindValue(':name', $object->getPersonName());
-        $statement->bindValue(':last_name', $object->getPersonLastName());
-        $statement->bindValue(':age', $object->getPersonAge());
-        $statement->bindValue(':country', $object->getLocationCountry());
-        $statement->bindValue(':city', $object->getLocationCity());
-        $statement->bindValue(':address', $object->getLocationAddress());
-        $statement->bindValue(':zip_code', $object->getLocationZipCode());
-        $statement->bindValue(':email', $object->getContactsEmail());
-        $statement->bindValue(':phone_number', $object->getContactsPhoneNumber());
-        return $statement->execute();
+        if ($object instanceof Customer) {
+            $statement->bindValue(':name', $object->getPersonName());
+            $statement->bindValue(':last_name', $object->getPersonLastName());
+            $statement->bindValue(':age', $object->getPersonAge());
+            $statement->bindValue(':country', $object->getLocationCountry());
+            $statement->bindValue(':city', $object->getLocationCity());
+            $statement->bindValue(':address', $object->getLocationAddress());
+            $statement->bindValue(':zip_code', $object->getLocationZipCode());
+            $statement->bindValue(':email', $object->getContactsEmail());
+            $statement->bindValue(':phone_number', $object->getContactsPhoneNumber());
+            return $statement->execute();
+        }
+        return false;
     }
 
     /**
@@ -109,11 +112,10 @@ class CustomersEntity extends AbstractRepository
             $zipCode = $row['zip_code'];
             $email = $row['email'];
             $phoneNumber = $row['phone_number'];
-            $person = Person::parameterizedConstructor($name, $lastName, $age);
-            $location = Location::parameterizedConstructor($country, $city, $address, $zipCode);
-            $contacts = Contacts::parameterizedConstructor($email, $phoneNumber);
-            $customer = Customer::parameterizedConstructor($person, $location, $contacts);
-            $customer->setId($id);
+            $person = new Person($name, $lastName, $age);
+            $location = new Location($country, $city, $address, $zipCode);
+            $contacts = new Contacts($email, $phoneNumber);
+            $customer = new Customer($person, $location, $contacts, $id);
             $customers[] = $customer;
         }
         return $customers;
@@ -142,16 +144,19 @@ class CustomersEntity extends AbstractRepository
      */
     public function updateStatement(PDOStatement $statement, object $object): bool
     {
-        $statement->bindValue(':name', $object->getPersonName());
-        $statement->bindValue(':last_name', $object->getPersonLastName());
-        $statement->bindValue(':age', $object->getPersonAge());
-        $statement->bindValue(':country', $object->getLocationCountry());
-        $statement->bindValue(':city', $object->getLocationCity());
-        $statement->bindValue(':address', $object->getLocationAddress());
-        $statement->bindValue(':zip_code', $object->getLocationZipCode());
-        $statement->bindValue(':email', $object->getContactsEmail());
-        $statement->bindValue(':phone_number', $object->getContactsPhoneNumber());
-        $statement->bindValue(':id', $object->getId());
-        return $statement->execute();
+        if ($object instanceof Customer) {
+            $statement->bindValue(':name', $object->getPersonName());
+            $statement->bindValue(':last_name', $object->getPersonLastName());
+            $statement->bindValue(':age', $object->getPersonAge());
+            $statement->bindValue(':country', $object->getLocationCountry());
+            $statement->bindValue(':city', $object->getLocationCity());
+            $statement->bindValue(':address', $object->getLocationAddress());
+            $statement->bindValue(':zip_code', $object->getLocationZipCode());
+            $statement->bindValue(':email', $object->getContactsEmail());
+            $statement->bindValue(':phone_number', $object->getContactsPhoneNumber());
+            $statement->bindValue(':id', $object->getId());
+            return $statement->execute();
+        }
+        return false;
     }
 }

@@ -6,11 +6,15 @@ require '../navbar.php';
 
 use config\Connector as Connection;
 use repository\payments\PaymentsEntity;
+use repository\payments\PaymentsJoin;
 
 $pdo = Connection::get()->getConnect();
 $paymentsEntity = new PaymentsEntity($pdo);
 $paymentJoin = $paymentsEntity->getFullInformationAboutPayments($pdo);
-$paymentJoinLength = count($paymentJoin);
+$paymentJoinLength = 0;
+if (is_array($paymentJoin)):
+    $paymentJoinLength = count($paymentJoin);
+endif;
 ?>
 
 <table class="table table-striped" style="margin-left: 3px">
@@ -32,23 +36,25 @@ $paymentJoinLength = count($paymentJoin);
     </tr>
     </thead>
     <tbody>
-    <?php for ($i = 0; $i < $paymentJoinLength; $i++):
-        ?>
-        <tr>
-            <td><?php echo $paymentJoin[$i]->getPayment()->getCustomerId(); ?></td>
-            <td><?php echo $paymentJoin[$i]->getPayment()->getId(); ?></td>
-            <td><?php echo $paymentJoin[$i]->getPayment()->getAmount(); ?></td>
-            <td><?php echo $paymentJoin[$i]->getPayment()->getPaymentDate()->format('Y-m-d'); ?></td>
-            <td><?php echo $paymentJoin[$i]->getCustomer()->getPersonName(); ?></td>
-            <td><?php echo $paymentJoin[$i]->getCustomer()->getPersonLastName(); ?></td>
-            <td><?php echo $paymentJoin[$i]->getCustomer()->getPersonAge(); ?></td>
-            <td><?php echo $paymentJoin[$i]->getCustomer()->getLocationCountry(); ?></td>
-            <td><?php echo $paymentJoin[$i]->getCustomer()->getLocationCity(); ?></td>
-            <td><?php echo $paymentJoin[$i]->getCustomer()->getLocationAddress(); ?></td>
-            <td><?php echo $paymentJoin[$i]->getCustomer()->getLocationZipCode(); ?></td>
-            <td><?php echo $paymentJoin[$i]->getCustomer()->getContactsEmail(); ?></td>
-            <td><?php echo $paymentJoin[$i]->getCustomer()->getContactsPhoneNumber(); ?></td>
-        </tr>
-    <?php endfor; ?>
+    <?php
+    for ($i = 0; $i < $paymentJoinLength; $i++):
+        if ($paymentJoin[$i] instanceof PaymentsJoin):
+            ?>
+            <tr>
+                <td><?php echo $paymentJoin[$i]->getPayment()->getCustomerId(); ?></td>
+                <td><?php echo $paymentJoin[$i]->getPayment()->getId(); ?></td>
+                <td><?php echo $paymentJoin[$i]->getPayment()->getAmount(); ?></td>
+                <td><?php echo $paymentJoin[$i]->getPayment()->getPaymentDate()->format('Y-m-d'); ?></td>
+                <td><?php echo $paymentJoin[$i]->getCustomer()->getPersonName(); ?></td>
+                <td><?php echo $paymentJoin[$i]->getCustomer()->getPersonLastName(); ?></td>
+                <td><?php echo $paymentJoin[$i]->getCustomer()->getPersonAge(); ?></td>
+                <td><?php echo $paymentJoin[$i]->getCustomer()->getLocationCountry(); ?></td>
+                <td><?php echo $paymentJoin[$i]->getCustomer()->getLocationCity(); ?></td>
+                <td><?php echo $paymentJoin[$i]->getCustomer()->getLocationAddress(); ?></td>
+                <td><?php echo $paymentJoin[$i]->getCustomer()->getLocationZipCode(); ?></td>
+                <td><?php echo $paymentJoin[$i]->getCustomer()->getContactsEmail(); ?></td>
+                <td><?php echo $paymentJoin[$i]->getCustomer()->getContactsPhoneNumber(); ?></td>
+            </tr>
+        <?php endif; endfor; ?>
     </tbody>
 </table>
