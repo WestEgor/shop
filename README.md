@@ -5,6 +5,7 @@ This project represents a simple interaction with PostgreSQL via PHP.
 * PHP 8.0;
 * PDO;
 * postgresql 12.0;
+* phpstan;
 * bootstrap.
 ### Project structure
 + Diagram of classes [click](https://github.com/WestEgor/shop/blob/master/images/diagrams.PNG)
