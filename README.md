@@ -6,6 +6,7 @@ This project represents a simple interaction with PostgreSQL via PHP.
 * PDO;
 * postgresql 12.0;
 * phpstan;
+* phpcs;
 * bootstrap.
 ### Project structure
 + Diagram of classes [click](https://github.com/WestEgor/shop/blob/master/images/diagrams.PNG)
