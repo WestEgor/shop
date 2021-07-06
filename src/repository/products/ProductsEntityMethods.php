@@ -9,6 +9,7 @@ use PDO;
 /**
  * Class ProductsEntityMethods
  * Class which have static methods to manipulate ProductsEntities methods
+ *
  * @package repository\products
  */
 class ProductsEntityMethods
@@ -16,10 +17,11 @@ class ProductsEntityMethods
 
     /**
      * Methods, that create record in 'products' entity in @param string $name Product name
-     * @param int $quantity Product quantity
-     * @param float $price Product price
-     * @param float $msrp Product msrp
-     * @return bool
+     *
+     * @param   int   $quantity Product quantity
+     * @param   float $price    Product price
+     * @param   float $msrp     Product msrp
+     * @return  bool
      * return TRUE iff record was created
      * return FALSE if records was not create
      * @package public
@@ -34,7 +36,8 @@ class ProductsEntityMethods
 
     /**
      * Methods, that get all records of 'products' entity in @param PDO $pdo instance of PDO
-     * @return array|false
+     *
+     * @return  array|false
      * return array iff records exist in table
      * return FALSE if no records in table
      * @package public
@@ -47,8 +50,9 @@ class ProductsEntityMethods
 
     /**
      * Methods, that get record with specified key of 'products' entity in @param PDO $pdo instance of PDO
-     * @param int $id Product id
-     * @return object|false
+     *
+     * @param   int $id Product id
+     * @return  object|false
      * return object iff record with specified id exist in table
      * return FALSE if no record with specified in table
      * @package public
@@ -61,19 +65,25 @@ class ProductsEntityMethods
 
     /**
      * Methods, that update record in 'product' entity in @param PDO $pdo instance of PDO
-     * @param int $id Product id
-     * @param string $name Product name
-     * @param int $quantity Product quantity
-     * @param float $price Product price
-     * @param float $msrp Product msrp
-     * @return bool
+     *
+     * @param   int    $id       Product id
+     * @param   string $name     Product name
+     * @param   int    $quantity Product quantity
+     * @param   float  $price    Product price
+     * @param   float  $msrp     Product msrp
+     * @return  bool
      * return TRUE iff record was updated
      * return FALSE if records was not updated
      * @package public
      */
-    public static function updateProduct(PDO $pdo, int $id,
-                                         string $name, int $quantity, float $price, float $msrp): bool
-    {
+    public static function updateProduct(
+        PDO $pdo,
+        int $id,
+        string $name,
+        int $quantity,
+        float $price,
+        float $msrp
+    ): bool {
         $product = new Product($name, $quantity, $price, $msrp, $id);
         $productEntity = new ProductsEntity($pdo);
         return $productEntity->update($product);
@@ -81,7 +91,8 @@ class ProductsEntityMethods
 
     /**
      * Methods, that delete record in 'product' entity in @param int $id Product id
-     * @return bool
+     *
+     * @return  bool
      * return TRUE iff record was deleted
      * return FALSE if records was not deleted
      * @package public
@@ -92,5 +103,4 @@ class ProductsEntityMethods
         $deleteProd = new ProductsEntity($pdo);
         return $deleteProd->delete($id);
     }
-
 }

@@ -8,18 +8,21 @@ use PDOStatement;
 /**
  * Class AbstractRepository
  * Implements RepositoryInterface
+ *
  * @package repository
  */
 abstract class AbstractRepository implements RepositoryInterface
 {
     /**
      * PDO instance
+     *
      * @var PDO
      */
     private PDO $pdo;
 
     /**
      * AbstractRepository constructor.
+     *
      * @param PDO $pdo instance of PDO
      */
     public function __construct(PDO $pdo)
@@ -29,78 +32,82 @@ abstract class AbstractRepository implements RepositoryInterface
 
     /**
      * Abstract method
+     *
      * @return string query of selecting all
      */
-    public abstract function readAllQuery(): string;
+    abstract public function readAllQuery(): string;
 
     /**
      * Abstract method
+     *
      * @return string query of selecting with specified id
      */
-    public abstract function readByKeyQuery(): string;
+    abstract public function readByKeyQuery(): string;
 
     /**
      * Abstract method
+     *
      * @return string query of inserting in table a record
      */
-    public abstract function createQuery(): string;
+    abstract public function createQuery(): string;
 
     /**
      * Abstract method
+     *
      * @return string query of updating a record in table
      */
-    public abstract function updateQuery(): string;
+    abstract public function updateQuery(): string;
 
     /**
      * Abstract method
+     *
      * @return string query of deleting a record in table
      */
-    public abstract function deleteQuery(): string;
-
+    abstract public function deleteQuery(): string;
 
     /**
      * Abstract method
      * Work with statement to create record in table
-     * @param PDOStatement $statement statement of prepared query
-     * @param object $object object of entity
+     *
+     * @param  PDOStatement $statement statement of prepared query
+     * @param  object       $object    object of entity
      * @return bool
      * return TRUE iff record was created in table
      * return FALSE if record was not created in table
      */
-    public abstract function createStatement(PDOStatement $statement, object $object): bool;
+    abstract public function createStatement(PDOStatement $statement, object $object): bool;
 
     /**
      * Abstract method
      * Work with statement to get all records from table
      *
-     * @param PDOStatement $statement statement of query
+     * @param  PDOStatement $statement statement of query
      * @return array|false
      * return array iff records exist in table
      * return FALSE if no records in table
      */
-    public abstract function readAllStatement(PDOStatement $statement): array|false;
+    abstract public function readAllStatement(PDOStatement $statement): array|false;
 
     /**
      * Abstract method
      * Work with statement to get record from specified ID table with
      *
-     * @param PDOStatement $statement statement of prepared query
-     * @param int $key id that searching
+     * @param  PDOStatement $statement statement of prepared query
+     * @param  int          $key       id that searching
      * @return object|false
      * return object iff record with specified id exist in table
      * return FALSE if no record with specified in table
      */
-    public abstract function readByKeyStatement(PDOStatement $statement, int $key): object|false;
+    abstract public  function readByKeyStatement(PDOStatement $statement, int $key): object|false;
 
     /**
-     * @param PDOStatement $statement statement of prepared query
-     * @param object $object object of entity
+     * @param  PDOStatement $statement statement of prepared query
+     * @param  object       $object    object of entity
      * @return bool
      * return TRUE iff record was updated
      * return FALSE if records was not updated
      */
-    public abstract function updateStatement(PDOStatement $statement, object $object): bool;
-
+    abstract public function updateStatement(PDOStatement $statement, object $object): bool;
 
     /**
      * Implementing RepositoryInterface
@@ -110,13 +117,16 @@ abstract class AbstractRepository implements RepositoryInterface
     public function readAll(): array|false
     {
         $statement = $this->pdo->query($this->readAllQuery());
-        if (!$statement) return false;
+        if (!$statement) {
+            return false;
+        }
         return $this->readAllStatement($statement);
     }
 
     /**
      * Implementing RepositoryInterface
-     * @param int $key
+     *
+     * @param  int $key
      * @return object|false
      */
     public function read(int $key): object|false
@@ -130,7 +140,8 @@ abstract class AbstractRepository implements RepositoryInterface
 
     /**
      * Implementing RepositoryInterface
-     * @param object $object
+     *
+     * @param  object $object
      * @return bool
      */
     public function create(object $object): bool
@@ -141,7 +152,8 @@ abstract class AbstractRepository implements RepositoryInterface
 
     /**
      * Implementing RepositoryInterface Method
-     * @param object $object
+     *
+     * @param  object $object
      * @return bool
      */
     public function update(object $object): bool
@@ -152,7 +164,8 @@ abstract class AbstractRepository implements RepositoryInterface
 
     /**
      * Implementing RepositoryInterface Method
-     * @param int $key
+     *
+     * @param  int $key
      * @return bool
      */
     public function delete(int $key): bool

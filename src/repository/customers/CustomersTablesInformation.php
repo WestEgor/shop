@@ -8,6 +8,7 @@ use repository\AbstractColumnsTablesInformation;
  * Class CustomersTablesInformation
  * Extends AbstractColumnsTablesInformation
  * Contain information about entity 'customers' columns
+ *
  * @package repository\customers
  */
 class CustomersTablesInformation extends AbstractColumnsTablesInformation
@@ -15,6 +16,7 @@ class CustomersTablesInformation extends AbstractColumnsTablesInformation
 
     /**
      * Implementation of abstract method
+     *
      * @return string get all names of columns from table 'customers'
      */
     public function getColumnsQuery(): string

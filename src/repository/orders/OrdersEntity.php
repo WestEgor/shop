@@ -13,6 +13,7 @@ use util\DateMethods;
  * Class OrdersEntity
  * Extends AbstractRepository
  * Class for work with entity 'orders'
+ *
  * @package repository\orders
  */
 class OrdersEntity extends AbstractRepository
@@ -20,6 +21,7 @@ class OrdersEntity extends AbstractRepository
 
     /**
      * Implementation of abstract method
+     *
      * @return string query of insert in 'orders'
      */
     public function createQuery(): string
@@ -30,6 +32,7 @@ class OrdersEntity extends AbstractRepository
 
     /**
      * Implementation of abstract method
+     *
      * @return string query of select all in 'orders'
      */
     public function readAllQuery(): string
@@ -39,6 +42,7 @@ class OrdersEntity extends AbstractRepository
 
     /**
      * Implementation of abstract method
+     *
      * @return string query of select all in 'orders' with id
      */
     public function readByKeyQuery(): string
@@ -48,6 +52,7 @@ class OrdersEntity extends AbstractRepository
 
     /**
      * Implementation of abstract method
+     *
      * @return string query of update in 'orders'
      */
     public function updateQuery(): string
@@ -60,6 +65,7 @@ class OrdersEntity extends AbstractRepository
 
     /**
      * Implementation of abstract method
+     *
      * @return string query of delete in 'orders' with
      */
     public function deleteQuery(): string
@@ -69,8 +75,9 @@ class OrdersEntity extends AbstractRepository
 
     /**
      * Implementation of abstract method
-     * @param PDOStatement $statement
-     * @param object $object
+     *
+     * @param  PDOStatement $statement
+     * @param  object       $object
      * @return bool
      */
     public function createStatement(PDOStatement $statement, object $object): bool
@@ -88,7 +95,8 @@ class OrdersEntity extends AbstractRepository
 
     /**
      * Implementation of abstract method
-     * @param PDOStatement $statement
+     *
+     * @param  PDOStatement $statement
      * @return array|false
      */
     public function readAllStatement(PDOStatement $statement): array|false
@@ -109,23 +117,27 @@ class OrdersEntity extends AbstractRepository
 
     /**
      * Implementation of abstract method
-     * @param PDOStatement $statement
-     * @param int $key
+     *
+     * @param  PDOStatement $statement
+     * @param  int          $key
      * @return Order|false
      */
     public function readByKeyStatement(PDOStatement $statement, int $key): object|false
     {
         $order = new Order();
         $obj = $statement->fetchObject();
-        if (!$obj) return false;
+        if (!$obj) {
+            return false;
+        }
         $order->setAll($obj);
         return $order;
     }
 
     /**
      * Implementation of abstract method
-     * @param PDOStatement $statement
-     * @param object $object
+     *
+     * @param  PDOStatement $statement
+     * @param  object       $object
      * @return bool
      */
     public function updateStatement(PDOStatement $statement, object $object): bool

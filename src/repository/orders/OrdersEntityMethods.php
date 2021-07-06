@@ -25,9 +25,13 @@ class OrdersEntityMethods
      * return TRUE iff record was created
      * return FALSE if records was not create
      */
-    public static function createOrder(DateTime $orderDate, DateTime $requiredDate,
-                                       string $status, string $comments, int $customersId): bool
-    {
+    public static function createOrder(
+        DateTime $orderDate,
+        DateTime $requiredDate,
+        string $status,
+        string $comments,
+        int $customersId
+    ): bool {
         $pdo = Connection::get()->getConnect();
         $order = new Order($orderDate, $requiredDate, $status, $comments, $customersId);
         $ordersEntity = new OrdersEntity($pdo);
@@ -74,9 +78,15 @@ class OrdersEntityMethods
      * return TRUE iff record was updated
      * return FALSE if records was not updated
      */
-    public static function updateOrder(PDO $pdo, int $id, DateTime $orderDate, DateTime $requiredDate,
-                                       string $status, string $comments, int $customersId): bool
-    {
+    public static function updateOrder(
+        PDO $pdo,
+        int $id,
+        DateTime $orderDate,
+        DateTime $requiredDate,
+        string $status,
+        string $comments,
+        int $customersId
+    ): bool {
         $order = new Order($orderDate, $requiredDate, $status, $comments, $customersId, $id);
         $ordersEntity = new OrdersEntity($pdo);
         return $ordersEntity->update($order);
@@ -96,5 +106,4 @@ class OrdersEntityMethods
         $ordersEntity = new OrdersEntity($pdo);
         return $ordersEntity->delete($id);
     }
-
 }

@@ -1,6 +1,5 @@
 <?php
 
-
 namespace repository\customers;
 
 use model\Customer;
@@ -15,6 +14,7 @@ use repository\AbstractRepository;
  * Class CustomersEntity
  * Extends AbstractRepository
  * Class for work with entity 'customers'
+ *
  * @package repository\customers
  */
 class CustomersEntity extends AbstractRepository
@@ -22,6 +22,7 @@ class CustomersEntity extends AbstractRepository
 
     /**
      * Implementation of abstract method
+     *
      * @return string query of insert in 'customers'
      */
     public function createQuery(): string
@@ -32,6 +33,7 @@ class CustomersEntity extends AbstractRepository
 
     /**
      * Implementation of abstract method
+     *
      * @return string query of select all in 'customers'
      */
     public function readAllQuery(): string
@@ -41,6 +43,7 @@ class CustomersEntity extends AbstractRepository
 
     /**
      * Implementation of abstract method
+     *
      * @return string query of select all in 'customers' with id
      */
     public function readByKeyQuery(): string
@@ -50,6 +53,7 @@ class CustomersEntity extends AbstractRepository
 
     /**
      * Implementation of abstract method
+     *
      * @return string query of update in 'customers'
      */
     public function updateQuery(): string
@@ -63,6 +67,7 @@ class CustomersEntity extends AbstractRepository
 
     /**
      * Implementation of abstract method
+     *
      * @return string query of delete in 'customers' with
      */
     public function deleteQuery(): string
@@ -72,8 +77,9 @@ class CustomersEntity extends AbstractRepository
 
     /**
      * Implementation of abstract method
-     * @param PDOStatement $statement
-     * @param object $object
+     *
+     * @param  PDOStatement $statement
+     * @param  object       $object
      * @return bool
      */
     public function createStatement(PDOStatement $statement, object $object): bool
@@ -95,7 +101,8 @@ class CustomersEntity extends AbstractRepository
 
     /**
      * Implementation of abstract method
-     * @param PDOStatement $statement
+     *
+     * @param  PDOStatement $statement
      * @return array|false
      */
     public function readAllStatement(PDOStatement $statement): array|false
@@ -123,23 +130,27 @@ class CustomersEntity extends AbstractRepository
 
     /**
      * Implementation of abstract method
-     * @param PDOStatement $statement
-     * @param int $key
+     *
+     * @param  PDOStatement $statement
+     * @param  int          $key
      * @return object|false
      */
     public function readByKeyStatement(PDOStatement $statement, int $key): object|false
     {
         $customer = new Customer();
         $obj = $statement->fetchObject();
-        if (!$obj) return false;
+        if (!$obj) {
+            return false;
+        }
         $customer->setAll($obj);
         return $customer;
     }
 
     /**
      * Implementation of abstract method
-     * @param PDOStatement $statement
-     * @param object $object
+     *
+     * @param  PDOStatement $statement
+     * @param  object       $object
      * @return bool
      */
     public function updateStatement(PDOStatement $statement, object $object): bool

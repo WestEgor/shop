@@ -10,6 +10,7 @@ use PDO;
 /**
  * Class PaymentsEntityMethods
  * Class which have static methods to manipulate PaymentsEntities methods
+ *
  * @package repository\products
  */
 class PaymentsEntityMethods
@@ -17,9 +18,10 @@ class PaymentsEntityMethods
 
     /**
      * Methods, that create record in 'payments' entity in @param int $customersId
-     * @param float $amount
-     * @param DateTime $paymentDate
-     * @return bool
+     *
+     * @param   float    $amount
+     * @param   DateTime $paymentDate
+     * @return  bool
      * return TRUE iff record was created
      * return FALSE if records was not create
      * @package public
@@ -34,7 +36,8 @@ class PaymentsEntityMethods
 
     /**
      * Methods, that get all records of 'payments' entity in @param PDO $pdo
-     * @return array|false
+     *
+     * @return  array|false
      * return array iff records exist in table
      * return FALSE if no records in table
      * @package public
@@ -47,8 +50,9 @@ class PaymentsEntityMethods
 
     /**
      * Methods, that get record with specified key of 'payment' entity in @param PDO $pdo instance of @PDO
-     * @param int $id @Product id
-     * @return object|false
+     *
+     * @param   int $id @Product id
+     * @return  object|false
      * return object iff record with specified id exist in table
      * return FALSE if no record with specified in table
      * @package public
@@ -61,18 +65,23 @@ class PaymentsEntityMethods
 
     /**
      * Methods, that update record in 'payments' entity in @param PDO $pdo
-     * @param int $id
-     * @param int $customersId
-     * @param float $amount
-     * @param DateTime $paymentDate
-     * @return bool
+     *
+     * @param   int      $id
+     * @param   int      $customersId
+     * @param   float    $amount
+     * @param   DateTime $paymentDate
+     * @return  bool
      * return TRUE iff record was updated
      * return FALSE if records was not updated
      * @package public
      */
-    public static function updatePayment(PDO $pdo, int $id, int $customersId,
-                                         float $amount, DateTime $paymentDate): bool
-    {
+    public static function updatePayment(
+        PDO $pdo,
+        int $id,
+        int $customersId,
+        float $amount,
+        DateTime $paymentDate
+    ): bool {
         $payment = new Payment($amount, $paymentDate, $customersId, $id);
         $paymentEntity = new PaymentsEntity($pdo);
         return $paymentEntity->update($payment);
@@ -81,7 +90,8 @@ class PaymentsEntityMethods
 
     /**
      * Methods, that delete record in 'payments' entity in @param int $id
-     * @return bool
+     *
+     * @return  bool
      * return TRUE iff record was deleted
      * return FALSE if records was not deleted
      * @package public
@@ -92,6 +102,4 @@ class PaymentsEntityMethods
         $paymentEntity = new PaymentsEntity($pdo);
         return $paymentEntity->delete($id);
     }
-
-
 }

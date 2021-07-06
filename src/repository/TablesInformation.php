@@ -7,6 +7,7 @@ use PDO;
 /**
  * Class TablesInformation
  * Get information from all tables in scheme
+ *
  * @package repository
  */
 class TablesInformation
@@ -14,12 +15,14 @@ class TablesInformation
 
     /**
      * Contain instance of PDO
+     *
      * @var PDO
      */
     protected PDO $pdo;
 
     /**
      * TablesInformation constructor
+     *
      * @param PDO $pdo instance of PDO
      */
     public function __construct(PDO $pdo)
@@ -38,6 +41,7 @@ class TablesInformation
 
     /**
      * Method to get all tables from scheme
+     *
      * @return array|false
      * return ARRAY iff minimum 1 table exists
      * return FALSE if no tables in scheme
@@ -49,9 +53,9 @@ class TablesInformation
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $tableList[] = $row['table_name'];
         }
-        if (count($tableList) === 0) return false;
+        if (count($tableList) === 0) {
+            return false;
+        }
         return $tableList;
     }
-
-
 }

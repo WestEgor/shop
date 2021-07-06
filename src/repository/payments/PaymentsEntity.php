@@ -1,8 +1,6 @@
 <?php
 
-
 namespace repository\payments;
-
 
 use DateTime;
 use model\Customer;
@@ -19,6 +17,7 @@ class PaymentsEntity extends AbstractRepository
 {
     /**
      * Implementation of abstract method
+     *
      * @return string query of select all in 'payments'
      */
     public function readAllQuery(): string
@@ -28,6 +27,7 @@ class PaymentsEntity extends AbstractRepository
 
     /**
      * Implementation of abstract method
+     *
      * @return string query of select all in 'payments' with id
      */
     public function readByKeyQuery(): string
@@ -37,6 +37,7 @@ class PaymentsEntity extends AbstractRepository
 
     /**
      * Implementation of abstract method
+     *
      * @return string query of insert in 'payments'
      */
     public function createQuery(): string
@@ -47,6 +48,7 @@ class PaymentsEntity extends AbstractRepository
 
     /**
      * Implementation of abstract method
+     *
      * @return string query of update in 'payments'
      */
     public function updateQuery(): string
@@ -58,6 +60,7 @@ class PaymentsEntity extends AbstractRepository
 
     /**
      * Implementation of abstract method
+     *
      * @return string query of delete in 'payments' with
      */
     public function deleteQuery(): string
@@ -67,8 +70,9 @@ class PaymentsEntity extends AbstractRepository
 
     /**
      * Implementation of abstract method
-     * @param PDOStatement $statement
-     * @param object $object
+     *
+     * @param  PDOStatement $statement
+     * @param  object       $object
      * @return bool
      */
     public function createStatement(PDOStatement $statement, object $object): bool
@@ -84,7 +88,8 @@ class PaymentsEntity extends AbstractRepository
 
     /**
      * Implementation of abstract method
-     * @param PDOStatement $statement
+     *
+     * @param  PDOStatement $statement
      * @return array|false
      */
     public function readAllStatement(PDOStatement $statement): array|false
@@ -103,23 +108,27 @@ class PaymentsEntity extends AbstractRepository
 
     /**
      * Implementation of abstract method
-     * @param PDOStatement $statement
-     * @param int $key
+     *
+     * @param  PDOStatement $statement
+     * @param  int          $key
      * @return object|false
      */
     public function readByKeyStatement(PDOStatement $statement, int $key): object|false
     {
         $payment = new Payment();
         $obj = $statement->fetchObject();
-        if (!$obj) return false;
+        if (!$obj) {
+            return false;
+        }
         $payment->setAll($obj);
         return $payment;
     }
 
     /**
      * Implementation of abstract method
-     * @param PDOStatement $statement
-     * @param object $object
+     *
+     * @param  PDOStatement $statement
+     * @param  object       $object
      * @return bool
      */
     public function updateStatement(PDOStatement $statement, object $object): bool
@@ -147,7 +156,8 @@ class PaymentsEntity extends AbstractRepository
 
     /**
      * Left inner join entities 'payments' and 'customers'
-     * @param PDO $pdo
+     *
+     * @param  PDO $pdo
      * @return array|false
      */
     public function getFullInformationAboutPayments(PDO $pdo): array|false

@@ -11,6 +11,7 @@ use PDO;
  * Class ProductsEntity
  * Extends AbstractRepository
  * Class for work with entity 'products'
+ *
  * @package repository\products
  */
 class ProductsEntity extends AbstractRepository
@@ -18,6 +19,7 @@ class ProductsEntity extends AbstractRepository
 
     /**
      * Implementation of abstract method
+     *
      * @return string query of insert in 'products'
      */
     public function createQuery(): string
@@ -28,6 +30,7 @@ class ProductsEntity extends AbstractRepository
 
     /**
      * Implementation of abstract method
+     *
      * @return string query of select all in 'products'
      */
     public function readAllQuery(): string
@@ -37,6 +40,7 @@ class ProductsEntity extends AbstractRepository
 
     /**
      * Implementation of abstract method
+     *
      * @return string query of select all in 'products' with id
      */
     public function readByKeyQuery(): string
@@ -46,6 +50,7 @@ class ProductsEntity extends AbstractRepository
 
     /**
      * Implementation of abstract method
+     *
      * @return string query of update in 'products'
      */
     public function updateQuery(): string
@@ -57,6 +62,7 @@ class ProductsEntity extends AbstractRepository
 
     /**
      * Implementation of abstract method
+     *
      * @return string query of delete in 'products' with id
      */
     public function deleteQuery(): string
@@ -67,7 +73,8 @@ class ProductsEntity extends AbstractRepository
 
     /**
      * Implementation of abstract method
-     * @param PDOStatement $statement
+     *
+     * @param  PDOStatement $statement
      * @return array|false
      */
     public function readAllStatement(PDOStatement $statement): array|false
@@ -87,23 +94,27 @@ class ProductsEntity extends AbstractRepository
 
     /**
      * Implementation of abstract method
-     * @param PDOStatement $statement
-     * @param int $key
+     *
+     * @param  PDOStatement $statement
+     * @param  int          $key
      * @return Product|false
      */
     public function readByKeyStatement(PDOStatement $statement, int $key): object|false
     {
         $product = new Product();
         $obj = $statement->fetchObject();
-        if (!$obj) return false;
+        if (!$obj) {
+            return false;
+        }
         $product->setAll($obj);
         return $product;
     }
 
     /**
      * Implementation of abstract method
-     * @param PDOStatement $statement
-     * @param object $object
+     *
+     * @param  PDOStatement $statement
+     * @param  object       $object
      * @return bool
      */
     public function createStatement(PDOStatement $statement, object $object): bool
@@ -118,11 +129,11 @@ class ProductsEntity extends AbstractRepository
         return false;
     }
 
-
     /**
      * Implementation of abstract method
-     * @param PDOStatement $statement
-     * @param object $object
+     *
+     * @param  PDOStatement $statement
+     * @param  object       $object
      * @return bool
      */
     public function updateStatement(PDOStatement $statement, object $object): bool

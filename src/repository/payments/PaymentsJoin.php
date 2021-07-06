@@ -8,6 +8,7 @@ use model\Payment;
 /**
  * Class PaymentsJoin
  * Class for join entities 'payments' and 'customers'
+ *
  * @package repository\payments
  */
 class PaymentsJoin
@@ -24,7 +25,8 @@ class PaymentsJoin
 
     /**
      * PaymentsJoin parameterized constructor.
-     * @param Payment $payment
+     *
+     * @param Payment  $payment
      * @param Customer $customer
      */
     public function __construct(Payment $payment, Customer $customer)
@@ -64,8 +66,4 @@ class PaymentsJoin
     {
         $this->customer = $customer;
     }
-
-
-
-
 }

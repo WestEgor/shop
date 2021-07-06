@@ -13,6 +13,7 @@ use repository\AbstractRepository;
  * Class OrderDetailsEntity
  * Extends AbstractRepository
  * Class for work with entity 'order_details'
+ *
  * @package repository\order_details
  */
 class OrderDetailsEntity extends AbstractRepository
@@ -20,6 +21,7 @@ class OrderDetailsEntity extends AbstractRepository
 
     /**
      * Implementation of abstract method
+     *
      * @return string query of select all in 'order_details'
      */
     public function readAllQuery(): string
@@ -29,6 +31,7 @@ class OrderDetailsEntity extends AbstractRepository
 
     /**
      * Implementation of abstract method
+     *
      * @return string query of select all in 'order_details' with id
      */
     public function readByKeyQuery(): string
@@ -38,6 +41,7 @@ class OrderDetailsEntity extends AbstractRepository
 
     /**
      * Implementation of abstract method
+     *
      * @return string query of insert in 'order_details'
      */
     public function createQuery(): string
@@ -48,6 +52,7 @@ class OrderDetailsEntity extends AbstractRepository
 
     /**
      * Implementation of abstract method
+     *
      * @return string query of update in 'order_details'
      */
     public function updateQuery(): string
@@ -60,6 +65,7 @@ class OrderDetailsEntity extends AbstractRepository
 
     /**
      * Implementation of abstract method
+     *
      * @return string query of delete in 'order_details' with id
      */
     public function deleteQuery(): string
@@ -69,8 +75,9 @@ class OrderDetailsEntity extends AbstractRepository
 
     /**
      * Implementation of abstract method
-     * @param PDOStatement $statement
-     * @param object $object
+     *
+     * @param  PDOStatement $statement
+     * @param  object       $object
      * @return bool
      */
     public function createStatement(PDOStatement $statement, object $object): bool
@@ -87,11 +94,11 @@ class OrderDetailsEntity extends AbstractRepository
 
     /**
      * Implementation of abstract method
-     * @param PDOStatement $statement
+     *
+     * @param  PDOStatement $statement
      * @return array|false
      */
-    public
-    function readAllStatement(PDOStatement $statement): array|false
+    public function readAllStatement(PDOStatement $statement): array|false
     {
         $orderDetailsArray = [];
         while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
@@ -100,8 +107,7 @@ class OrderDetailsEntity extends AbstractRepository
             $orderId = $row['orders_id'];
             $quantityOrdered = $row['quantity_ordered'];
             $price = $row['price'];
-            $order = OrderDetails::parameterizedConstructor($productId, $orderId, $quantityOrdered, $price);
-            $order->setId($id);
+            $order = new OrderDetails($productId, $orderId, $quantityOrdered, $price, $id);
             $orderDetailsArray[] = $order;
         }
         return $orderDetailsArray;
@@ -109,28 +115,30 @@ class OrderDetailsEntity extends AbstractRepository
 
     /**
      * Implementation of abstract method
-     * @param PDOStatement $statement
-     * @param int $key
+     *
+     * @param  PDOStatement $statement
+     * @param  int          $key
      * @return object|false
      */
-    public
-    function readByKeyStatement(PDOStatement $statement, int $key): object|false
+    public function readByKeyStatement(PDOStatement $statement, int $key): object|false
     {
         $orderDetails = new OrderDetails();
         $obj = $statement->fetchObject();
-        if (!$obj) return false;
+        if (!$obj) {
+            return false;
+        }
         $orderDetails->setAll($obj);
         return $orderDetails;
     }
 
     /**
      * Implementation of abstract method
-     * @param PDOStatement $statement
-     * @param object $object
+     *
+     * @param  PDOStatement $statement
+     * @param  object       $object
      * @return bool
      */
-    public
-    function updateStatement(PDOStatement $statement, object $object): bool
+    public function updateStatement(PDOStatement $statement, object $object): bool
     {
         if ($object instanceof OrderDetails) {
             $statement->bindValue(':products_id', $object->getProductId());

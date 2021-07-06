@@ -9,12 +9,14 @@ abstract class AbstractColumnsTablesInformation extends TablesInformation
 
     /**
      * Abstract method
+     *
      * @return string get all names of columns from table query
      */
     abstract public function getColumnsQuery(): string;
 
     /**
      * Method to get all columns of tables
+     *
      * @return array|false
      * return ARRAY if columns exist
      * return FALSE if no columns in table
@@ -26,8 +28,9 @@ abstract class AbstractColumnsTablesInformation extends TablesInformation
         while ($row = $stmt->fetch(PDO::FETCH_NAMED)) {
             $tableList[] = $row['column_name'];
         }
-        if (count($tableList) === 0) return false;
+        if (count($tableList) === 0) {
+            return false;
+        }
         return $tableList;
     }
-
 }
