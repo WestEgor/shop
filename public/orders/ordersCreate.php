@@ -59,43 +59,43 @@ if (isset($_POST['create_submit'])) :
         session_destroy();
         echo '<META HTTP-EQUIV="refresh" content="0;URL=orders.php">';
         ?>
-    <?php else: ?>
+    <?php else : ?>
         <div class="alert alert-danger" role="alert">
             <?php echo $errorMessage; ?>
         </div>
-    <?php
+        <?php
     endif;
 endif;
 ?>
 
 
-<form action="<? echo $_SERVER['PHP_SELF'] ?>" method="POST">
+<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
     <div class="row g-3 align-items-center" style="margin-left: 5px">
 
         <div class="col-auto" style="margin-bottom:10px; margin-top: 15px">
             <label for="pprice" class="form-label" style="margin-top: 15px">Order date:</label>
             <input type="date" id="pprice" name="order_date" class="form-control"
-                   value="<?php if ($orderDate) echo $orderDate->format('Y-m-d') ?>">
+                   value="<?php echo $orderDate->format('Y-m-d'); ?>">
         </div>
         <div class="col-auto" style="margin-bottom:10px; margin-top: 15px">
             <label for="pprice" class="form-label" style="margin-top: 15px">Required date:</label>
             <input type="date" id="pprice" name="required_date" class="form-control"
-                   value="<?php if ($requiredDate) echo $requiredDate->format('Y-m-d') ?>">
+                   value="<?php echo $requiredDate->format('Y-m-d'); ?>">
         </div>
         <div class="col-auto" style="margin-bottom:10px; margin-top: 15px">
             <label for="pquantity" class="form-label" style="margin-top: 15px">Status:</label>
             <input type="text" id="pquantity" name="status" class="form-control"
-                   value="<?php if ($status) echo $status ?>">
+                   value="<?php echo $status; ?>">
         </div>
         <div class="col-auto" style="margin-bottom:10px; margin-top: 15px">
             <label for="pquantity" class="form-label" style="margin-top: 15px">Comments:</label>
             <input type="text" id="pquantity" name="comments" class="form-control"
-                   value="<?php if ($comments) echo $comments ?>">
+                   value="<?php  echo $comments; ?>">
         </div>
         <div class="col-auto" style="margin-bottom:10px; margin-top: 15px">
             <label for="pname" class="form-label" style="margin-top: 15px">Customers ID:</label>
             <input type="text" id="pname" name="customers_id" class="form-control"
-                   value="<?php if ($customersId) echo $customersId ?>">
+                   value="<?php echo $customersId; ?>">
         </div>
     </div>
     <button type="submit" name="create_submit" class="btn btn-success"

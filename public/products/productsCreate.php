@@ -44,37 +44,37 @@ if (isset($_POST['create_submit'])) :
         session_destroy();
         echo '<META HTTP-EQUIV="refresh" content="0;URL=products.php">';
         ?>
-    <?php else: ?>
+    <?php else : ?>
         <div class="alert alert-danger" role="alert">
             <?php echo $errorMessage; ?>
         </div>
-    <?php
+        <?php
     endif;
 endif;
 ?>
 
 
-<form action="<? echo $_SERVER['PHP_SELF'] ?>" method="POST">
+<form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST">
     <div class="row g-3 align-items-center" style="margin-left: 5px">
         <div class="col-auto" style="margin-bottom:10px; margin-top: 15px">
             <label for="pname" class="form-label" style="margin-top: 15px">Name of product:</label>
             <input type="text" id="pname" name="product_name" class="form-control"
-                   value="<?php if($name) echo $name?>">
+                   value="<?php echo $name;?>">
         </div>
         <div class="col-auto" style="margin-bottom:10px; margin-top: 15px">
             <label for="pquantity" class="form-label" style="margin-top: 15px">Quantity:</label>
             <input type="text" id="pquantity" name="product_quantity" class="form-control"
-                   value="<?php if($quantity) echo $quantity ?>">
+                   value="<?php echo $quantity; ?>">
         </div>
         <div class="col-auto" style="margin-bottom:10px; margin-top: 15px">
             <label for="pprice" class="form-label" style="margin-top: 15px">Price:</label>
             <input type="text" id="pprice" name="product_price" class="form-control"
-                   value="<?php if($price) echo $price  ?>">
+                   value="<?php echo $price;  ?>">
         </div>
         <div class="col-auto" style="margin-bottom:10px; margin-top: 15px">
             <label for="pmsrp" class="form-label" style="margin-top: 15px">MSRP:</label>
             <input type="text" id="pmsrp" name="product_msrp" class="form-control"
-                   value="<?php if($msrp) echo $msrp  ?>">
+                   value="<?php echo $msrp;  ?>">
         </div>
     </div>
     <button type="submit" name="create_submit" class="btn btn-success"

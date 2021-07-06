@@ -12,7 +12,7 @@ $pdo = Connection::get()->getConnect();
 $paymentsEntity = new PaymentsEntity($pdo);
 $paymentJoin = $paymentsEntity->getFullInformationAboutPayments($pdo);
 $paymentJoinLength = 0;
-if (is_array($paymentJoin)):
+if (is_array($paymentJoin)) :
     $paymentJoinLength = count($paymentJoin);
 endif;
 ?>
@@ -38,7 +38,7 @@ endif;
     <tbody>
     <?php
     foreach ($paymentJoin as $pj) :
-    /*for ($i = 0; $i < $paymentJoinLength; $i++) :*/
+        /*for ($i = 0; $i < $paymentJoinLength; $i++) :*/
         if ($pj instanceof PaymentsJoin) :
             ?>
             <tr>
@@ -56,6 +56,8 @@ endif;
                 <td><?php echo $pj->getCustomer()->getContactsEmail(); ?></td>
                 <td><?php echo $pj->getCustomer()->getContactsPhoneNumber(); ?></td>
             </tr>
-        <?php endif; /*endfor;*/ endforeach; ?>
+            <?php
+        endif; /*endfor;*/
+    endforeach; ?>
     </tbody>
 </table>

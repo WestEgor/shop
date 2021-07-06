@@ -31,15 +31,15 @@ use repository\customers\CustomersEntityMethods;
     </form>
 </div>
 <?php
-if (isset($_GET['submit'])):
+if (isset($_GET['submit'])) :
     $id = $_GET['search_by_id_customers'];
-    if (filter_var($id, FILTER_VALIDATE_INT)):
+    if (filter_var($id, FILTER_VALIDATE_INT)) :
         $pdo = Connection::get()->getConnect();
-        if ($customer = CustomersEntityMethods::readCustomersByKey($pdo, $id)):?>
+        if ($customer = CustomersEntityMethods::readCustomersByKey($pdo, $id)) :?>
             <table class="table table-striped" style="margin-left: 3px">
                 <thead>
                 <tr>
-                    <?php foreach ($col as $column):
+                    <?php foreach ($col as $column) :
                         ?>
                         <th scope="col"><?php echo $column ?>
                         </th>
@@ -49,7 +49,7 @@ if (isset($_GET['submit'])):
                 </thead>
                 <tbody>
                 <tr>
-                    <?php if ($customer instanceof Customer): ?>
+                    <?php if ($customer instanceof Customer) : ?>
                         <th scope="row"><?php echo $customer->getId(); ?></th>
                         <td><?php echo $customer->getPersonName(); ?></td>
                         <td><?php echo $customer->getPersonLastName(); ?></td>
@@ -64,17 +64,17 @@ if (isset($_GET['submit'])):
                 </tr>
                 </tbody>
             </table>
-        <?php else: ?>
+        <?php else : ?>
             <div class="alert alert-danger" role="alert">
                 <?php echo 'Customer with chosen ID doesn\'t exist'; ?>
             </div>
-        <?php
+            <?php
         endif;
-    else:?>
+    else :?>
         <div class="alert alert-danger" role="alert">
             <?php echo 'ID have to be integer value(without comma)'; ?>
         </div>
-    <?php
+        <?php
     endif;
 endif;
 session_destroy();

@@ -31,15 +31,15 @@ use repository\products\ProductsEntityMethods;
     </form>
 </div>
 <?php
-if (isset($_GET['submit'])):
+if (isset($_GET['submit'])) :
     $id = $_GET['search_by_id_products'];
-    if (filter_var($id, FILTER_VALIDATE_INT)):
+    if (filter_var($id, FILTER_VALIDATE_INT)) :
         $pdo = Connection::get()->getConnect();
-        if ($product = ProductsEntityMethods::readProductByKey($pdo, $id)):?>
+        if ($product = ProductsEntityMethods::readProductByKey($pdo, $id)) :?>
             <table class="table table-striped" style="margin-left: 3px">
                 <thead>
                 <tr>
-                    <?php foreach ($col as $column):
+                    <?php foreach ($col as $column) :
                         ?>
                         <th scope="col"><?php echo $column ?>
                         </th>
@@ -59,23 +59,20 @@ if (isset($_GET['submit'])):
                 </tr>
                 </tbody>
             </table>
-        <?php else: ?>
+        <?php else : ?>
             <div class="alert alert-danger" role="alert">
                 <?php echo 'Product with chosen ID doesn\'t exist'; ?>
             </div>
-        <?php
+            <?php
         endif;
-    else:?>
+    else : ?>
         <div class="alert alert-danger" role="alert">
             <?php echo 'ID have to be integer value(without comma)'; ?>
         </div>
-    <?php
+        <?php
     endif;
 endif;
 session_destroy();
 ?>
-
-
 </body>
-
 </html>

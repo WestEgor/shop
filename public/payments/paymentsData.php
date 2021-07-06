@@ -12,11 +12,12 @@ use repository\payments\PaymentsEntityMethods;
         $pdo = Connection::get()->getConnect();
         $columns = new PaymentsColumnsInformation($pdo);
         $col = $columns->getColumnName();
-        if (is_array($col)):
-            foreach ($col as $column):
+        if (is_array($col)) :
+            foreach ($col as $column) :
                 ?>
                 <th scope="col"><?php echo $column ?></th>
-            <?php endforeach; endif ?>
+            <?php endforeach;
+        endif ?>
         <th scope="col">Update column</th>
         <th scope="col">Delete column</th>
     </tr>
@@ -24,7 +25,7 @@ use repository\payments\PaymentsEntityMethods;
     </thead>
     <tbody>
     <?php
-    if (!$payments = PaymentsEntityMethods::readAllPayments($pdo)): ?>
+    if (!$payments = PaymentsEntityMethods::readAllPayments($pdo)) : ?>
         <tr>
             <th scope="row">No data</th>
             <td>-</td>
@@ -34,8 +35,8 @@ use repository\payments\PaymentsEntityMethods;
             <td>-</td>
             <td>-</td>
         </tr>
-    <?php else:
-        foreach ($payments as $payment):
+    <?php else :
+        foreach ($payments as $payment) :
             ?>
             <tr>
                 <th scope="row"><?php echo $payment->getCustomerId(); ?></th>
@@ -48,6 +49,8 @@ use repository\payments\PaymentsEntityMethods;
                 <td><a id="submit_delete" class="btn btn-primary"
                        href="paymentsDelete.php?id=<?php echo $payment->getId(); ?>">Delete</a></td>
             </tr>
-        <?php endforeach; endif; ?>
+            <?php
+        endforeach;
+    endif; ?>
     </tbody>
 </table>

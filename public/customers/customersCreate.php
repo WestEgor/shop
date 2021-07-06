@@ -69,12 +69,11 @@ if (isset($_POST['create_submit'])) :
         $errorMessage .= 'Phone number code cannot be empty or cannot be string' . '</br>';
     }
 
-
     if ($errorMessage === '') :
         $person = new Person($name, $lastName, $age);
         $location = new Location($country, $city, $address, $zipCode);
         $contacts = new Contacts($email, $phoneNumber);
-        CustomersEntityMethods::createCustomer($person, $location, $contacts,);
+        CustomersEntityMethods::createCustomer($person, $location, $contacts);
         foreach ($_SESSION as $key) {
             unset($_SESSION[$key]);
         }
@@ -82,17 +81,17 @@ if (isset($_POST['create_submit'])) :
 
         echo '<META HTTP-EQUIV="refresh" content="0;URL=customers.php">';
         ?>
-    <?php else: ?>
+    <?php else : ?>
         <div class="alert alert-danger" role="alert">
             <?php echo $errorMessage; ?>
         </div>
-    <?php
+        <?php
     endif;
 endif;
 ?>
 
 
-<form action="<? echo $_SERVER['PHP_SELF'] ?>" method="POST">
+<form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST">
     <div class="row g-3 align-items-center" style="margin-left: 5px">
         <div class="col-auto" style="margin-bottom:10px; margin-top: 15px">
             <label for="cname" class="form-label" style="margin-top: 15px">Name:

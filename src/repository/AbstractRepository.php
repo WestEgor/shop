@@ -98,7 +98,7 @@ abstract class AbstractRepository implements RepositoryInterface
      * return object iff record with specified id exist in table
      * return FALSE if no record with specified in table
      */
-    abstract public  function readByKeyStatement(PDOStatement $statement, int $key): object|false;
+    abstract public function readByKeyStatement(PDOStatement $statement, int $key): object|false;
 
     /**
      * @param  PDOStatement $statement statement of prepared query

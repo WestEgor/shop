@@ -11,19 +11,20 @@ use repository\order_details\OrderDetailsTablesInformation;
         <?php $pdo = Connection::get()->getConnect();
         $columns = new OrderDetailsTablesInformation($pdo);
         $col = $columns->getColumnName();
-        if (is_array($col)):
-            foreach ($col as $column):
+        if (is_array($col)) :
+            foreach ($col as $column) :
                 ?>
                 <th scope="col"><?php echo $column ?></th>
-            <?php endforeach; endif; ?>
+                <?php
+            endforeach;
+        endif; ?>
         <th scope="col">Update column</th>
         <th scope="col">Delete column</th>
     </tr>
-
     </thead>
     <tbody>
     <?php
-    if (!$orderDetailsArray = OrderDetailsEntityMethods::readAllOrderDetails($pdo)): ?>
+    if (!$orderDetailsArray = OrderDetailsEntityMethods::readAllOrderDetails($pdo)) : ?>
         <tr>
             <th scope="row">No data</th>
             <td>-</td>
@@ -33,8 +34,8 @@ use repository\order_details\OrderDetailsTablesInformation;
             <td>-</td>
             <td>-</td>
         </tr>
-    <?php else:
-        foreach ($orderDetailsArray as $orderDetails):
+    <?php else :
+        foreach ($orderDetailsArray as $orderDetails) :
             ?>
             <tr>
                 <th scope="row"><?php echo $orderDetails->getId(); ?></th>
@@ -48,6 +49,8 @@ use repository\order_details\OrderDetailsTablesInformation;
                 <td><a id="submit_delete" class="btn btn-primary"
                        href="orderDetailsDelete.php?id=<?php echo $orderDetails->getId(); ?>">Delete</a></td>
             </tr>
-        <?php endforeach; endif; ?>
+            <?php
+        endforeach;
+    endif; ?>
     </tbody>
 </table>

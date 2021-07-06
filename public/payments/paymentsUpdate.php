@@ -41,16 +41,16 @@ if (isset($_POST['update_submit'])) :
         session_destroy();
         echo '<META HTTP-EQUIV="refresh" content="0;URL=payments.php">';
         ?>
-    <?php else: ?>
+    <?php else : ?>
         <div class="alert alert-danger" role="alert">
             <?php echo $errorMessage; ?>
         </div>
-    <?php
+        <?php
     endif;
 endif;
 ?>
 
-<?php if ($payment instanceof Payment): ?>
+<?php if ($payment instanceof Payment) : ?>
     <form action="paymentsUpdate.php?id=<?php echo $payment->getId(); ?>" method="POST">
         <div class="row g-3 align-items-center" style="margin-left: 5px">
             <div class="col-auto" style="margin-bottom:10px; margin-top: 15px">
@@ -66,7 +66,7 @@ endif;
             <div class="col-auto" style="margin-bottom:10px; margin-top: 15px">
                 <label for="pprice" class="form-label" style="margin-top: 15px">Payments Date:</label>
                 <input type="date" id="pprice" name="payment_date" class="form-control"
-                       value="<?php echo $payment->getPaymentDate()->format('Y-m-d') ?>">
+                       value="<?php echo $payment->getPaymentDate()->format('Y-m-d'); ?>">
             </div>
         </div>
         <button type="submit" name="update_submit" class="btn btn-success"

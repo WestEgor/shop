@@ -4,7 +4,6 @@ use config\Connector as Connection;
 use repository\orders\OrdersColumnsInformation;
 use repository\orders\OrdersEntityMethods;
 
-
 ?>
 <table class="table table-striped" style="margin-left: 3px">
     <thead>
@@ -13,11 +12,13 @@ use repository\orders\OrdersEntityMethods;
         $pdo = Connection::get()->getConnect();
         $columns = new OrdersColumnsInformation($pdo);
         $col = $columns->getColumnName();
-        if (is_array($col)):
-            foreach ($col as $column):
+        if (is_array($col)) :
+            foreach ($col as $column) :
                 ?>
                 <th scope="col"><?php echo $column ?></th>
-            <?php endforeach; endif; ?>
+                <?php
+            endforeach;
+        endif; ?>
         <th scope="col">Update column</th>
         <th scope="col">Delete column</th>
     </tr>
@@ -25,7 +26,7 @@ use repository\orders\OrdersEntityMethods;
     </thead>
     <tbody>
     <?php
-    if (!$orders = OrdersEntityMethods::readAllOrders($pdo)): ?>
+    if (!$orders = OrdersEntityMethods::readAllOrders($pdo)) : ?>
         <tr>
             <th scope="row">No data</th>
             <td>-</td>
@@ -35,8 +36,8 @@ use repository\orders\OrdersEntityMethods;
             <td>-</td>
             <td>-</td>
         </tr>
-    <?php else:
-        foreach ($orders as $order):
+    <?php else :
+        foreach ($orders as $order) :
             ?>
             <tr>
                 <th scope="row"><?php echo $order->getId(); ?></th>
@@ -51,6 +52,8 @@ use repository\orders\OrdersEntityMethods;
                 <td><a id="submit_delete" class="btn btn-primary"
                        href="ordersDelete.php?id=<?php echo $order->getId(); ?>">Delete</a></td>
             </tr>
-        <?php endforeach; endif; ?>
+            <?php
+        endforeach;
+    endif; ?>
     </tbody>
 </table>

@@ -11,7 +11,7 @@ use repository\products\ProductsColumnsInformation;
         <?php $pdo = Connection::get()->getConnect();
         $columns = new ProductsColumnsInformation($pdo);
         $col = $columns->getColumnName();
-        foreach ($col as $column):
+        foreach ($col as $column) :
             ?>
             <th scope="col"><?php echo $column ?></th>
         <?php endforeach; ?>
@@ -22,7 +22,7 @@ use repository\products\ProductsColumnsInformation;
     </thead>
     <tbody>
     <?php
-    if (!$products = ProductsEntityMethods::readAllProducts($pdo)): ?>
+    if (!$products = ProductsEntityMethods::readAllProducts($pdo)) : ?>
         <tr>
             <th scope="row">No data</th>
             <td>-</td>
@@ -32,8 +32,8 @@ use repository\products\ProductsColumnsInformation;
             <td>-</td>
             <td>-</td>
         </tr>
-    <?php else:
-        foreach ($products as $product):
+    <?php else :
+        foreach ($products as $product) :
             ?>
             <tr>
                 <th scope="row"><?php echo $product->getId(); ?></th>
@@ -47,6 +47,8 @@ use repository\products\ProductsColumnsInformation;
                 <td><a id="submit_delete" class="btn btn-primary"
                        href="productsDelete.php?id=<?php echo $product->getId(); ?>">Delete</a></td>
             </tr>
-        <?php endforeach; endif; ?>
+            <?php
+        endforeach;
+    endif; ?>
     </tbody>
 </table>

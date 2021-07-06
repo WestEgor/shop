@@ -11,7 +11,6 @@ use repository\orders\OrdersEntityMethods;
 use util\Parser;
 use util\Validator;
 
-
 $id = intval($_REQUEST['id']);
 
 $pdo = Connection::get()->getConnect();
@@ -50,7 +49,6 @@ if (isset($_POST['create_submit'])) :
         $errorMessage .= 'Customer id cannot be empty or cannot be string/float' . '</br>';
     }
 
-
     if ($errorMessage === '') :
         OrdersEntityMethods::updateOrder($pdo, $id, $orderDate, $requiredDate, $status, $comments, $customersId);
         foreach ($_SESSION as $key) {
@@ -59,16 +57,16 @@ if (isset($_POST['create_submit'])) :
         session_destroy();
         echo '<META HTTP-EQUIV="refresh" content="0;URL=orders.php">';
         ?>
-    <?php else: ?>
+    <?php else : ?>
         <div class="alert alert-danger" role="alert">
             <?php echo $errorMessage; ?>
         </div>
-    <?php
+        <?php
     endif;
 endif;
 ?>
 
-<?php if ($order instanceof Order): ?>
+<?php if ($order instanceof Order) : ?>
     <form action="ordersUpdate.php?id=<?php echo $order->getId(); ?>" method="POST">
         <div class="row g-3 align-items-center" style="margin-left: 5px">
 
@@ -102,4 +100,4 @@ endif;
                 style="margin: 12px">Update
         </button>
     </form>
-<?php endif ?>
+<?php endif; ?>

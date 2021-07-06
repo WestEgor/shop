@@ -46,16 +46,16 @@ if (isset($_POST['update_submit'])) :
         session_destroy();
         echo '<META HTTP-EQUIV="refresh" content="0;URL=order_details.php">';
         ?>
-    <?php else: ?>
+    <?php else : ?>
         <div class="alert alert-danger" role="alert">
             <?php echo $errorMessage; ?>
         </div>
-    <?php
+        <?php
     endif;
 endif;
 ?>
 
-<?php if ($orderDetails instanceof OrderDetails): ?>
+<?php if ($orderDetails instanceof OrderDetails) : ?>
     <form action="orderDetailsUpdate.php?id=<?php echo $orderDetails->getId(); ?>" method="POST">
         <div class="row g-3 align-items-center" style="margin-left: 5px">
             <div class="col-auto" style="margin-bottom:10px; margin-top: 15px">

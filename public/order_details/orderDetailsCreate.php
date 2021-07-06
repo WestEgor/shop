@@ -15,7 +15,6 @@ $price = '';
 
 if (isset($_POST['create_submit'])) :
     $errorMessage = '';
-
     $_SESSION['product_id'] = $_POST['product_id'];
     $productId = $_SESSION['product_id'];
     if (!Validator::validateInt($productId)) {
@@ -45,41 +44,39 @@ if (isset($_POST['create_submit'])) :
         session_destroy();
         echo '<META HTTP-EQUIV="refresh" content="0;URL=order_details.php">';
         ?>
-    <?php else: ?>
+    <?php else : ?>
         <div class="alert alert-danger" role="alert">
             <?php echo $errorMessage; ?>
         </div>
-    <?php
+        <?php
     endif;
 endif;
 ?>
 
-
-<form action="<? echo $_SERVER['PHP_SELF'] ?>" method="POST">
+<form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST">
     <div class="row g-3 align-items-center" style="margin-left: 5px">
         <div class="col-auto" style="margin-bottom:10px; margin-top: 15px">
             <label for="pname" class="form-label" style="margin-top: 15px">Product ID:</label>
             <input type="text" id="pname" name="product_id" class="form-control"
-                   value="<?php if ($productId) echo $productId ?>">
+                   value="<?php echo $productId; ?>">
         </div>
         <div class="col-auto" style="margin-bottom:10px; margin-top: 15px">
             <label for="pquantity" class="form-label" style="margin-top: 15px">Order ID:</label>
             <input type="text" id="pquantity" name="order_id" class="form-control"
-                   value="<?php if ($orderId) echo $orderId ?>">
+                   value="<?php echo $orderId; ?>">
         </div>
         <div class="col-auto" style="margin-bottom:10px; margin-top: 15px">
             <label for="pprice" class="form-label" style="margin-top: 15px">Quantity ordered:</label>
             <input type="text" id="pprice" name="quantity_ordered" class="form-control"
-                   value="<?php if ($quantityOrdered) echo $quantityOrdered ?>">
+                   value="<?php echo $quantityOrdered; ?>">
         </div>
         <div class="col-auto" style="margin-bottom:10px; margin-top: 15px">
             <label for="pmsrp" class="form-label" style="margin-top: 15px">Price:</label>
             <input type="text" id="pmsrp" name="price" class="form-control"
-                   value="<?php if ($price) echo $price ?>">
+                   value="<?php echo $price; ?>">
         </div>
     </div>
     <button type="submit" name="create_submit" class="btn btn-success"
             style="margin: 12px">Create
     </button>
 </form>
-

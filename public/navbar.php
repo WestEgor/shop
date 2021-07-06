@@ -25,8 +25,8 @@ use repository\TablesInformation as Information;
         try {
             $pdo = Connection::get()->getConnect();
             $tableNames = new Information($pdo);
-            if ($names = $tableNames->getTableName()):
-                foreach ($names as $name):
+            if ($names = $tableNames->getTableName()) :
+                foreach ($names as $name) :
                     ?>
                     <ul class="navbar-nav">
                         <a class="nav-link" href="/public/<?php echo $name . '/' . $name . '.php' ?>" id="navbar-s"
@@ -35,7 +35,7 @@ use repository\TablesInformation as Information;
                         </a>
                     </ul>
                 <?php endforeach;
-            else:
+            else :
                 echo 'No table in scheme';
             endif;
         } catch (PDOException $e) {
@@ -43,5 +43,3 @@ use repository\TablesInformation as Information;
         } ?>
     </div>
 </nav>
-
-

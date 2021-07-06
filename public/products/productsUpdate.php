@@ -45,11 +45,11 @@ if (isset($_POST['update_submit'])) :
         session_destroy();
         echo '<META HTTP-EQUIV="refresh" content="0;URL=products.php">';
         ?>
-    <?php else: ?>
+    <?php else : ?>
         <div class="alert alert-danger" role="alert">
             <?php echo $errorMessage; ?>
         </div>
-    <?php
+        <?php
     endif;
 endif;
 ?>

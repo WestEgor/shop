@@ -11,11 +11,11 @@ use repository\customers\CustomersTablesInformation;
         <?php $pdo = Connection::get()->getConnect();
         $columns = new CustomersTablesInformation($pdo);
         $col = $columns->getColumnName();
-        if (is_array($col)):
-            foreach ($col as $column):
+        if (is_array($col)) :
+            foreach ($col as $column) :
                 ?>
                 <th scope="col"><?php echo $column ?></th>
-            <?php
+                <?php
             endforeach;
         endif;
         ?>
@@ -25,7 +25,7 @@ use repository\customers\CustomersTablesInformation;
     </thead>
     <tbody>
     <?php
-    if (!$customers = CustomersEntityMethods::readAllCustomers($pdo)): ?>
+    if (!$customers = CustomersEntityMethods::readAllCustomers($pdo)) : ?>
         <tr>
             <th scope="row">No data</th>
             <td>-</td>
@@ -40,9 +40,9 @@ use repository\customers\CustomersTablesInformation;
             <td>-</td>
             <td>-</td>
         </tr>
-    <?php else:
-        if (is_array($customers)):
-            foreach ($customers as $customer):
+    <?php else :
+        if (is_array($customers)) :
+            foreach ($customers as $customer) :
                 ?>
                 <tr>
                     <th scope="row"><?php echo $customer->getId(); ?></th>
@@ -62,6 +62,8 @@ use repository\customers\CustomersTablesInformation;
                     <td><a id="submit_delete" class="btn btn-primary"
                            href="customersDelete.php?id=<?php echo $customer->getId(); ?>">Delete</a></td>
                 </tr>
-            <?php endforeach; endif; endif; ?>
+            <?php endforeach;
+        endif;
+    endif; ?>
     </tbody>
 </table>
