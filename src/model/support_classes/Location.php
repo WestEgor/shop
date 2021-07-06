@@ -5,6 +5,7 @@ namespace model\support_classes;
 /**
  * Class Location
  * Support class for entities
+ *
  * @package model\support_classes
  */
 class Location
@@ -31,41 +32,24 @@ class Location
 
     /**
      * Location constructor.
+     *
      * @param string|null $country
      * @param string|null $city
      * @param string|null $address
      * @param string|null $zipCode
      */
-    public function __construct(?string $country = null,
-                                ?string $city = null,
-                                ?string $address = null,
-                                ?string $zipCode = null)
-    {
+    public function __construct(
+        ?string $country = null,
+        ?string $city = null,
+        ?string $address = null,
+        ?string $zipCode = null
+    ) {
         $this->country = $country;
         $this->city = $city;
         $this->address = $address;
         $this->zipCode = $zipCode;
     }
 
-
-    /**
-     * Method, that represents @Location parameterized constructor.
-     * @param string $country
-     * @param string $city
-     * @param string $address
-     * @param string $zipCode
-     * @return Location
-     */
-    public static function parameterizedConstructor(string $country, string $city,
-                                                    string $address, string $zipCode): Location
-    {
-        $location = new self();
-        $location->country = $country;
-        $location->city = $city;
-        $location->address = $address;
-        $location->zipCode = $zipCode;
-        return $location;
-    }
 
     /**
      * @return string country
@@ -130,5 +114,4 @@ class Location
     {
         $this->zipCode = $zipCode;
     }
-
 }

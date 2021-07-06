@@ -2,20 +2,17 @@
 
 namespace util;
 
-
-use DateTime;
-use model\ModelInterface;
-
 /**
  * Class Validator
  * Class to validate input variables
+ *
  * @package util
  */
 class Validator
 {
 
     /**
-     * @param int $intNumber
+     * @param  int $intNumber
      * @return bool
      * return TRUE iff $intNumber is integer
      * return FALSE if $intNumber doesnt integer
@@ -26,7 +23,7 @@ class Validator
     }
 
     /**
-     * @param mixed $floatVal
+     * @param  mixed $floatVal
      * @return bool
      * return TRUE iff $floatVal is float
      * return FALSE if $floatVal doesnt float
@@ -37,7 +34,7 @@ class Validator
     }
 
     /**
-     * @param mixed $str
+     * @param  mixed $str
      * @return bool
      * return TRUE iff $str is not empty string
      * return FALSE if $str is empty string
@@ -48,7 +45,7 @@ class Validator
     }
 
     /**
-     * @param mixed $email
+     * @param  mixed $email
      * @return bool
      * return TRUE iff $email after sanitize is valid
      * return FALSE if $email after sanitize is not valid
@@ -58,5 +55,4 @@ class Validator
         $email = filter_var($email, FILTER_SANITIZE_EMAIL);
         return is_string(filter_var($email, FILTER_VALIDATE_EMAIL));
     }
-
 }

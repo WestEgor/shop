@@ -30,16 +30,18 @@ class Payment implements ModelInterface
 
     /**
      * Payment default constructor.
-     * @param int|null $customerId
-     * @param float|null $amount
+     *
+     * @param int|null      $customerId
+     * @param float|null    $amount
      * @param DateTime|null $paymentDate
-     * @param int|null $id
+     * @param int|null      $id
      */
-    public function __construct(?float $amount = null,
-                                ?DateTime $paymentDate = null,
-                                ?int $customerId = null,
-                                ?int $id = null)
-    {
+    public function __construct(
+        ?float $amount = null,
+        ?DateTime $paymentDate = null,
+        ?int $customerId = null,
+        ?int $id = null
+    ) {
         $this->amount = $amount;
         $this->paymentDate = $paymentDate;
         $this->customerId = $customerId;
@@ -112,15 +114,22 @@ class Payment implements ModelInterface
 
     /**
      * Implemented method from ModelInterface
-     * @param object $keys
+     *
+     * @param  object $keys
      * @return bool
      */
     public function setAll(object $keys): bool
     {
         foreach ($keys as $key => $value) {
-            if ($key === 'customers_id') $this->customerId = $value;
-            if ($key === 'id') $this->id = $value;
-            if ($key === 'amount') $this->amount = $value;
+            if ($key === 'customers_id') {
+                $this->customerId = $value;
+            }
+            if ($key === 'id') {
+                $this->id = $value;
+            }
+            if ($key === 'amount') {
+                $this->amount = $value;
+            }
             if ($key === 'payment_date') {
                 $this->paymentDate = DateMethods::setDate(DateTime::createFromFormat('Y-m-d', $value));
             }

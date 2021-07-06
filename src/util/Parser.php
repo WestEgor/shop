@@ -7,13 +7,15 @@ use DateTime;
 /**
  * Class Parser
  * Need for parse data
+ *
  * @package util
  */
 class Parser
 {
     /**
      * Method to parse from string to DateTime
-     * @param string $date
+     *
+     * @param  string $date
      * @return DateTime|bool
      */
     public static function toDateTime(string &$date): DateTime|bool

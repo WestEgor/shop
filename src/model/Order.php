@@ -172,8 +172,6 @@ class Order implements ModelInterface
      */
     public function setAll(object $keys): bool
     {
-        var_dump($keys);
-        var_dump(is_object($keys));
         foreach ($keys as $key => $value) {
             if ($key === 'id') {
                 $this->id = $value;

@@ -5,54 +5,62 @@ namespace model;
 /**
  * Class Product
  * Instance will be used to manipulate of entity of table ´products´
+ *
  * @package model
  */
 class Product implements ModelInterface
 {
     /**
      * id of entity 'products'
+     *
      * @var int|null
      */
     private ?int $id;
 
     /**
      * name of entity 'products'
+     *
      * @var string|null
      */
     private ?string $name;
 
     /**
      * quantity of entity 'products'
+     *
      * @var int|null
      */
     private ?int $quantity;
 
     /**
      * price of entity 'products'
+     *
      * @var float|null
      */
     private ?float $price;
 
     /**
      * msrp of entity 'products'
+     *
      * @var float|null
      */
     private ?float $msrp;
 
     /**
      * Product constructor.
+     *
      * @param string|null $name
-     * @param int|null $quantity
-     * @param float|null $price
-     * @param float|null $msrp
-     * @param int|null $id
+     * @param int|null    $quantity
+     * @param float|null  $price
+     * @param float|null  $msrp
+     * @param int|null    $id
      */
-    public function __construct(?string $name = null,
-                                ?int $quantity = null,
-                                ?float $price = null,
-                                ?float $msrp = null,
-                                ?int $id = null)
-    {
+    public function __construct(
+        ?string $name = null,
+        ?int $quantity = null,
+        ?float $price = null,
+        ?float $msrp = null,
+        ?int $id = null
+    ) {
         $this->name = $name;
         $this->quantity = $quantity;
         $this->price = $price;
@@ -144,19 +152,29 @@ class Product implements ModelInterface
 
     /**
      * Implemented method from ModelInterface
-     * @param object $keys
+     *
+     * @param  object $keys
      * @return bool
      */
     public function setAll(object $keys): bool
     {
         foreach ($keys as $key => $value) {
-            if ($key === 'id') $this->id = $value;
-            if ($key === 'name') $this->name = $value;
-            if ($key === 'quantity') $this->quantity = $value;
-            if ($key === 'price') $this->price = $value;
-            if ($key === 'msrp') $this->msrp = $value;
+            if ($key === 'id') {
+                $this->id = $value;
+            }
+            if ($key === 'name') {
+                $this->name = $value;
+            }
+            if ($key === 'quantity') {
+                $this->quantity = $value;
+            }
+            if ($key === 'price') {
+                $this->price = $value;
+            }
+            if ($key === 'msrp') {
+                $this->msrp = $value;
+            }
         }
         return true;
     }
-
 }

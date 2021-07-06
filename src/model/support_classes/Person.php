@@ -5,6 +5,7 @@ namespace model\support_classes;
 /**
  * Class Person
  * Support class for entities
+ *
  * @package model\support_classes
  */
 class Person
@@ -26,14 +27,16 @@ class Person
 
     /**
      * Person constructor.
+     *
      * @param string|null $name
      * @param string|null $lastname
      * @param int|null $age
      */
-    public function __construct(?string $name = null,
-                                ?string $lastname = null,
-                                ?int $age = null)
-    {
+    public function __construct(
+        ?string $name = null,
+        ?string $lastname = null,
+        ?int $age = null
+    ) {
         $this->name = $name;
         $this->lastname = $lastname;
         $this->age = $age;
@@ -87,5 +90,4 @@ class Person
     {
         $this->age = $age;
     }
-
 }

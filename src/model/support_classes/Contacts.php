@@ -5,6 +5,7 @@ namespace model\support_classes;
 /**
  * Class Contacts
  * Support class for entities
+ *
  * @package model\support_classes
  */
 class Contacts
@@ -20,20 +21,23 @@ class Contacts
 
     /**
      * Contacts constructor.
-     * @param string $email
-     * @param string $phoneNumber
+     *
+     * @param string|null $email
+     * @param string|null $phoneNumber
      */
-    public function __construct(?string $email = null,
-                                ?string $phoneNumber = null)
-    {
+    public function __construct(
+        ?string $email = null,
+        ?string $phoneNumber = null
+    ) {
         $this->email = $email;
         $this->phoneNumber = $phoneNumber;
     }
 
     /**
      * Method, that represents @Contacts parameterized constructor.
-     * @param string $email
-     * @param string $phoneNumber
+     *
+     * @param  string $email
+     * @param  string $phoneNumber
      * @return Contacts
      */
     public static function parameterizedConstructor(string $email, string $phoneNumber): Contacts
@@ -75,6 +79,4 @@ class Contacts
     {
         $this->phoneNumber = $phoneNumber;
     }
-
-
 }

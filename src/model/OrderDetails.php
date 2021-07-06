@@ -5,54 +5,50 @@ namespace model;
 class OrderDetails implements ModelInterface
 {
     /**
-     * @var int id of entity 'order_details'
+     * @var int|null id of entity 'order_details'
      */
-    private int $id;
+    private ?int $id;
 
     /**
-     * @var int product id of entity 'order_details'
+     * @var int|null  product id of entity 'order_details'
      */
-    private int $productId;
+    private ?int $productId;
 
     /**
-     * @var int order id of entity 'order_details'
+     * @var int|null  order id of entity 'order_details'
      */
-    private int $orderId;
+    private ?int $orderId;
 
     /**
-     * @var int quantity_ordered of entity 'order_details'
+     * @var int|null  quantity_ordered of entity 'order_details'
      */
-    private int $quantityOrdered;
+    private ?int $quantityOrdered;
 
     /**
-     * @var float price of entity 'order_details'
+     * @var float|null  price of entity 'order_details'
      */
-    private float $price;
+    private ?float $price;
 
     /**
-     * OrderDetails default constructor.
+     * OrderDetails constructor.
+     * @param int|null $productId
+     * @param int|null $orderId
+     * @param int|null $quantityOrdered
+     * @param float|null $price
+     * @param int|null $id
      */
-    public function __construct()
-    {
-    }
-
-    /**
-     * Method, that represents OrderDetails parameterized constructor
-     * @param int $productId
-     * @param int $orderId
-     * @param int $quantityOrdered
-     * @param float $price
-     * @return OrderDetails
-     */
-    public static function parameterizedConstructor(int $productId, int $orderId,
-                                                    int $quantityOrdered, float $price): OrderDetails
-    {
-        $orderDetails = new self();
-        $orderDetails->productId = $productId;
-        $orderDetails->orderId = $orderId;
-        $orderDetails->quantityOrdered = $quantityOrdered;
-        $orderDetails->price = $price;
-        return $orderDetails;
+    public function __construct(
+        ?int $productId = null,
+        ?int $orderId = null,
+        ?int $quantityOrdered = null,
+        ?float $price = null,
+        ?int $id = null
+    ) {
+        $this->productId = $productId;
+        $this->orderId = $orderId;
+        $this->quantityOrdered = $quantityOrdered;
+        $this->price = $price;
+        $this->id = $id;
     }
 
     /**
@@ -137,17 +133,28 @@ class OrderDetails implements ModelInterface
 
     /**
      * Implemented method from ModelInterface
+     *
      * @param object $keys
      * @return bool
      */
     public function setAll(object $keys): bool
     {
         foreach ($keys as $key => $value) {
-            if ($key === 'id') $this->id = $value;
-            if ($key === 'products_id') $this->productId = $value;
-            if ($key === 'orders_id') $this->orderId = $value;
-            if ($key === 'quantity_ordered') $this->quantityOrdered = $value;
-            if ($key === 'price') $this->price = $value;
+            if ($key === 'id') {
+                $this->id = $value;
+            }
+            if ($key === 'products_id') {
+                $this->productId = $value;
+            }
+            if ($key === 'orders_id') {
+                $this->orderId = $value;
+            }
+            if ($key === 'quantity_ordered') {
+                $this->quantityOrdered = $value;
+            }
+            if ($key === 'price') {
+                $this->price = $value;
+            }
         }
         return true;
     }

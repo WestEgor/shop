@@ -7,6 +7,7 @@ use PDO;
 /**
  * Class Connector
  * Class for get connection from database using PDO
+ *
  * @package config
  */
 class Connector
@@ -30,16 +31,16 @@ class Connector
      * Private Connector constructor
      * Cannot call in others classes to avoid unnecessary connections
      */
-    private final function __construct()
+    final private function __construct()
     {
     }
 
     /**
      * Method to connect to database and return PDO object
+     *
      * @return PDO
      */
-    public
-    function getConnect(): PDO
+    public function getConnect(): PDO
     {
         $conn = 'pgsql:dbname=postgres;host=127.0.0.1;port=5432';
         $user = self::USER;
@@ -52,12 +53,11 @@ class Connector
 
     /**
      * Create instance of Connector
+     *
      * @return Connector
      */
-    public
-    static function get(): Connector
+    public static function get(): Connector
     {
         return static::$connection = new static();
     }
-
 }
