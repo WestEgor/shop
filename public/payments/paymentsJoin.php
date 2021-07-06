@@ -37,24 +37,25 @@ endif;
     </thead>
     <tbody>
     <?php
-    for ($i = 0; $i < $paymentJoinLength; $i++):
-        if ($paymentJoin[$i] instanceof PaymentsJoin):
+    foreach ($paymentJoin as $pj) :
+    /*for ($i = 0; $i < $paymentJoinLength; $i++) :*/
+        if ($pj instanceof PaymentsJoin) :
             ?>
             <tr>
-                <td><?php echo $paymentJoin[$i]->getPayment()->getCustomerId(); ?></td>
-                <td><?php echo $paymentJoin[$i]->getPayment()->getId(); ?></td>
-                <td><?php echo $paymentJoin[$i]->getPayment()->getAmount(); ?></td>
-                <td><?php echo $paymentJoin[$i]->getPayment()->getPaymentDate()->format('Y-m-d'); ?></td>
-                <td><?php echo $paymentJoin[$i]->getCustomer()->getPersonName(); ?></td>
-                <td><?php echo $paymentJoin[$i]->getCustomer()->getPersonLastName(); ?></td>
-                <td><?php echo $paymentJoin[$i]->getCustomer()->getPersonAge(); ?></td>
-                <td><?php echo $paymentJoin[$i]->getCustomer()->getLocationCountry(); ?></td>
-                <td><?php echo $paymentJoin[$i]->getCustomer()->getLocationCity(); ?></td>
-                <td><?php echo $paymentJoin[$i]->getCustomer()->getLocationAddress(); ?></td>
-                <td><?php echo $paymentJoin[$i]->getCustomer()->getLocationZipCode(); ?></td>
-                <td><?php echo $paymentJoin[$i]->getCustomer()->getContactsEmail(); ?></td>
-                <td><?php echo $paymentJoin[$i]->getCustomer()->getContactsPhoneNumber(); ?></td>
+                <td><?php echo $pj->getPayment()->getCustomerId(); ?></td>
+                <td><?php echo $pj->getPayment()->getId(); ?></td>
+                <td><?php echo $pj->getPayment()->getAmount(); ?></td>
+                <td><?php echo $pj->getPayment()->getPaymentDate()->format('Y-m-d'); ?></td>
+                <td><?php echo $pj->getCustomer()->getPersonName(); ?></td>
+                <td><?php echo $pj->getCustomer()->getPersonLastName(); ?></td>
+                <td><?php echo $pj->getCustomer()->getPersonAge(); ?></td>
+                <td><?php echo $pj->getCustomer()->getLocationCountry(); ?></td>
+                <td><?php echo $pj->getCustomer()->getLocationCity(); ?></td>
+                <td><?php echo $pj->getCustomer()->getLocationAddress(); ?></td>
+                <td><?php echo $pj->getCustomer()->getLocationZipCode(); ?></td>
+                <td><?php echo $pj->getCustomer()->getContactsEmail(); ?></td>
+                <td><?php echo $pj->getCustomer()->getContactsPhoneNumber(); ?></td>
             </tr>
-        <?php endif; endfor; ?>
+        <?php endif; /*endfor;*/ endforeach; ?>
     </tbody>
 </table>

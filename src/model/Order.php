@@ -52,13 +52,14 @@ class Order implements ModelInterface
      * @param int|null $customerId
      * @param int|null $id
      */
-    public function __construct(?DateTime $orderDate = null,
-                                ?DateTime $requiredDate = null,
-                                ?string $status = null,
-                                ?string $comments = null,
-                                ?int $customerId = null,
-                                ?int $id = null)
-    {
+    public function __construct(
+        ?DateTime $orderDate = null,
+        ?DateTime $requiredDate = null,
+        ?string $status = null,
+        ?string $comments = null,
+        ?int $customerId = null,
+        ?int $id = null
+    ) {
         $this->orderDate = $orderDate;
         $this->requiredDate = $requiredDate;
         $this->status = $status;
@@ -174,18 +175,25 @@ class Order implements ModelInterface
         var_dump($keys);
         var_dump(is_object($keys));
         foreach ($keys as $key => $value) {
-            if ($key === 'id') $this->id = $value;
+            if ($key === 'id') {
+                $this->id = $value;
+            }
             if ($key === 'order_date') {
                 $this->orderDate = DateMethods::setDate(DateTime::createFromFormat('Y-m-d', $value));
             }
             if ($key === 'required_date') {
                 $this->orderDate = DateMethods::setDate(DateTime::createFromFormat('Y-m-d', $value));
             }
-            if ($key === 'status') $this->status = $value;
-            if ($key === 'comments') $this->comments = $value;
-            if ($key === 'customers_id') $this->customerId = $value;
+            if ($key === 'status') {
+                $this->status = $value;
+            }
+            if ($key === 'comments') {
+                $this->comments = $value;
+            }
+            if ($key === 'customers_id') {
+                $this->customerId = $value;
+            }
         }
         return true;
     }
-
 }

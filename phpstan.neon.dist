@@ -2,7 +2,9 @@ parameters:
   level: 7
   paths:
     - public
+    - src
   ignoreErrors:
-    - '#Argument of an invalid type object supplied for foreach, only iterables are supported.#'
+    - '#Argument of an invalid type [a-zA-Z0-9|]+ supplied for foreach, only iterables are supported.#'
     - '#Cannot call method fetch#'
+    - '#Variable \$col might not be defined.#'
   checkMissingIterableValueType: false

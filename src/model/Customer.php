@@ -40,8 +40,7 @@ class Customer implements ModelInterface
         ?Location $location = null,
         ?Contacts $contacts = null,
         ?int $id = null
-    )
-    {
+    ) {
         $this->person = $person;
         $this->location = $location;
         $this->contacts = $contacts;
@@ -196,22 +195,41 @@ class Customer implements ModelInterface
             $person = new Person();
             $location = new Location();
             $contacts = new Contacts();
-            foreach ($keys as $key => $value) {
-                if ($key === 'id') $this->id = $value;
-                if ($key === 'name') $person->setName($value);
-                if ($key === 'last_name') $person->setLastname($value);
-                if ($key === 'age') $person->setAge($value);
-                if ($key === 'country') $location->setCountry($value);
-                if ($key === 'city') $location->setCity($value);
-                if ($key === 'address') $location->setAddress($value);
-                if ($key === 'zip_code') $location->setZipCode($value);
-                if ($key === 'email') $contacts->setEmail($value);
-                if ($key === 'phone_number') $contacts->setPhoneNumber($value);
+        foreach ($keys as $key => $value) {
+            if ($key === 'id') {
+                $this->id = $value;
             }
+            if ($key === 'name') {
+                $person->setName($value);
+            }
+            if ($key === 'last_name') {
+                $person->setLastname($value);
+            }
+            if ($key === 'age') {
+                $person->setAge($value);
+            }
+            if ($key === 'country') {
+                $location->setCountry($value);
+            }
+            if ($key === 'city') {
+                $location->setCity($value);
+            }
+            if ($key === 'address') {
+                $location->setAddress($value);
+            }
+            if ($key === 'zip_code') {
+                $location->setZipCode($value);
+            }
+            if ($key === 'email') {
+                $contacts->setEmail($value);
+            }
+            if ($key === 'phone_number') {
+                $contacts->setPhoneNumber($value);
+            }
+        }
             $this->setPerson($person);
             $this->setLocation($location);
             $this->setContacts($contacts);
             return true;
     }
-
 }

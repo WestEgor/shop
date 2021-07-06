@@ -5,6 +5,7 @@ if (!session_id()) {
 require __DIR__ . '/../../vendor/autoload.php';
 
 use config\Connector as Connection;
+use model\Product;
 use repository\products\ProductsEntityMethods;
 
 ?>
@@ -48,11 +49,13 @@ if (isset($_GET['submit'])):
                 </thead>
                 <tbody>
                 <tr>
-                    <th scope="row"><?php echo $product->getId(); ?></th>
-                    <td><?php echo $product->getName(); ?></td>
-                    <td><?php echo $product->getQuantity(); ?></td>
-                    <td><?php echo $product->getPrice(); ?></td>
-                    <td><?php echo $product->getMsrp(); ?></td>
+                    <?php if ($product instanceof Product) : ?>
+                        <th scope="row"><?php echo $product->getId(); ?></th>
+                        <td><?php echo $product->getName(); ?></td>
+                        <td><?php echo $product->getQuantity(); ?></td>
+                        <td><?php echo $product->getPrice(); ?></td>
+                        <td><?php echo $product->getMsrp(); ?></td>
+                    <?php endif; ?>
                 </tr>
                 </tbody>
             </table>

@@ -6,6 +6,7 @@ require __DIR__ . '/../../vendor/autoload.php';
 require '../navbar.php';
 
 use config\Connector as Connection;
+use model\Product;
 use repository\products\ProductsEntity;
 use repository\products\ProductsEntityMethods;
 use util\Validator;
@@ -53,7 +54,8 @@ if (isset($_POST['update_submit'])) :
 endif;
 ?>
 
-    <body>
+<body>
+<?php if ($product instanceof Product) : ?>
     <form action="productsUpdate.php?id=<?php echo $product->getId(); ?>" method="POST">
         <div class="row g-3 align-items-center" style="margin-left: 5px">
             <div class="col-auto" style="margin-bottom:10px; margin-top: 15px">
@@ -81,4 +83,5 @@ endif;
                 style="margin: 12px">Update
         </button>
     </form>
-    </body>
+<?php endif; ?>
+</body>
