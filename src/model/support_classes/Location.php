@@ -52,9 +52,9 @@ class Location
 
 
     /**
-     * @return string country
+     * @return string|null country
      */
-    public function getCountry(): string
+    public function getCountry(): ?string
     {
         return $this->country;
     }
@@ -68,9 +68,9 @@ class Location
     }
 
     /**
-     * @return string city
+     * @return string|null city
      */
-    public function getCity(): string
+    public function getCity(): ?string
     {
         return $this->city;
     }
@@ -84,9 +84,9 @@ class Location
     }
 
     /**
-     * @return string address
+     * @return string|null address
      */
-    public function getAddress(): string
+    public function getAddress(): ?string
     {
         return $this->address;
     }
@@ -100,9 +100,9 @@ class Location
     }
 
     /**
-     * @return string zip code
+     * @return string|null zip code
      */
-    public function getZipCode(): string
+    public function getZipCode(): ?string
     {
         return $this->zipCode;
     }

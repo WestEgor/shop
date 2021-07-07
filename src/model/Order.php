@@ -70,9 +70,9 @@ class Order implements ModelInterface
 
 
     /**
-     * @return int id of order
+     * @return int|null id of order
      */
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -86,9 +86,9 @@ class Order implements ModelInterface
     }
 
     /**
-     * @return DateTime date of order
+     * @return DateTime|null date of order
      */
-    public function getOrderDate(): DateTime
+    public function getOrderDate(): ?DateTime
     {
         return $this->orderDate;
     }
@@ -102,9 +102,9 @@ class Order implements ModelInterface
     }
 
     /**
-     * @return DateTime required date to order
+     * @return DateTime|null required date to order
      */
-    public function getRequiredDate(): DateTime
+    public function getRequiredDate(): ?DateTime
     {
         return $this->requiredDate;
     }
@@ -118,9 +118,9 @@ class Order implements ModelInterface
     }
 
     /**
-     * @return string status of order
+     * @return string|null status of order
      */
-    public function getStatus(): string
+    public function getStatus(): ?string
     {
         return $this->status;
     }
@@ -134,9 +134,9 @@ class Order implements ModelInterface
     }
 
     /**
-     * @return string comments to order
+     * @return string|null comments to order
      */
-    public function getComments(): string
+    public function getComments(): ?string
     {
         return $this->comments;
     }
@@ -150,9 +150,9 @@ class Order implements ModelInterface
     }
 
     /**
-     * @return int customer id (who made this order)
+     * @return int|null customer id (who made this order)
      */
-    public function getCustomerId(): int
+    public function getCustomerId(): ?int
     {
         return $this->customerId;
     }

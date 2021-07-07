@@ -52,9 +52,9 @@ class OrderDetails implements ModelInterface
     }
 
     /**
-     * @return int id
+     * @return int|null id
      */
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -68,9 +68,9 @@ class OrderDetails implements ModelInterface
     }
 
     /**
-     * @return int quantity ordered
+     * @return int|null quantity ordered
      */
-    public function getQuantityOrdered(): int
+    public function getQuantityOrdered(): ?int
     {
         return $this->quantityOrdered;
     }
@@ -84,9 +84,9 @@ class OrderDetails implements ModelInterface
     }
 
     /**
-     * @return float proce
+     * @return float|null price
      */
-    public function getPrice(): float
+    public function getPrice(): ?float
     {
         return $this->price;
     }
@@ -100,9 +100,9 @@ class OrderDetails implements ModelInterface
     }
 
     /**
-     * @return int product id
+     * @return int|null product id
      */
-    public function getProductId(): int
+    public function getProductId(): ?int
     {
         return $this->productId;
     }
@@ -116,9 +116,9 @@ class OrderDetails implements ModelInterface
     }
 
     /**
-     * @return int order id
+     * @return int|null order id
      */
-    public function getOrderId(): int
+    public function getOrderId(): ?int
     {
         return $this->orderId;
     }

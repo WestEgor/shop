@@ -66,7 +66,7 @@ endif;
             <div class="col-auto" style="margin-bottom:10px; margin-top: 15px">
                 <label for="pprice" class="form-label" style="margin-top: 15px">Payments Date:</label>
                 <input type="date" id="pprice" name="payment_date" class="form-control"
-                       value="<?php echo $payment->getPaymentDate()->format('Y-m-d'); ?>">
+                       value="<?php echo $payment->getPaymentDate()?->format('Y-m-d'); ?>">
             </div>
         </div>
         <button type="submit" name="update_submit" class="btn btn-success"

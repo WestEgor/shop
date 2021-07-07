@@ -42,7 +42,7 @@ use repository\payments\PaymentsEntityMethods;
                 <th scope="row"><?php echo $payment->getCustomerId(); ?></th>
                 <td><?php echo $payment->getId(); ?></td>
                 <td><?php echo $payment->getAmount(); ?></td>
-                <td><?php echo $payment->getPaymentDate()->format('Y-m-d'); ?></td>
+                <td><?php echo $payment->getPaymentDate()?->format('Y-m-d'); ?></td>
                 <td><a id="submit_update" class="btn btn-primary"
                        href="paymentsUpdate.php?id=<?php echo $payment->getId(); ?>">Update</a>
                 </td>

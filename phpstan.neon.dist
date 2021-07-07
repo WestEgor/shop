@@ -1,8 +1,8 @@
 parameters:
-  level: 7
+  level: 8
   paths:
-    - public
     - src
+    - public
   ignoreErrors:
     - '#Argument of an invalid type [a-zA-Z0-9|]+ supplied for foreach, only iterables are supported.#'
     - '#Cannot call method fetch#'

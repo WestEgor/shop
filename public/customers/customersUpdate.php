@@ -14,7 +14,6 @@ use repository\customers\CustomersEntityMethods;
 use repository\customers\CustomersEntity;
 use util\Validator;
 
-
 $id = intval($_REQUEST['id']);
 $pdo = Connection::get()->getConnect();
 $productEntity = new CustomersEntity($pdo);

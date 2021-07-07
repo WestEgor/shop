@@ -44,9 +44,9 @@ class Person
 
 
     /**
-     * @return string name
+     * @return string|null name
      */
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -60,9 +60,9 @@ class Person
     }
 
     /**
-     * @return string last name
+     * @return string|null last name
      */
-    public function getLastname(): string
+    public function getLastname(): ?string
     {
         return $this->lastname;
     }
@@ -76,9 +76,9 @@ class Person
     }
 
     /**
-     * @return int age
+     * @return int|null age
      */
-    public function getAge(): int
+    public function getAge(): ?int
     {
         return $this->age;
     }

@@ -70,9 +70,9 @@ class Product implements ModelInterface
 
 
     /**
-     * @return int product id
+     * @return int|null product id
      */
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -86,9 +86,9 @@ class Product implements ModelInterface
     }
 
     /**
-     * @return String product name
+     * @return string|null product name
      */
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -102,9 +102,9 @@ class Product implements ModelInterface
     }
 
     /**
-     * @return int product quantity
+     * @return int|null product quantity
      */
-    public function getQuantity(): int
+    public function getQuantity(): ?int
     {
         return $this->quantity;
     }
@@ -118,9 +118,9 @@ class Product implements ModelInterface
     }
 
     /**
-     * @return float price
+     * @return float|null price
      */
-    public function getPrice(): float
+    public function getPrice(): ?float
     {
         return $this->price;
     }
@@ -134,9 +134,9 @@ class Product implements ModelInterface
     }
 
     /**
-     * @return float product msrp
+     * @return float|null product msrp
      */
-    public function getMsrp(): float
+    public function getMsrp(): ?float
     {
         return $this->msrp;
     }

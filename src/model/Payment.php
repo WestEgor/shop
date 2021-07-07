@@ -49,9 +49,9 @@ class Payment implements ModelInterface
     }
 
     /**
-     * @return int id of payments
+     * @return int|null id of payments
      */
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -65,9 +65,9 @@ class Payment implements ModelInterface
     }
 
     /**
-     * @return float amount of payments
+     * @return float|null amount of payments
      */
-    public function getAmount(): float
+    public function getAmount(): ?float
     {
         return $this->amount;
     }
@@ -81,9 +81,9 @@ class Payment implements ModelInterface
     }
 
     /**
-     * @return DateTime payment date
+     * @return DateTime|null payment date
      */
-    public function getPaymentDate(): DateTime
+    public function getPaymentDate(): ?DateTime
     {
         return $this->paymentDate;
     }
@@ -97,9 +97,9 @@ class Payment implements ModelInterface
     }
 
     /**
-     * @return int customer id
+     * @return int|null customer id
      */
-    public function getCustomerId(): int
+    public function getCustomerId(): ?int
     {
         return $this->customerId;
     }

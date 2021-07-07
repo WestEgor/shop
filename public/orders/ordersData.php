@@ -41,8 +41,8 @@ use repository\orders\OrdersEntityMethods;
             ?>
             <tr>
                 <th scope="row"><?php echo $order->getId(); ?></th>
-                <td><?php echo $order->getOrderDate()->format('Y-m-d'); ?></td>
-                <td><?php echo $order->getRequiredDate()->format('Y-m-d'); ?></td>
+                <td><?php echo $order->getOrderDate()?->format('Y-m-d'); ?></td>
+                <td><?php echo $order->getRequiredDate()?->format('Y-m-d'); ?></td>
                 <td><?php echo $order->getStatus(); ?></td>
                 <td><?php echo $order->getComments(); ?></td>
                 <td><?php echo $order->getCustomerId(); ?></td>

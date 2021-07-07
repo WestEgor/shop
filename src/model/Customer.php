@@ -2,6 +2,7 @@
 
 namespace model;
 
+use JetBrains\PhpStorm\Pure;
 use model\support_classes\Contacts;
 use model\support_classes\Location;
 use model\support_classes\Person;
@@ -49,9 +50,9 @@ class Customer implements ModelInterface
 
 
     /**
-     * @return int customer id
+     * @return int|null customer id
      */
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -65,9 +66,9 @@ class Customer implements ModelInterface
     }
 
     /**
-     * @return Person persons information of customer
+     * @return Person|null persons information of customer
      */
-    public function getPerson(): Person
+    public function getPerson(): ?Person
     {
         return $this->person;
     }
@@ -81,9 +82,9 @@ class Customer implements ModelInterface
     }
 
     /**
-     * @return Location location of customer
+     * @return Location|null location of customer
      */
-    public function getLocation(): Location
+    public function getLocation(): ?Location
     {
         return $this->location;
     }
@@ -97,9 +98,9 @@ class Customer implements ModelInterface
     }
 
     /**
-     * @return Contacts contacts information of customer
+     * @return Contacts|null contacts information of customer
      */
-    public function getContacts(): Contacts
+    public function getContacts(): ?Contacts
     {
         return $this->contacts;
     }
@@ -114,75 +115,75 @@ class Customer implements ModelInterface
 
 
     /**
-     * @return string persons name
+     * @return string|null persons name
      */
-    public function getPersonName(): string
+    public function getPersonName(): ?string
     {
-        return $this->getPerson()->getName();
+        return $this->getPerson()?->getName();
     }
 
     /**
-     * @return string persons last name
+     * @return string|null persons last name
      */
-    public function getPersonLastName(): string
+    public function getPersonLastName(): ?string
     {
-        return $this->getPerson()->getLastname();
+        return $this->getPerson()?->getLastname();
     }
 
     /**
-     * @return int persons age
+     * @return int|null persons age
      */
-    public function getPersonAge(): int
+    public function getPersonAge(): ?int
     {
-        return $this->getPerson()->getAge();
+        return $this->getPerson()?->getAge();
     }
 
     /**
      * @return string location country
      */
-    public function getLocationCountry(): string
+    public function getLocationCountry(): ?string
     {
-        return $this->getLocation()->getCountry();
+        return $this->getLocation()?->getCountry();
     }
 
     /**
-     * @return string location city
+     * @return string|null location city
      */
-    public function getLocationCity(): string
+    public function getLocationCity(): ?string
     {
-        return $this->getLocation()->getCity();
+        return $this->getLocation()?->getCity();
     }
 
     /**
-     * @return string location address
+     * @return string|null location address
      */
-    public function getLocationAddress(): string
+    public function getLocationAddress(): ?string
     {
-        return $this->getLocation()->getAddress();
+        return $this->getLocation()?->getAddress();
     }
 
     /**
-     * @return string zip code
+     * @return string|null zip code
      */
-    public function getLocationZipCode(): string
+    public function getLocationZipCode(): ?string
     {
-        return $this->getLocation()->getZipCode();
+        return $this->getLocation()?->getZipCode();
     }
 
     /**
-     * @return string contacts email
+     * @return string|null contacts email
      */
-    public function getContactsEmail(): string
+    public function getContactsEmail(): ?string
     {
-        return $this->getContacts()->getEmail();
+        return $this->getContacts()?->getEmail();
     }
 
     /**
-     * @return string contacts phone number
+     * @return string|null contacts phone number
      */
-    public function getContactsPhoneNumber(): string
+    public function getContactsPhoneNumber(): ?string
     {
-        return $this->getContacts()->getPhoneNumber();
+        return $this->getContacts()?->getPhoneNumber();
     }
 
     /**

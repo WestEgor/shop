@@ -38,14 +38,13 @@ endif;
     <tbody>
     <?php
     foreach ($paymentJoin as $pj) :
-        /*for ($i = 0; $i < $paymentJoinLength; $i++) :*/
         if ($pj instanceof PaymentsJoin) :
             ?>
             <tr>
                 <td><?php echo $pj->getPayment()->getCustomerId(); ?></td>
                 <td><?php echo $pj->getPayment()->getId(); ?></td>
                 <td><?php echo $pj->getPayment()->getAmount(); ?></td>
-                <td><?php echo $pj->getPayment()->getPaymentDate()->format('Y-m-d'); ?></td>
+                <td><?php echo $pj->getPayment()->getPaymentDate()?->format('Y-m-d'); ?></td>
                 <td><?php echo $pj->getCustomer()->getPersonName(); ?></td>
                 <td><?php echo $pj->getCustomer()->getPersonLastName(); ?></td>
                 <td><?php echo $pj->getCustomer()->getPersonAge(); ?></td>
@@ -57,7 +56,7 @@ endif;
                 <td><?php echo $pj->getCustomer()->getContactsPhoneNumber(); ?></td>
             </tr>
             <?php
-        endif; /*endfor;*/
+        endif;
     endforeach; ?>
     </tbody>
 </table>

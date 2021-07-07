@@ -58,7 +58,7 @@ if (isset($_GET['submit'])) :
                         <th scope="row"><?php echo $payment->getCustomerId(); ?></th>
                         <td><?php echo $payment->getId(); ?></td>
                         <td><?php echo $payment->getAmount(); ?></td>
-                        <td><?php echo $payment->getPaymentDate()->format('Y-m-d'); ?></td>
+                        <td><?php echo $payment->getPaymentDate()?->format('Y-m-d'); ?></td>
                     <?php endif; ?>
                 </tr>
                 </tbody>

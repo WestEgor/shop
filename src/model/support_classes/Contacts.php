@@ -49,9 +49,9 @@ class Contacts
     }
 
     /**
-     * @return string email
+     * @return string|null email
      */
-    public function getEmail(): string
+    public function getEmail(): ?string
     {
         return $this->email;
     }
@@ -65,9 +65,9 @@ class Contacts
     }
 
     /**
-     * @return string phone number
+     * @return string|null phone number
      */
-    public function getPhoneNumber(): string
+    public function getPhoneNumber(): ?string
     {
         return $this->phoneNumber;
     }

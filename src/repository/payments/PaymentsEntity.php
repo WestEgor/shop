@@ -80,7 +80,7 @@ class PaymentsEntity extends AbstractRepository
         if ($object instanceof Payment) {
             $statement->bindValue(':customers_id', $object->getCustomerId());
             $statement->bindValue(':amount', $object->getAmount());
-            $statement->bindValue(':payment_date', $object->getPaymentDate()->format('Y-m-d'));
+            $statement->bindValue(':payment_date', $object->getPaymentDate()?->format('Y-m-d'));
             return $statement->execute();
         }
         return false;
@@ -136,7 +136,7 @@ class PaymentsEntity extends AbstractRepository
         if ($object instanceof Payment) {
             $statement->bindValue(':customers_id', $object->getCustomerId());
             $statement->bindValue(':amount', $object->getAmount());
-            $statement->bindValue(':payment_date', $object->getPaymentDate()->format('Y-m-d'));
+            $statement->bindValue(':payment_date', $object->getPaymentDate()?->format('Y-m-d'));
             $statement->bindValue(':id', $object->getId());
             return $statement->execute();
         }

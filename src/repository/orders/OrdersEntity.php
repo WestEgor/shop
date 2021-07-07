@@ -83,8 +83,8 @@ class OrdersEntity extends AbstractRepository
     public function createStatement(PDOStatement $statement, object $object): bool
     {
         if ($object instanceof Order) {
-            $statement->bindValue(':order_date', $object->getOrderDate()->format('Y-m-d'));
-            $statement->bindValue(':required_date', $object->getRequiredDate()->format('Y-m-d'));
+            $statement->bindValue(':order_date', $object->getOrderDate()?->format('Y-m-d'));
+            $statement->bindValue(':required_date', $object->getRequiredDate()?->format('Y-m-d'));
             $statement->bindValue(':status', $object->getStatus());
             $statement->bindValue(':comments', $object->getComments());
             $statement->bindValue(':customers_id', $object->getCustomerId());
@@ -143,8 +143,8 @@ class OrdersEntity extends AbstractRepository
     public function updateStatement(PDOStatement $statement, object $object): bool
     {
         if ($object instanceof Order) {
-            $statement->bindValue(':order_date', $object->getOrderDate()->format('Y-m-d'));
-            $statement->bindValue(':required_date', $object->getRequiredDate()->format('Y-m-d'));
+            $statement->bindValue(':order_date', $object->getOrderDate()?->format('Y-m-d'));
+            $statement->bindValue(':required_date', $object->getRequiredDate()?->format('Y-m-d'));
             $statement->bindValue(':status', $object->getStatus());
             $statement->bindValue(':comments', $object->getComments());
             $statement->bindValue(':customers_id', $object->getCustomerId());

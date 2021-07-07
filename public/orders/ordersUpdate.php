@@ -73,12 +73,12 @@ endif;
             <div class="col-auto" style="margin-bottom:10px; margin-top: 15px">
                 <label for="pprice" class="form-label" style="margin-top: 15px">Order date:</label>
                 <input type="date" id="pprice" name="order_date" class="form-control"
-                       value="<?php echo $order->getOrderDate()->format('Y-m-d'); ?>">
+                       value="<?php echo $order->getOrderDate()?->format('Y-m-d'); ?>">
             </div>
             <div class="col-auto" style="margin-bottom:10px; margin-top: 15px">
                 <label for="pprice" class="form-label" style="margin-top: 15px">Required date:</label>
                 <input type="date" id="pprice" name="required_date" class="form-control"
-                       value="<?php echo $order->getRequiredDate()->format('Y-m-d'); ?>">
+                       value="<?php echo $order->getRequiredDate()?->format('Y-m-d'); ?>">
             </div>
             <div class="col-auto" style="margin-bottom:10px; margin-top: 15px">
                 <label for="pquantity" class="form-label" style="margin-top: 15px">Status:</label>
