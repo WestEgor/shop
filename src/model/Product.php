@@ -159,20 +159,15 @@ class Product implements ModelInterface
     public function setAll(object $keys): bool
     {
         foreach ($keys as $key => $value) {
-            if ($key === 'id') {
-                $this->id = $value;
-            }
-            if ($key === 'name') {
-                $this->name = $value;
-            }
-            if ($key === 'quantity') {
-                $this->quantity = $value;
-            }
-            if ($key === 'price') {
-                $this->price = $value;
-            }
-            if ($key === 'msrp') {
-                $this->msrp = $value;
+            if (is_string($key)) {
+                match ($key) {
+                    'id' => $this->id = $value,
+                    'name' => $this->name = $value,
+                    'quantity' => $this->quantity = $value,
+                    'price' => $this->price = $value,
+                    'msrp' => $this->msrp = $value,
+                    default => null
+                };
             }
         }
         return true;

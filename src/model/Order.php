@@ -173,23 +173,18 @@ class Order implements ModelInterface
     public function setAll(object $keys): bool
     {
         foreach ($keys as $key => $value) {
-            if ($key === 'id') {
-                $this->id = $value;
-            }
-            if ($key === 'order_date') {
-                $this->orderDate = DateMethods::setDate(DateTime::createFromFormat('Y-m-d', $value));
-            }
-            if ($key === 'required_date') {
-                $this->orderDate = DateMethods::setDate(DateTime::createFromFormat('Y-m-d', $value));
-            }
-            if ($key === 'status') {
-                $this->status = $value;
-            }
-            if ($key === 'comments') {
-                $this->comments = $value;
-            }
-            if ($key === 'customers_id') {
-                $this->customerId = $value;
+            if (is_string($key)) {
+                match ($key) {
+                    'id' => $this->id = $value,
+                    'order_date' =>
+                    $this->orderDate = DateMethods::setDate(DateTime::createFromFormat('Y-m-d', $value)),
+                    'required_date' =>
+                    $this->requiredDate = DateMethods::setDate(DateTime::createFromFormat('Y-m-d', $value)),
+                    'status' => $this->status = $value,
+                    'comments' => $this->comments = $value,
+                    'customers_id' => $this->customerId = $value,
+                    default => null
+                };
             }
         }
         return true;

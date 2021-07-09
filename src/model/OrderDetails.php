@@ -2,6 +2,8 @@
 
 namespace model;
 
+use util\DateMethods;
+
 class OrderDetails implements ModelInterface
 {
     /**
@@ -43,7 +45,8 @@ class OrderDetails implements ModelInterface
         ?int $quantityOrdered = null,
         ?float $price = null,
         ?int $id = null
-    ) {
+    )
+    {
         $this->productId = $productId;
         $this->orderId = $orderId;
         $this->quantityOrdered = $quantityOrdered;
@@ -140,20 +143,15 @@ class OrderDetails implements ModelInterface
     public function setAll(object $keys): bool
     {
         foreach ($keys as $key => $value) {
-            if ($key === 'id') {
-                $this->id = $value;
-            }
-            if ($key === 'products_id') {
-                $this->productId = $value;
-            }
-            if ($key === 'orders_id') {
-                $this->orderId = $value;
-            }
-            if ($key === 'quantity_ordered') {
-                $this->quantityOrdered = $value;
-            }
-            if ($key === 'price') {
-                $this->price = $value;
+            if (is_string($key)) {
+                match ($key) {
+                    'id' => $this->id = $value,
+                    'products_id' => $this->productId = $value,
+                    'orders_id' => $this->orderId = $value,
+                    'quantity_ordered' => $this->quantityOrdered = $value,
+                    'price' => $this->price = $value,
+                    default => null
+                };
             }
         }
         return true;

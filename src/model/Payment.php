@@ -121,17 +121,15 @@ class Payment implements ModelInterface
     public function setAll(object $keys): bool
     {
         foreach ($keys as $key => $value) {
-            if ($key === 'customers_id') {
-                $this->customerId = $value;
-            }
-            if ($key === 'id') {
-                $this->id = $value;
-            }
-            if ($key === 'amount') {
-                $this->amount = $value;
-            }
-            if ($key === 'payment_date') {
-                $this->paymentDate = DateMethods::setDate(DateTime::createFromFormat('Y-m-d', $value));
+            if (is_string($key)) {
+                match ($key) {
+                    'id' => $this->id = $value,
+                    'customers_id' => $this->customerId = $value,
+                    'amount' => $this->amount = $value,
+                    'payment_date' =>
+                    $this->paymentDate = DateMethods::setDate(DateTime::createFromFormat('Y-m-d', $value)),
+                    default => null
+                };
             }
         }
         return true;

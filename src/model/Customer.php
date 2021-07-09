@@ -2,6 +2,7 @@
 
 namespace model;
 
+use Exception;
 use JetBrains\PhpStorm\Pure;
 use model\support_classes\Contacts;
 use model\support_classes\Location;
@@ -193,44 +194,29 @@ class Customer implements ModelInterface
      */
     public function setAll(object $keys): bool
     {
-            $person = new Person();
-            $location = new Location();
-            $contacts = new Contacts();
+        $person = new Person();
+        $location = new Location();
+        $contacts = new Contacts();
         foreach ($keys as $key => $value) {
-            if ($key === 'id') {
-                $this->id = $value;
-            }
-            if ($key === 'name') {
-                $person->setName($value);
-            }
-            if ($key === 'last_name') {
-                $person->setLastname($value);
-            }
-            if ($key === 'age') {
-                $person->setAge($value);
-            }
-            if ($key === 'country') {
-                $location->setCountry($value);
-            }
-            if ($key === 'city') {
-                $location->setCity($value);
-            }
-            if ($key === 'address') {
-                $location->setAddress($value);
-            }
-            if ($key === 'zip_code') {
-                $location->setZipCode($value);
-            }
-            if ($key === 'email') {
-                $contacts->setEmail($value);
-            }
-            if ($key === 'phone_number') {
-                $contacts->setPhoneNumber($value);
+            if (is_string($key)) {
+                match ($key) {
+                    'id' => $this->id = $value,
+                    'name' => $person->setName($value),
+                    'last_name' => $person->setLastname($value),
+                    'age' => $person->setAge($value),
+                    'country' => $location->setCountry($value),
+                    'city' => $location->setCity($value),
+                    'address' => $location->setAddress($value),
+                    'zip_code' => $location->setZipCode($value),
+                    'email' => $contacts->setEmail($value),
+                    'phone_number' => $contacts->setPhoneNumber($value),
+                    default => null
+                };
             }
         }
-            $this->setPerson($person);
-            $this->setLocation($location);
-            $this->setContacts($contacts);
-            return true;
+        $this->setPerson($person);
+        $this->setLocation($location);
+        $this->setContacts($contacts);
+        return true;
     }
 }
